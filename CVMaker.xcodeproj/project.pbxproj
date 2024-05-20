@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		B5C9BBF5FFE35DA448FFC151 /* Pods_CVMaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */; };
+		DE42B0962BFBB3CD00FF61B0 /* GeneralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */; };
+		DE42B0982BFBB58000FF61B0 /* ContactInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */; };
+		DE42B09A2BFBB6E400FF61B0 /* WorkExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */; };
+		DE42B09C2BFBB77A00FF61B0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B09B2BFBB77A00FF61B0 /* Profile.swift */; };
+		DE42B09E2BFBB86D00FF61B0 /* Education.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B09D2BFBB86D00FF61B0 /* Education.swift */; };
+		DE42B0A02BFBB92700FF61B0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B09F2BFBB92700FF61B0 /* Language.swift */; };
+		DE42B0A22BFBBA4C00FF61B0 /* Certificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0A12BFBBA4C00FF61B0 /* Certificate.swift */; };
+		DE42B0A42BFBBAB700FF61B0 /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0A32BFBBAB700FF61B0 /* SocialMedia.swift */; };
+		DE42B0A62BFBBB2400FF61B0 /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0A52BFBBB2400FF61B0 /* Reference.swift */; };
+		DE42B0A92BFBBC1A00FF61B0 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0A82BFBBC1A00FF61B0 /* ProfileManager.swift */; };
 		DE83F5B02BFB444100439D14 /* DefaultPaygate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A42BFB444100439D14 /* DefaultPaygate.swift */; };
 		DE83F5B12BFB444100439D14 /* PaygateOptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A52BFB444100439D14 /* PaygateOptionInfo.swift */; };
 		DE83F5B22BFB444100439D14 /* PaygateInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A72BFB444100439D14 /* PaygateInfoCell.swift */; };
@@ -106,6 +116,16 @@
 		2BEF1F182D56DC405C4242E2 /* Pods-CVMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CVMaker.release.xcconfig"; path = "Target Support Files/Pods-CVMaker/Pods-CVMaker.release.xcconfig"; sourceTree = "<group>"; };
 		BE5A295E0D0738953EA22F78 /* Pods-CVMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CVMaker.debug.xcconfig"; path = "Target Support Files/Pods-CVMaker/Pods-CVMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CVMaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfo.swift; sourceTree = "<group>"; };
+		DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfo.swift; sourceTree = "<group>"; };
+		DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExperience.swift; sourceTree = "<group>"; };
+		DE42B09B2BFBB77A00FF61B0 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		DE42B09D2BFBB86D00FF61B0 /* Education.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Education.swift; sourceTree = "<group>"; };
+		DE42B09F2BFBB92700FF61B0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		DE42B0A12BFBBA4C00FF61B0 /* Certificate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Certificate.swift; sourceTree = "<group>"; };
+		DE42B0A32BFBBAB700FF61B0 /* SocialMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
+		DE42B0A52BFBBB2400FF61B0 /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
+		DE42B0A82BFBBC1A00FF61B0 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		DE83F5A42BFB444100439D14 /* DefaultPaygate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPaygate.swift; sourceTree = "<group>"; };
 		DE83F5A52BFB444100439D14 /* PaygateOptionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaygateOptionInfo.swift; sourceTree = "<group>"; };
 		DE83F5A72BFB444100439D14 /* PaygateInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaygateInfoCell.swift; sourceTree = "<group>"; };
@@ -229,6 +249,31 @@
 				C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE42B0922BFBB2E100FF61B0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B0942BFBB3C500FF61B0 /* Model */,
+				DE42B0A82BFBBC1A00FF61B0 /* ProfileManager.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DE42B0942BFBB3C500FF61B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B09B2BFBB77A00FF61B0 /* Profile.swift */,
+				DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */,
+				DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */,
+				DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */,
+				DE42B09D2BFBB86D00FF61B0 /* Education.swift */,
+				DE42B09F2BFBB92700FF61B0 /* Language.swift */,
+				DE42B0A12BFBBA4C00FF61B0 /* Certificate.swift */,
+				DE42B0A32BFBBAB700FF61B0 /* SocialMedia.swift */,
+				DE42B0A52BFBBB2400FF61B0 /* Reference.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DE83F5A62BFB444100439D14 /* Models */ = {
@@ -560,6 +605,7 @@
 		DEFA93B82BE94AED00F892BC /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DE42B0922BFBB2E100FF61B0 /* Profile */,
 				DE83F5B92BFB449F00439D14 /* Paygate */,
 				DEFA93B52BE94AED00F892BC /* Purchase */,
 				DEFA93B72BE94AED00F892BC /* Session */,
@@ -765,7 +811,9 @@
 				DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */,
 				DEFA93C52BE94AED00F892BC /* CircleView.swift in Sources */,
 				DE83F5BE2BFB44B700439D14 /* PaygateOptionLineComponent.swift in Sources */,
+				DE42B09E2BFBB86D00FF61B0 /* Education.swift in Sources */,
 				DEFA93D22BE94AED00F892BC /* UIView+RxExtension.swift in Sources */,
+				DE42B0962BFBB3CD00FF61B0 /* GeneralInfo.swift in Sources */,
 				DEFA93E32BE94AED00F892BC /* XOREncryption.swift in Sources */,
 				DE83F5B62BFB444100439D14 /* PaygateViewController.swift in Sources */,
 				DEFA93E52BE94AED00F892BC /* Appearance.swift in Sources */,
@@ -780,6 +828,7 @@
 				DEFA940B2BE94AED00F892BC /* IAPError.swift in Sources */,
 				DEFA93DA2BE94AED00F892BC /* NetworkError.swift in Sources */,
 				DEFA93E12BE94AED00F892BC /* TextAttributes.swift in Sources */,
+				DE42B0A02BFBB92700FF61B0 /* Language.swift in Sources */,
 				DE83F5B12BFB444100439D14 /* PaygateOptionInfo.swift in Sources */,
 				DE83F5B32BFB444100439D14 /* PaygateProductButton.swift in Sources */,
 				DEFA93FB2BE94AED00F892BC /* SplashViewController.swift in Sources */,
@@ -787,6 +836,7 @@
 				DEFA93CC2BE94AED00F892BC /* String+Extension.swift in Sources */,
 				DEFA93C42BE94AED00F892BC /* CircleProgressView.swift in Sources */,
 				DEFA93ED2BE94AED00F892BC /* OnboardingViewModel.swift in Sources */,
+				DE42B0A62BFBBB2400FF61B0 /* Reference.swift in Sources */,
 				DEFA940D2BE94AED00F892BC /* IAPActionResult.swift in Sources */,
 				DEFA93C82BE94AED00F892BC /* PaddingTextField.swift in Sources */,
 				DEFA93BF2BE94AED00F892BC /* RequestReview.swift in Sources */,
@@ -797,14 +847,17 @@
 				DEFA93D92BE94AED00F892BC /* ContentError.swift in Sources */,
 				DEFA93E62BE94AED00F892BC /* GlobalDefinitions.swift in Sources */,
 				DEFA93D62BE94AED00F892BC /* PushNotificationsAuthorizationStatus.swift in Sources */,
+				DE42B09C2BFBB77A00FF61B0 /* Profile.swift in Sources */,
 				DEFA940F2BE94AED00F892BC /* ProductPrice.swift in Sources */,
 				DEFA93DC2BE94AED00F892BC /* Fonts.swift in Sources */,
+				DE42B0A22BFBBA4C00FF61B0 /* Certificate.swift in Sources */,
 				DE83F5C02BFB44C600439D14 /* PaygateOptionConfig.swift in Sources */,
 				DEFA93C92BE94AED00F892BC /* TapAreaButton.swift in Sources */,
 				DEFA94122BE94AED00F892BC /* SessionManager.swift in Sources */,
 				DEFA93E72BE94AED00F892BC /* SceneDelegate.swift in Sources */,
 				DEFA93D02BE94AED00F892BC /* UIEdgeInsets+Extension.swift in Sources */,
 				DEFA940E2BE94AED00F892BC /* IAPProduct.swift in Sources */,
+				DE42B09A2BFBB6E400FF61B0 /* WorkExperience.swift in Sources */,
 				DE83F5C22BFB4E7000439D14 /* Currency.swift in Sources */,
 				DE83F5B82BFB444100439D14 /* PaygateViewModel.swift in Sources */,
 				DEFA93D52BE94AED00F892BC /* RestAPITransport.swift in Sources */,
@@ -826,9 +879,12 @@
 				DEFA93C02BE94AED00F892BC /* RxActivityIndicator.swift in Sources */,
 				DEFA93EB2BE94AED00F892BC /* OnboardingView.swift in Sources */,
 				DEFA93E22BE94AED00F892BC /* Weak.swift in Sources */,
+				DE42B0A42BFBBAB700FF61B0 /* SocialMedia.swift in Sources */,
 				DEFA93DE2BE94AED00F892BC /* ObservableRetrySingle.swift in Sources */,
 				DEFA93C62BE94AED00F892BC /* GradientView.swift in Sources */,
+				DE42B0982BFBB58000FF61B0 /* ContactInfo.swift in Sources */,
 				DE83F5B42BFB444100439D14 /* PaygateInteractor.swift in Sources */,
+				DE42B0A92BFBBC1A00FF61B0 /* ProfileManager.swift in Sources */,
 				DEFA94102BE94AED00F892BC /* IAPManager.swift in Sources */,
 				DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */,
 				DEFA93CD2BE94AED00F892BC /* UIApplication+Extension.swift in Sources */,
