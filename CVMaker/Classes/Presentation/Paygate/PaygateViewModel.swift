@@ -1,8 +1,8 @@
 //
 //  PaygateViewModel.swift
-//  CodeChallenge
+//  Soccer
 //
-//  Created by Андрей Чернышев on 20.02.2024.
+//  Created by Андрей Чернышев on 02.09.2022.
 //
 
 import RxSwift
@@ -18,7 +18,7 @@ final class PaygateViewModel {
     private lazy var activity = RxActivityIndicator()
     
     private lazy var iapManager = IAPManager()
-    private lazy var paygateInteractor = PaygateInteractor()
+    private lazy var purchaseInteractor = PaygateInteractor()
 }
 
 // MARK: Public
@@ -34,7 +34,7 @@ extension PaygateViewModel {
     struct Output {
         let activity: Driver<Bool>
         let route: Driver<Route>
-        let product: Driver<ProductPrice>
+        let products: Driver<[PaygateOptionInfo]>
     }
     
     func configure(input: Input) -> Output {
@@ -47,23 +47,31 @@ extension PaygateViewModel {
                 didTapTermsOfUse: input.didTapTermsOfUse,
                 didTapPrivacyPolicy: input.didTapPrivacyPolicy
             ),
-            product: makeProduct()
+            products: makeProducts()
         )
     }
 }
 
 // MARK: Private
 private extension PaygateViewModel {
-    func makeProduct() -> Driver<ProductPrice> {
+    func makeProducts() -> Driver<[PaygateOptionInfo]> {
         iapManager
             .obtainPrices(for: [
-                GlobalDefinitions.Paygate.lifetime
+                GlobalDefinitions.Paygate.defaultLifetime,
+                GlobalDefinitions.Paygate.defaultMonthly
             ])
-            .compactMap { prices -> ProductPrice? in
-                prices.first(where: { $0.id == GlobalDefinitions.Paygate.lifetime })
+            .map { [weak self] prices -> [PaygateOptionInfo] in
+                guard let self, let paygate = Paygate(prices: prices) else {
+                    return []
+                }
+                
+                return [
+                    self.info(config: paygate.leftOptionConfig, prices: prices),
+                    self.info(config: paygate.rightOptionConfig, prices: prices)
+                ].compactMap { $0 }
             }
             .trackActivity(activity)
-            .asDriver(onErrorDriveWith: .never())
+            .asDriver(onErrorJustReturn: [])
     }
     
     func makeRoute(
@@ -98,7 +106,7 @@ private extension PaygateViewModel {
                     return .never()
                 }
                 
-                return self.paygateInteractor
+                return self.purchaseInteractor
                     .makeActiveSubscription(by: .buy(productId))
                     .map { result -> Bool in
                         switch result {
@@ -115,12 +123,12 @@ private extension PaygateViewModel {
     
     func makeRestored(didTapRestore: Signal<Void>) -> Driver<Bool> {
         didTapRestore
-            .flatMapLatest { [weak self] _ -> Driver<Bool> in
+            .flatMapLatest { [weak self] void -> Driver<Bool> in
                 guard let self = self else {
                     return .never()
                 }
                 
-                return self.paygateInteractor
+                return self.purchaseInteractor
                     .makeActiveSubscription(by: .restore)
                     .map { result -> Bool in
                         switch result {
@@ -133,5 +141,17 @@ private extension PaygateViewModel {
                     .trackActivity(self.activity)
                     .asDriver(onErrorJustReturn: false)
             }
+    }
+}
+
+// MARK: Private (Additional)
+private extension PaygateViewModel {
+    func info(config: PaygateOptionConfig, prices: [ProductPrice]) -> PaygateOptionInfo? {
+        guard let price = prices.first(where: { $0.id == config.productId }) else {
+            return nil
+        }
+        
+        return PaygateOptionInfo(config: config,
+                                 price: price)
     }
 }

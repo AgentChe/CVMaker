@@ -29,7 +29,7 @@ final class OLinkedInView: OSlideView {
 // MARK: Private
 private extension OLinkedInView {
     func initialize() {
-        backgroundColor = Appearance.background
+        backgroundColor = Appearance.main100
     }
 }
 
@@ -85,7 +85,7 @@ private extension OLinkedInView {
     
     func makeTitleLabel() -> UILabel {
         let attrs = TextAttributes()
-            .textColor(Appearance.black)
+            .textColor(Appearance.mono200)
             .font(Fonts.Bitter.bold(size: 30.scale))
             .lineHeight(34.scale)
             .textAlignment(.center)
@@ -100,7 +100,7 @@ private extension OLinkedInView {
     
     func makeSubTitleLabel() -> UILabel {
         let attrs = TextAttributes()
-            .textColor(Appearance.black)
+            .textColor(Appearance.mono200)
             .font(Fonts.SFPro.regular(size: 17.scale))
             .lineHeight(21.scale)
             .textAlignment(.center)
@@ -115,13 +115,13 @@ private extension OLinkedInView {
     
     func makeContinueButton() -> UIButton {
         let attrs = TextAttributes()
-            .textColor(Appearance.white)
+            .textColor(Appearance.mono100)
             .font(Fonts.Nunito.semiBold(size: 17.scale))
         
         let view = UIButton()
         view.setAttributedTitle("Continue".localized.attributed(with: attrs), for: .normal)
         view.layer.cornerRadius = 12.scale
-        view.backgroundColor = Appearance.custom_30_35_64
+        view.backgroundColor = Appearance.main200
         view.addTarget(self, action: #selector(onNext), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
@@ -130,13 +130,13 @@ private extension OLinkedInView {
     
     func makeExportFromLinkedInButton() -> UIButton {
         let attrs = TextAttributes()
-            .textColor(Appearance.white)
+            .textColor(Appearance.mono100)
             .font(Fonts.Nunito.semiBold(size: 17.scale))
         
         let view = UIButton()
         view.setAttributedTitle("Onboarding.LinkedIN.ExportButton".localized.attributed(with: attrs), for: .normal)
         view.layer.cornerRadius = 12.scale
-        view.backgroundColor = Appearance.custom_11_102_194
+        view.backgroundColor = Appearance.main300
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

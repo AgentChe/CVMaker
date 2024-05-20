@@ -1,8 +1,8 @@
 //
 //  PaygateInteractor.swift
-//  CodeChallenge
+//  Soccer
 //
-//  Created by Андрей Чернышев on 20.02.2024.
+//  Created by Андрей Чернышев on 02.09.2022.
 //
 
 import RxSwift

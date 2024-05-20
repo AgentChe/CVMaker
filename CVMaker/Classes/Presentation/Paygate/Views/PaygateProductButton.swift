@@ -1,28 +1,38 @@
 //
 //  PaygateProductButton.swift
-//  RingSizer
+//  Soccer
 //
-//  Created by Андрей Чернышев on 25.03.2024.
+//  Created by Андрей Чернышев on 02.09.2022.
 //
 
 import UIKit
 
-final class PaygateProductView: UIView {
-    lazy var freePeriodLabel = makeFreePeriodLabel()
-    lazy var priceLabel = makeLabel()
+final class PaygateProductButton: UIButton {
+    var marked: Bool = false {
+        didSet {
+            update()
+        }
+    }
     
-    private lazy var priceAttrs = TextAttributes()
-        .textColor(Appearance.black)
-        .font(Fonts.Nunito.bold(size: 12.scale))
-        .lineHeight(22.scale)
-        .letterSpacing(3.scale)
-        .textAlignment(.center)
+    var info: PaygateOptionInfo? {
+        didSet {
+            update()
+        }
+    }
+    
+    lazy var checkedView = makeCheckedView()
+    lazy var line1Label = makeLabel()
+    lazy var line2Label = makeLabel()
+    lazy var line3Label = makeLabel()
+    lazy var discountPlaceholderView = makeDiscountPlaceholderView()
+    lazy var discountLabel = makeLabel()
+    lazy var line5Label = makeLabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         makeConstraints()
-        initialize()
+        update()
     }
     
     required init?(coder: NSCoder) {
@@ -30,55 +40,94 @@ final class PaygateProductView: UIView {
     }
 }
 
-// MARK: Public
-extension PaygateProductView {
-    func setup(product: ProductPrice) {
-        guard let price = Currency(productPrice: product).formatted() else {
+// MARK: Private
+private extension PaygateProductButton {
+    func update() {
+        changeSelection()
+        configure()
+    }
+    
+    func changeSelection() {
+        layer.borderWidth = 2.scale
+        layer.borderColor = marked ? Appearance.main200.cgColor : UIColor.clear.cgColor
+        
+        checkedView.isHidden = !marked
+    }
+    
+    func configure() {
+        guard let info = info else {
             return
         }
         
-        let string = String(format: "Paygate.Price".localized, price)
-        priceLabel.attributedText = string.attributed(with: priceAttrs)
+        line1Label.attributedText = info.line1
+        line1Label.isHidden = info.line1 == nil
+        
+        line2Label.attributedText = info.line2
+        line2Label.isHidden = info.line2 == nil
+        
+        line3Label.attributedText = info.line3
+        line3Label.isHidden = info.line3 == nil
+        
+        discountLabel.attributedText = info.line4
+        discountLabel.isHidden = info.line4 == nil
+        discountPlaceholderView.isHidden = info.line4 == nil
+        
+        line5Label.attributedText = info.line5
+        line5Label.isHidden = info.line5 == nil
     }
 }
 
 // MARK: Make constraints
-private extension PaygateProductView {
-    func initialize() {
-        backgroundColor = Appearance.background
-        layer.cornerRadius = 12.scale
-        layer.borderWidth = 1.scale
-        layer.borderColor = Appearance.black.cgColor
-    }
-}
-
-// MARK: Make constraints
-private extension PaygateProductView {
+private extension PaygateProductButton {
     func makeConstraints() {
         NSLayoutConstraint.activate([
-            freePeriodLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            freePeriodLabel.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -2.scale)
+            checkedView.widthAnchor.constraint(equalToConstant: 24.scale),
+            checkedView.heightAnchor.constraint(equalToConstant: 24.scale),
+            checkedView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12.scale),
+            checkedView.topAnchor.constraint(equalTo: topAnchor, constant: 13.scale)
         ])
         
         NSLayoutConstraint.activate([
-            priceLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            priceLabel.topAnchor.constraint(equalTo: centerYAnchor, constant: 2.scale)
+            line1Label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.scale),
+            line1Label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -127.scale)
+        ])
+        
+        NSLayoutConstraint.activate([
+            line2Label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.scale),
+            line2Label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -91.scale)
+        ])
+        
+        NSLayoutConstraint.activate([
+            line3Label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.scale),
+            line3Label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -74.scale)
+        ])
+        
+        NSLayoutConstraint.activate([
+            discountPlaceholderView.heightAnchor.constraint(equalToConstant: 23.scale),
+            discountPlaceholderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.scale),
+            discountPlaceholderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -47.scale)
+        ])
+        
+        NSLayoutConstraint.activate([
+            discountLabel.leadingAnchor.constraint(equalTo: discountPlaceholderView.leadingAnchor, constant: 2.scale),
+            discountLabel.trailingAnchor.constraint(equalTo: discountPlaceholderView.trailingAnchor, constant: -2.scale),
+            discountLabel.topAnchor.constraint(equalTo: discountPlaceholderView.topAnchor, constant: 3.scale),
+            discountLabel.bottomAnchor.constraint(equalTo: discountPlaceholderView.bottomAnchor, constant: -3.scale)
+        ])
+        
+        NSLayoutConstraint.activate([
+            line5Label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12.scale),
+            line5Label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.scale)
         ])
     }
 }
 
 // MARK: Lazy initialization
-private extension PaygateProductView {
-    func makeFreePeriodLabel() -> UILabel {
-        let attrs = TextAttributes()
-            .textColor(Appearance.black)
-            .font(Fonts.Nunito.regular(size: 12.scale))
-            .lineHeight(22.scale)
-            .letterSpacing(3.scale)
-            .textAlignment(.center)
-        
-        let view = UILabel()
-        view.attributedText = "Paygate.FreePeriod".localized.attributed(with: attrs)
+private extension PaygateProductButton {
+    func makeCheckedView() -> UIImageView {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.image = UIImage(named: "Paygate.Checked")
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view
@@ -86,6 +135,16 @@ private extension PaygateProductView {
     
     func makeLabel() -> UILabel {
         let view = UILabel()
+        view.numberOfLines = 2
+        view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        return view
+    }
+    
+    func makeDiscountPlaceholderView() -> UIView {
+        let view = UIView()
+        view.backgroundColor = Appearance.main400
+        view.layer.cornerRadius = 4.scale
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

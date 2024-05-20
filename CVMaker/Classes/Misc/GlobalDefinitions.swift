@@ -25,6 +25,7 @@ final class GlobalDefinitions {
     }
     
     enum Paygate {
-        static let lifetime = "com.whipapp.forever"
+        static let defaultLifetime = "train.somatic.endless"
+        static let defaultMonthly = "train.somatic.monthly"
     }
 }

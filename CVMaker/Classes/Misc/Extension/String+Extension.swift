@@ -26,4 +26,8 @@ extension String {
     var localized: String {
         NSLocalizedString(self, comment: "")
     }
+    
+    func removingWhitespaces() -> String {
+        components(separatedBy: .whitespaces).joined()
+    }
 }

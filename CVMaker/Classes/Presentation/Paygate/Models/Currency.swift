@@ -1,8 +1,8 @@
 //
 //  Currency.swift
-//  CodeChallenge
+//  CVMaker
 //
-//  Created by Андрей Чернышев on 19.03.2024.
+//  Created by Андрей Чернышев on 20.05.2024.
 //
 
 import Foundation
@@ -39,11 +39,14 @@ struct Currency {
         
         let ltrCurrencies = LTRCurrency.allCases.map { $0.rawValue }
         
-        if ltrCurrencies.contains(productPrice.currency) {
-            return String(format: "%@%@", currencySymbol, resultPrice)
-        } else {
-            return String(format: "%@%@", resultPrice, currencySymbol)
-        }
+        let result: String = {
+            if ltrCurrencies.contains(productPrice.currency) {
+                return String(format: "%@%@", currencySymbol, resultPrice)
+            } else {
+                return String(format: "%@%@", resultPrice, currencySymbol)
+            }
+        }()
+        
+        return result.removingWhitespaces()
     }
 }
-

@@ -26,15 +26,24 @@
 "Onboarding.LandOffer.SubTitle" = "Get noticed by employers and get hired\nfaster!";
 
 // MARK: Paygate
-"Paygate.FreePeriod" = "EVERYTHING FOR";
-"Paygate.Price" = "%@";
-"Paygate.Title" = "GET A LIFETIME PLAN\nTO ACCESS ALL WHIPS";
-"Paygate.BuyButton" = "CONTINUE";
-"Paygate.CancelAnytime" = "SECURED BY THE APP STORE. CANCEL ANYTIME.";
-"Paygate.TermsOfUse" = "TERMS OF USE";
-"Paygate.&" = " &";
-"Paygate.PrivacyPolicy" = "PRIVACY POLICY";
-"Paygate.Restore" = "RESTORE PURCHASES";
+"Paygate.Title" = "Unlock Premium Status";
+"Paygate.Cell1" = "Customizable CV templates";
+"Paygate.Cell2" = "Cover letter AI writer";
+"Paygate.Cell3" = "Edit your resume anytime";
+"Paygate.Info" = "Secured by the App Store. Cancel anytime.";
+"Paygate.TermsOfUse" = "Terms of Use";
+"Paygate.PrivacyPolicy" = "Privacy Policy";
+"Paygate.RestorePurchases" = "Restore Purchase";
+"Paygate.Failed" = "Failed to make purchase";
+"Paygate.Monthly.Name1" = "7 days for free";
+"Paygate.Monthly.Name2" = "Quick prep";
+"Paygate.Monthly.Bottom1" = "After 7-day trial";
+"Paygate.Monthly.Bottom2" = "Trial is over";
+"Paygate.Lifetime.Name" = "Lifetime";
+"Paygate.Lifetime.PriceDescription" = "\nIn terms of  1  year";
+"Paygate.Lifetime.BottomDescription" = "once";
+"Paygate.Discount" = "SAVE %i%%";
+"Paygate.Price.Period" = "month";
 "Paygate.Error.Title" = "Error";
 "Paygate.Error.Text" = "An error occurred during execution. Try later.";
 "Paygate.Error.Button" = "OK";

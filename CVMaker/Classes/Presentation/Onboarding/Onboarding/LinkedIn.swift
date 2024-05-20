@@ -14,7 +14,7 @@ final class LinkedIn: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = Appearance.background
+        view.backgroundColor = Appearance.main100
         
         webView.navigationDelegate = self
         view.addSubview(webView)

@@ -1,8 +1,8 @@
 //
 //  PaygateViewController.swift
-//  CodeChallenge
+//  Soccer
 //
-//  Created by Андрей Чернышев on 20.02.2024.
+//  Created by Андрей Чернышев on 02.09.2022.
 //
 
 import UIKit
@@ -10,11 +10,11 @@ import RxSwift
 import RxCocoa
 
 final class PaygateViewController: UIViewController {
-    private lazy var mainView = PaygateView()
-    
-    private lazy var viewModel = PaygateViewModel()
+    private lazy var mainView =  PaygateView()
     
     private lazy var disposeBag = DisposeBag()
+    
+    private lazy var viewModel = PaygateViewModel()
     
     private let didClose: (() -> Void)?
     
@@ -38,16 +38,39 @@ final class PaygateViewController: UIViewController {
         AmplitudeManager.shared
             .logEvent(name: "Paygate Screen")
         
-        let didBuy = mainView.buyButton.rx.tap
-            .map { GlobalDefinitions.Paygate.lifetime }
+        Observable
+            .merge(
+                mainView.leftOptionButton.rx.tap.map { (true, false) },
+                mainView.rightOptionButton.rx.tap.map { (false, true) }
+            )
+            .startWith((true, false))
+            .bind(to: Binder(mainView) { base, args in
+                base.leftOptionButton.marked = args.0
+                base.rightOptionButton.marked = args.1
+            })
+            .disposed(by: disposeBag)
+        
+        let didBuy = mainView.continueButton.rx.tap
+            .compactMap { [weak self] void -> String? in
+                guard let self else {
+                    return nil
+                }
+
+                let id = [
+                    self.mainView.leftOptionButton,
+                    self.mainView.rightOptionButton
+                ].first(where: { $0.marked })?.info?.productId
+
+                return id
+            }
             .asSignal(onErrorSignalWith: .never())
         
         let output = viewModel.configure(input: PaygateViewModel.Input(
             didTapClose: mainView.closeButton.rx.tap.asSignal(),
             didTapBuy: didBuy,
             didTapRestore: mainView.restoreButton.rx.tap.asSignal(),
-            didTapTermsOfUse: mainView.didTapTermsOfUse,
-            didTapPrivacyPolicy: mainView.didTapPrivacyPolicy
+            didTapTermsOfUse: mainView.termsOfServiceButton.rx.tap.asSignal(),
+            didTapPrivacyPolicy: mainView.privacyPolicyButton.rx.tap.asSignal()
         ))
         
         output.activity
@@ -62,15 +85,20 @@ final class PaygateViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        output.product
-            .drive(Binder(mainView) { base, product in
-                base.productView.setup(product: product)
+        output.products
+            .drive(Binder(mainView) { base, products in
+                base.leftOptionButton.info = products?.first(where: { $0.productId == GlobalDefinitions.Paygate.defaultLifetime })
+                base.rightOptionButton.info = products?.first(where: { $0.productId == GlobalDefinitions.Paygate.defaultMonthly })
             })
             .disposed(by: disposeBag)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
 }
 
-// MARK: Public
+// MARK: Make
 extension PaygateViewController {
     static func make(didClose: (() -> Void)? = nil) -> PaygateViewController {
         let vc = PaygateViewController(didClose: didClose)
@@ -83,12 +111,11 @@ extension PaygateViewController {
 private extension PaygateViewController {
     func activity(_ activity: Bool) {
         activity ? mainView.preloader.startAnimating() : mainView.preloader.stopAnimating()
-
-        [
-            mainView.productView,
-            mainView.buyButton,
-            mainView.restoreButton
-        ].forEach { $0.isHidden = activity }
+        
+        mainView.leftOptionButton.isHidden = activity
+        mainView.rightOptionButton.isHidden = activity
+        mainView.continueButton.isHidden = activity
+        mainView.restoreButton.isHidden = activity
     }
     
     func route(_ route: PaygateViewModel.Route) {
