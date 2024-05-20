@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B5C9BBF5FFE35DA448FFC151 /* Pods_CVMaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */; };
+		DED6C71D2BEA7FD9001DE5B2 /* OLinkedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C71C2BEA7FD9001DE5B2 /* OLinkedInView.swift */; };
+		DED6C71F2BEA8154001DE5B2 /* OCoverLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */; };
+		DED6C7212BEA815C001DE5B2 /* OLandOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */; };
+		DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -96,6 +100,10 @@
 		2BEF1F182D56DC405C4242E2 /* Pods-CVMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CVMaker.release.xcconfig"; path = "Target Support Files/Pods-CVMaker/Pods-CVMaker.release.xcconfig"; sourceTree = "<group>"; };
 		BE5A295E0D0738953EA22F78 /* Pods-CVMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CVMaker.debug.xcconfig"; path = "Target Support Files/Pods-CVMaker/Pods-CVMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CVMaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DED6C71C2BEA7FD9001DE5B2 /* OLinkedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLinkedInView.swift; sourceTree = "<group>"; };
+		DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCoverLetterView.swift; sourceTree = "<group>"; };
+		DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLandOfferView.swift; sourceTree = "<group>"; };
+		DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedIn.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -209,6 +217,18 @@
 				C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DED6C7242BEBBD7C001DE5B2 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DEFA937B2BE94AED00F892BC /* Views */,
+				DEFA937D2BE94AED00F892BC /* OnboardingViewController.swift */,
+				DEFA937E2BE94AED00F892BC /* OnboardingViewModel.swift */,
+				DEFA937C2BE94AED00F892BC /* OnboardingView.swift */,
+				DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		DEFA931C2BE949F900F892BC = {
@@ -394,6 +414,9 @@
 			isa = PBXGroup;
 			children = (
 				DEFA93792BE94AED00F892BC /* OSlideView.swift */,
+				DED6C71C2BEA7FD9001DE5B2 /* OLinkedInView.swift */,
+				DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */,
+				DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,10 +424,7 @@
 		DEFA937F2BE94AED00F892BC /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				DEFA937B2BE94AED00F892BC /* Views */,
-				DEFA937D2BE94AED00F892BC /* OnboardingViewController.swift */,
-				DEFA937E2BE94AED00F892BC /* OnboardingViewModel.swift */,
-				DEFA937C2BE94AED00F892BC /* OnboardingView.swift */,
+				DED6C7242BEBBD7C001DE5B2 /* Onboarding */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -708,12 +728,14 @@
 				DEFA93CE2BE94AED00F892BC /* UIColor+Extension.swift in Sources */,
 				DEFA93D42BE94AED00F892BC /* APIRequestBody.swift in Sources */,
 				DEFA93D82BE94AED00F892BC /* PushNotificationsManager.swift in Sources */,
+				DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */,
 				DEFA93C52BE94AED00F892BC /* CircleView.swift in Sources */,
 				DEFA93D22BE94AED00F892BC /* UIView+RxExtension.swift in Sources */,
 				DEFA93F32BE94AED00F892BC /* PaygateViewModel.swift in Sources */,
 				DEFA93E32BE94AED00F892BC /* XOREncryption.swift in Sources */,
 				DEFA93E52BE94AED00F892BC /* Appearance.swift in Sources */,
 				DEFA93EE2BE94AED00F892BC /* Currency.swift in Sources */,
+				DED6C7212BEA815C001DE5B2 /* OLandOfferView.swift in Sources */,
 				DEFA93BD2BE94AED00F892BC /* FirebaseManager.swift in Sources */,
 				DEFA94112BE94AED00F892BC /* PurchaseValidationObserver.swift in Sources */,
 				DEFA940C2BE94AED00F892BC /* IAPErrorHelper.swift in Sources */,
@@ -749,6 +771,7 @@
 				DEFA93D02BE94AED00F892BC /* UIEdgeInsets+Extension.swift in Sources */,
 				DEFA940E2BE94AED00F892BC /* IAPProduct.swift in Sources */,
 				DEFA93D52BE94AED00F892BC /* RestAPITransport.swift in Sources */,
+				DED6C71F2BEA8154001DE5B2 /* OCoverLetterView.swift in Sources */,
 				DEFA93C22BE94AED00F892BC /* NavigationController.swift in Sources */,
 				DEFA93C72BE94AED00F892BC /* PaddingLabel.swift in Sources */,
 				DEFA93E42BE94AED00F892BC /* AppDelegate.swift in Sources */,
@@ -756,6 +779,7 @@
 				DEFA93EF2BE94AED00F892BC /* PaygateInteractor.swift in Sources */,
 				DEFA93DD2BE94AED00F892BC /* NumberLaunches.swift in Sources */,
 				DEFA93FA2BE94AED00F892BC /* SplashView.swift in Sources */,
+				DED6C71D2BEA7FD9001DE5B2 /* OLinkedInView.swift in Sources */,
 				DEFA93CA2BE94AED00F892BC /* Collection+Extension.swift in Sources */,
 				DEFA93E92BE94AED00F892BC /* OSlideView.swift in Sources */,
 				DEFA93DB2BE94AED00F892BC /* SignError.swift in Sources */,

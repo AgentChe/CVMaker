@@ -9,18 +9,22 @@ import UIKit
 
 final class OnboardingView: UIView {
     enum Step: Int {
-        case welcome
+        case linkedIn, coverLetter, landOffer
     }
     
     var didFinish: (() -> Void)?
     
-    private lazy var contentViews: [OSlideView] = {
+    lazy var linkedInView = OLinkedInView(step: .linkedIn)
+    
+    lazy var contentViews: [OSlideView] = {
         [
-            OSlideView(step: .welcome)
+            linkedInView,
+            OCoverLetterView(step: .coverLetter),
+            OLandOfferView(step: .landOffer)
         ]
     }()
     
-    private var step = Step.welcome
+    private var step = Step.linkedIn
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,10 +102,12 @@ private extension OnboardingView {
         let currentView = contentViews[currentIndex]
         let scrollToView = contentViews[scrollToIndex]
         
-        scrollToView.frame.origin = CGPoint(x: 390.scale * CGFloat(direction), y: 0)
+        scrollToView.frame.origin = CGPoint(x: 393.scale * CGFloat(direction), y: 0)
+        
+        addSubview(scrollToView)
         
         UIView.animate(withDuration: 0.3, animations: {
-            currentView.frame.origin = CGPoint(x: 390.scale * CGFloat(-direction), y: 0)
+            currentView.frame.origin = CGPoint(x: 393.scale * CGFloat(-direction), y: 0)
             scrollToView.frame.origin = CGPoint(x: 0, y: 0)
         }, completion: { [weak self] result in
             guard let self = self else {

@@ -18,6 +18,12 @@ final class GlobalDefinitions {
     static let privacyPolicyUrl = URL(string: "https://sergei-mobile.com/policy.html")!
     static let contactUsUrl = URL(string: "https://sergei-mobile.com/contact.html")!
     
+    enum LinkedIn {
+        static let clientId = "7792qc3r585vh5"
+        static let clientShared = "KDFs4YQmsbY6rHRG"
+        static let redirectUri = "https://cmmaker.callback"
+    }
+    
     enum Paygate {
         static let lifetime = "com.whipapp.forever"
     }
