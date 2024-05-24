@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol CVMakerGeneralInfoNameViewDelegate: AnyObject {
     func generalInfo(firstName: String, lastName: String)
@@ -18,6 +19,10 @@ final class CVMakerGeneralInfoNameView: CVMakerGeneralInfoFlowView {
     lazy var firstNameField = makeInputField(title: "CVMaker.GeneralInfo.Name.FirstName".localized)
     lazy var lastNameField = makeInputField(title: "CVMaker.GeneralInfo.Name.LastName".localized)
     lazy var continueButton = makeContinueButton()
+    
+    private lazy var disposeBag = DisposeBag()
+    
+    private lazy var continueBottomConstraint = NSLayoutConstraint()
     
     private weak var mainDelegate: CVMakerGeneralInfoNameViewDelegate?
     
@@ -50,6 +55,18 @@ extension CVMakerGeneralInfoNameView {
 // MARK: Private
 private extension CVMakerGeneralInfoNameView {
     func initialize() {
+        rx.keyboardHeight
+            .bind(to: Binder(self) { base, keyboardHeight in
+                base.continueBottomConstraint.isActive = false
+                base.continueBottomConstraint.constant = -(keyboardHeight + 8.scale)
+                base.continueBottomConstraint.isActive = true
+                
+                UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                    self?.layoutIfNeeded()
+                })
+            })
+            .disposed(by: disposeBag)
+        
         firstNameField.editing = { [weak self] text in
             self?.checkEnableContinue()
         }
@@ -118,11 +135,12 @@ private extension CVMakerGeneralInfoNameView {
             lastNameField.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
         
+        continueBottomConstraint = continueButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: ScreenSize.isIphoneXFamily ? -8.scale : -16.scale)
         NSLayoutConstraint.activate([
             continueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
             continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
             continueButton.heightAnchor.constraint(equalToConstant: 58.scale),
-            continueButton.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -16.scale)
+            continueBottomConstraint
         ])
     }
 }

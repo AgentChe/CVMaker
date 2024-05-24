@@ -26,7 +26,7 @@ final class CVMakerView: UIView {
     lazy var container = makeContainer()
     
     lazy var chaptersViews: [CVMakerChapterView] = [
-        CVMakerGeneralInfoView(vc: vc) {
+        CVMakerGeneralInfoView(vc: vc) { generalInfo in
             
         }
     ]

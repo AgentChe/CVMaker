@@ -8,6 +8,10 @@
 import UIKit
 
 final class DocumentsDirectory {
+    enum ReserveNames {
+        static let cvPhoto = "documents_directory_cv_photo_name"
+    }
+    
     @discardableResult
     static func saveImageToDocumentsDirectory(image: UIImage, fileName: String) -> URL? {
         if let data = image.pngData() {
@@ -29,6 +33,13 @@ final class DocumentsDirectory {
             return UIImage(contentsOfFile: filePath.path)
         } else {
             return nil
+        }
+    }
+    
+    static func deleteImageFromDocumentsDirectory(fileName: String) {
+        let filePath = getDocumentsDirectory().appendingPathComponent(fileName)
+        if FileManager.default.fileExists(atPath: filePath.path) {
+            try? FileManager.default.removeItem(at: filePath)
         }
     }
 }

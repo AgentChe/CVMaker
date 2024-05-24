@@ -27,9 +27,9 @@ final class CVMakerGeneralInfoView: CVMakerChapterView {
     private lazy var collector = CVMakerGeneralInfoCollector()
     
     private weak var vc: UIViewController?
-    private let flowFinished: (() -> Void)
+    private let flowFinished: ((GeneralInfo) -> Void)
     
-    init(vc: UIViewController?, flowFinished: @escaping (() -> Void)) {
+    init(vc: UIViewController?, flowFinished: @escaping ((GeneralInfo) -> Void)) {
         self.vc = vc
         self.flowFinished = flowFinished
         
@@ -43,6 +43,14 @@ final class CVMakerGeneralInfoView: CVMakerChapterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        flowViews.forEach { flowView in
+            flowView.frame.size = container.bounds.size
+        }
+    }
 }
 
 // MARK: CVMakerGeneralInfoFlowViewDelegate
@@ -51,7 +59,7 @@ extension CVMakerGeneralInfoView: CVMakerGeneralInfoFlowViewDelegate {
         let nextRawValue = step.rawValue + 1
         
         guard let nextStep = Step(rawValue: nextRawValue) else {
-            flowFinished()
+            flowFinished(collector.make())
             
             return
         }
@@ -84,17 +92,7 @@ private extension CVMakerGeneralInfoView {
                 view.delegate = self
                 
                 if index == 0 {
-                    view.translatesAutoresizingMaskIntoConstraints = false
                     container.addSubview(view)
-                    
-                    NSLayoutConstraint.activate([
-                        view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-                        view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-                        view.topAnchor.constraint(equalTo: container.topAnchor),
-                        view.bottomAnchor.constraint(equalTo: container.bottomAnchor)
-                    ])
-                    
-                    view.layoutIfNeeded()
                     
                     view.moveToThis()
                 }
@@ -129,10 +127,6 @@ private extension CVMakerGeneralInfoView {
         let currentView = flowViews[currentIndex]
         let scrollToView = flowViews[scrollToIndex]
         
-        currentView.translatesAutoresizingMaskIntoConstraints = true
-        scrollToView.translatesAutoresizingMaskIntoConstraints = true
-        
-        scrollToView.frame.size = container.bounds.size
         scrollToView.frame.origin = CGPoint(x: 393.scale * CGFloat(direction), y: 0)
         
         container.addSubview(scrollToView)

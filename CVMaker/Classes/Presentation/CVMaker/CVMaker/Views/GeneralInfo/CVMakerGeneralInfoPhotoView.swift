@@ -51,7 +51,7 @@ extension CVMakerGeneralInfoPhotoView: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         guard
             let image,
-            let filePath = DocumentsDirectory.saveImageToDocumentsDirectory(image: image, fileName: UUID().uuidString)
+            let filePath = DocumentsDirectory.saveImageToDocumentsDirectory(image: image, fileName: DocumentsDirectory.ReserveNames.cvPhoto)
         else {
             return
         }
@@ -80,6 +80,7 @@ private extension CVMakerGeneralInfoPhotoView {
     @objc
     func deleteTapped() {
         setup(photoFileName: nil)
+        DocumentsDirectory.deleteImageFromDocumentsDirectory(fileName: DocumentsDirectory.ReserveNames.cvPhoto)
     }
     
     @objc
@@ -116,7 +117,7 @@ private extension CVMakerGeneralInfoPhotoView {
             continueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
             continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
             continueButton.heightAnchor.constraint(equalToConstant: 58.scale),
-            continueButton.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: -16.scale)
+            continueButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: ScreenSize.isIphoneXFamily ? -8.scale : -16.scale)
         ])
     }
 }
