@@ -57,11 +57,11 @@ final class CVMakerGeneralInfoContactInfoView: CVMakerGeneralInfoFlowView {
 
 // MARK: Public
 extension CVMakerGeneralInfoContactInfoView {
-    func setup(contactInfo: ContactInfo) {
-        phoneField.textField.text = contactInfo.phone
-        emailField.textField.text = contactInfo.email
-        websiteField.textField.text = contactInfo.website
-        homeAddressField.value = contactInfo.homeAddress
+    func setup(contactInfo: ContactInfo?) {
+        phoneField.textField.text = contactInfo?.phone
+        emailField.textField.text = contactInfo?.email
+        websiteField.textField.text = contactInfo?.website
+        homeAddressField.value = contactInfo?.homeAddress
     }
 }
 

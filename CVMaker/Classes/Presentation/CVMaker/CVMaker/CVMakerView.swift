@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class CVMakerView: UIView {
     enum Chapter: Int {
@@ -24,12 +26,14 @@ final class CVMakerView: UIView {
     
     lazy var chaptersView = makeChaptersView()
     lazy var container = makeContainer()
-    
     lazy var chaptersViews: [CVMakerChapterView] = [
-        CVMakerGeneralInfoView(vc: vc) { generalInfo in
-            
-        }
+        generalInfoView
     ]
+    lazy var generalInfoView = CVMakerGeneralInfoView(vc: vc) { [weak self] generalInfo in
+        self?.didCollectedGeneralInfoTrigger.accept(generalInfo)
+    }
+    
+    private lazy var didCollectedGeneralInfoTrigger = PublishRelay<GeneralInfo>()
     
     private var chapter = Chapter.generalInfo
     
@@ -71,6 +75,13 @@ extension CVMakerView: CVMakerChapterViewDelegate {
         }
         
         scroll(to: previousChapter)
+    }
+}
+
+// MARK: Public
+extension CVMakerView {
+    var didCollectedGeneralInfo: Signal<GeneralInfo> {
+        didCollectedGeneralInfoTrigger.asSignal()
     }
 }
 

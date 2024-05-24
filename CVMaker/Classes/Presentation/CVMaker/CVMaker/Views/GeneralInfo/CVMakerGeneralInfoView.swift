@@ -14,13 +14,16 @@ final class CVMakerGeneralInfoView: CVMakerChapterView {
     
     lazy var progressView = makeProgressView()
     lazy var container = makeContainer()
-    
     lazy var flowViews: [CVMakerGeneralInfoFlowView] = [
-        CVMakerGeneralInfoNameView(mainDelegate: collector),
-        CVMakerGeneralInfoAboutYourselfView(mainDelegate: collector),
-        CVMakerGeneralInfoContactInfoView(vc: vc, mainDelegate: collector),
-        CVMakerGeneralInfoPhotoView(vc: vc, mainDelegate: collector)
+        nameView,
+        aboutYourselfView,
+        contactInfoView,
+        photoView
     ]
+    lazy var nameView = CVMakerGeneralInfoNameView(mainDelegate: collector)
+    lazy var aboutYourselfView = CVMakerGeneralInfoAboutYourselfView(mainDelegate: collector)
+    lazy var contactInfoView = CVMakerGeneralInfoContactInfoView(vc: vc, mainDelegate: collector)
+    lazy var photoView = CVMakerGeneralInfoPhotoView(vc: vc, mainDelegate: collector)
     
     private lazy var step = Step.name
     
@@ -50,6 +53,17 @@ final class CVMakerGeneralInfoView: CVMakerChapterView {
         flowViews.forEach { flowView in
             flowView.frame.size = container.bounds.size
         }
+    }
+}
+
+// MARK: Public
+extension CVMakerGeneralInfoView {
+    func setup(generalInfo: GeneralInfo?) {
+        nameView.setup(firstName: generalInfo?.firstName)
+        nameView.setup(lastName: generalInfo?.lastName)
+        aboutYourselfView.setup(aboutYourself: generalInfo?.aboutYourself)
+        contactInfoView.setup(contactInfo: generalInfo?.contactInfo)
+        photoView.setup(photoFileName: generalInfo?.photoFileName)
     }
 }
 

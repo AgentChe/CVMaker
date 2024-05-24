@@ -41,7 +41,7 @@ final class CVMakerGeneralInfoAboutYourselfView: CVMakerGeneralInfoFlowView {
 
 // MARK: Public
 extension CVMakerGeneralInfoAboutYourselfView {
-    func setup(aboutYourself: String) {
+    func setup(aboutYourself: String?) {
         inputField.textField.text = aboutYourself
     }
 }

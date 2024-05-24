@@ -12,7 +12,7 @@ final class SelectField: UIView {
     
     var value: String? {
         didSet {
-            contentLabel.attributedText = value?.attributed(with: contentAttrs)
+            update()
         }
     }
     
@@ -22,6 +22,11 @@ final class SelectField: UIView {
     
     private lazy var contentAttrs = TextAttributes()
         .textColor(Appearance.mono200)
+        .font(Fonts.Nunito.semiBold(size: 17.scale))
+        .lineHeight(23.19.scale)
+        .textAlignment(.left)
+    private lazy var placeholderAttrs = TextAttributes()
+        .textColor(Appearance.mono200.withAlphaComponent(0.4))
         .font(Fonts.Nunito.semiBold(size: 17.scale))
         .lineHeight(23.19.scale)
         .textAlignment(.left)
@@ -37,6 +42,7 @@ final class SelectField: UIView {
         
         makeConstraints()
         initialize()
+        update()
     }
     
     required init?(coder: NSCoder) {
@@ -50,6 +56,12 @@ private extension SelectField {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
         container.isUserInteractionEnabled = true
         container.addGestureRecognizer(tapGesture)
+    }
+    
+    func update() {
+        let attrs = value == nil ? placeholderAttrs : contentAttrs
+        let text = value ?? placeholder
+        contentLabel.attributedText = text.attributed(with: attrs)
     }
     
     @objc
@@ -114,14 +126,7 @@ private extension SelectField {
     }
     
     func makeLabel() -> UILabel {
-        let placeholderAttrs = TextAttributes()
-            .textColor(Appearance.mono200.withAlphaComponent(0.4))
-            .font(Fonts.Nunito.semiBold(size: 17.scale))
-            .lineHeight(23.19.scale)
-            .textAlignment(.left)
-        
         let view = UILabel()
-        view.attributedText = placeholder.attributed(with: placeholderAttrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(view)
         return view

@@ -43,12 +43,16 @@ final class CVMakerGeneralInfoNameView: CVMakerGeneralInfoFlowView {
 
 // MARK: Public
 extension CVMakerGeneralInfoNameView {
-    func setup(firstName: String) {
+    func setup(firstName: String?) {
         firstNameField.textField.text = firstName
+        
+        checkEnableContinue()
     }
     
-    func setup(lastName: String) {
+    func setup(lastName: String?) {
         lastNameField.textField.text = lastName
+        
+        checkEnableContinue()
     }
 }
 

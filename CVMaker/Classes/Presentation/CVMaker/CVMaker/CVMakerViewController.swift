@@ -22,7 +22,18 @@ final class CVMakerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let output = viewModel.configure(input: CVMakerViewModel.Input())
+        let output = viewModel.configure(input: CVMakerViewModel.Input(
+            didSaveGeneralInfo: mainView.didCollectedGeneralInfo
+        ))
+        
+        output.profile
+            .drive(Binder(mainView) { base, profile in
+                base.generalInfoView.setup(generalInfo: profile.generalInfo)
+            })
+            .disposed(by: disposeBag)
+        
+        output.disposable
+            .disposed(by: disposeBag)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
