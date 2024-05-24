@@ -11,6 +11,8 @@ final class GlobalDefinitions {
     static let otterScaleHost = "https://api.korrekted.com"
     static let otterScaleApiKey = "i9upCYSnV2mW4aM3"
     
+    static let countriesCitiesAPIKey = "eHlzeXRJVWViT3o1Rm9hM2V1UG1iS1ZKN00yQWtHWkFpaUhYcHhPSg=="
+    
     static let applicationTag = "WHIP"
     static let amplitudeApiKey = "d4ad5c33d23d7a891e9c68de9471f36b"
     

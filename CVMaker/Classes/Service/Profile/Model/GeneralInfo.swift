@@ -10,4 +10,5 @@ struct GeneralInfo: Codable {
     let lastName: String?
     let aboutYourself: String?
     let contactInfo: ContactInfo?
+    let photoFileName: String?
 }

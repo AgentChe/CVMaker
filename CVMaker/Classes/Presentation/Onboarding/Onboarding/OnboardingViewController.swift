@@ -65,17 +65,19 @@ private extension OnboardingViewController {
         UserDefaults.standard.setValue(true, forKey: Constants.wasViewedKey)
     }
     
+    // TODO
     func goToNext(at step: OnboardingViewModel.Step) {
-        switch step {
-        case .main:
-            break // TODO
+        UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make()
+        
+//        switch step {
+//        case .main:
 //            UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController = NavigationController(rootViewController: WhipsViewController.make())
-        case .paygate:
-            let vc = PaygateViewController.make { [weak self] in
-                self?.goToNext(at: .main)
-            }
-            present(vc, animated: true)
-        }
+//        case .paygate:
+//            let vc = PaygateViewController.make { [weak self] in
+//                self?.goToNext(at: .main)
+//            }
+//            present(vc, animated: true)
+//        }
     }
     
     // TODO

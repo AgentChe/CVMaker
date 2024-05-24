@@ -10,5 +10,4 @@ struct ContactInfo: Codable {
     let email: String?
     let website: String?
     let homeAddress: String?
-    let photoFileName: String?
 }

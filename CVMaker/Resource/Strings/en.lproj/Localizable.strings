@@ -47,3 +47,44 @@
 "Paygate.Error.Title" = "Error";
 "Paygate.Error.Text" = "An error occurred during execution. Try later.";
 "Paygate.Error.Button" = "OK";
+
+// MARK: CVMaker
+"CVMaker.Chapter.GeneralInfo" = "General information";
+"CVMaker.Chapter.WorkExperience" = "Work experience";
+"CVMaker.Chapter.Education" = "Education";
+"CVMaker.Chapter.ProfessionalSkills" = "Professional skills";
+"CVMaker.Chapter.Languages" = "Languages";
+"CVMaker.Chapter.Interests" = "Interests";
+"CVMaker.Chapter.Certificates" = "Certificates";
+"CVMaker.Chapter.SocialMedia" = "Social media";
+"CVMaker.Chapter.References" = "References";
+"CVMaker.GeneralInfo.Name.Title" = "What’s your name?";
+"CVMaker.GeneralInfo.Name.SubTitle" = "Please enter your full name. We will never use or store your personal information";
+"CVMaker.GeneralInfo.Name.FirstName" = "First Name";
+"CVMaker.GeneralInfo.Name.LastName" = "Last Name";
+"CVMaker.AboutYourself.Title" = "Tell us a little bit about yourself.";
+"CVMaker.AboutYourself.TipsTitle" = "Small tips:";
+"CVMaker.AboutYourself.Tip1" = "How do I perceive my strengths and weaknesses?";
+"CVMaker.AboutYourself.Tip2" = "What are my skills?";
+"CVMaker.AboutYourself.Tip3" = "What experience do I have?";
+"CVMaker.AboutYourself.FieldTitle" = "About yourself";
+"CVMaker.AboutYourself.Placeholder" = "I’m an expert in...";
+"CVMaker.ContactInfo.Title" = "Contact information";
+"CVMaker.ContactInfo.SubTitle" = "Please provide your contact information so that the employer may reach out to you";
+"CVMaker.ContactInfo.Phone.Title" = "Phone";
+"CVMaker.ContactInfo.Phone.Placeholder" = "+1 223 123 123";
+"CVMaker.ContactInfo.Email.Title" = "Email";
+"CVMaker.ContactInfo.Email.Placeholder" = "example@example.com";
+"CVMaker.ContactInfo.Website.Title" = "Website";
+"CVMaker.ContactInfo.Website.Placeholder" = "example.com";
+"CVMaker.ContactInfo.HomeAddress.Title" = "Home address";
+"CVMaker.ContactInfo.HomeAddress.Placeholder" = "City, Country";
+"CVMaker.Photo.Title" = "Add photo";
+"CVMaker.Photo.SubTitle" = "Please add your photo. It would be best if it was a high-quality official-style photo";
+"CVMaker.Photo.UploadPhoto" = "Upload photo";
+
+// MARK: SelectCity
+"SelectCity.Country" = "Country";
+"SelectCity.City" = "City";
+"SelectCity.Search" = "􀊫 Search";
+"SelectCity.Progress" = "%i of %i";
