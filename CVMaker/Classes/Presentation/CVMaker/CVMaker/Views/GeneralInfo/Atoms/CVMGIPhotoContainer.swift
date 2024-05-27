@@ -96,7 +96,7 @@ private extension CVMGIPhotoContainer {
         
         let iconView = UIImageView()
         iconView.contentMode = .scaleAspectFit
-        iconView.image = UIImage(named: "SelectCity.AddPhoto")
+        iconView.image = UIImage(named: "CVMaker.AddPhoto")
         iconView.clipsToBounds = true
         iconView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(iconView)
@@ -141,7 +141,7 @@ private extension CVMGIPhotoContainer {
     
     func makeDeleteButton() -> TapAreaButton {
         let view = TapAreaButton()
-        view.setImage(UIImage(named: "SelectCity.DeletePhoto"), for: .normal)
+        view.setImage(UIImage(named: "CVMaker.DeletePhoto"), for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

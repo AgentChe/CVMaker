@@ -16,6 +16,7 @@ final class CVMakerViewModel {
 extension CVMakerViewModel {
     struct Input {
         let didSaveGeneralInfo: Signal<GeneralInfo>
+        let didSaveWorkExperiences: Signal<[WorkExperience]>
     }
     
     struct Output {
@@ -27,7 +28,8 @@ extension CVMakerViewModel {
         Output(
             profile: makeProfile(),
             disposable: makeDisposable(
-                didSaveGeneralInfo: input.didSaveGeneralInfo
+                didSaveGeneralInfo: input.didSaveGeneralInfo,
+                didSaveWorkExperiences: input.didSaveWorkExperiences
             )
         )
     }
@@ -42,7 +44,8 @@ private extension CVMakerViewModel {
     }
     
     func makeDisposable(
-        didSaveGeneralInfo: Signal<GeneralInfo>
+        didSaveGeneralInfo: Signal<GeneralInfo>,
+        didSaveWorkExperiences: Signal<[WorkExperience]>
     ) -> Disposable {
         let generalInfo = didSaveGeneralInfo
             .flatMapLatest { [weak self] generalInfo -> Signal<Void> in
@@ -54,8 +57,19 @@ private extension CVMakerViewModel {
             }
             .emit()
         
+        let workExperiences = didSaveWorkExperiences
+            .flatMapLatest { [weak self] workExperiences -> Signal<Void> in
+                guard let self else { return .never() }
+                
+                return self.profileManager
+                    .set(workExperiences: workExperiences)
+                    .asSignal(onErrorSignalWith: .never())
+            }
+            .emit()
+        
         return Disposables.create([
-            generalInfo
+            generalInfo,
+            workExperiences
         ])
     }
 }

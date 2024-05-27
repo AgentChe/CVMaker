@@ -9,7 +9,9 @@ import UIKit
 import RxSwift
 
 final class CVMakerViewController: UIViewController {
-    private lazy var mainView = CVMakerView(vc: self)
+    private lazy var mainView = CVMakerView(vc: self) {
+        // TODO
+    }
     
     private lazy var viewModel = CVMakerViewModel()
     
@@ -23,12 +25,14 @@ final class CVMakerViewController: UIViewController {
         super.viewDidLoad()
         
         let output = viewModel.configure(input: CVMakerViewModel.Input(
-            didSaveGeneralInfo: mainView.didCollectedGeneralInfo
+            didSaveGeneralInfo: mainView.didCollectedGeneralInfo,
+            didSaveWorkExperiences: mainView.didCollectedWorkExperience
         ))
         
         output.profile
             .drive(Binder(mainView) { base, profile in
                 base.generalInfoView.setup(generalInfo: profile.generalInfo)
+                base.workExperienceView.setup(workExperiences: profile.workExperience ?? [])
             })
             .disposed(by: disposeBag)
         

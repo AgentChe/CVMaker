@@ -10,7 +10,7 @@ import RxSwift
 protocol ProfileManagerProtocol {
     func obtainProfile() -> Single<Profile>
     func set(generalInfo: GeneralInfo) -> Single<Void>
-    func set(workExperience: WorkExperience) -> Single<Void>
+    func set(workExperiences: [WorkExperience]) -> Single<Void>
     func set(education: Education) -> Single<Void>
     func set(professionalSkills: [String]) -> Single<Void>
     func set(languages: [Language]) -> Single<Void>
@@ -24,7 +24,7 @@ protocol ProfileManagerProtocol {
 final class ProfileManager {
     enum Entity: String {
         case generalInfo = "generalInfo"
-        case workExperience = "workExperience"
+        case workExperiences = "workExperience"
         case education = "education"
         case professionalSkills = "professionalSkills"
         case languages = "languages"
@@ -45,7 +45,7 @@ extension ProfileManager: ProfileManagerProtocol {
             
             let profile = Profile(
                 generalInfo: cached(entity: .generalInfo),
-                workExperience: cached(entity: .workExperience),
+                workExperience: cached(entity: .workExperiences),
                 education: cached(entity: .education),
                 professionalSkills: cached(entity: .professionalSkills),
                 languages: cached(entity: .languages),
@@ -65,8 +65,8 @@ extension ProfileManager: ProfileManagerProtocol {
         store(object: generalInfo, entity: .generalInfo)
     }
     
-    func set(workExperience: WorkExperience) -> Single<Void> {
-        store(object: workExperience, entity: .workExperience)
+    func set(workExperiences: [WorkExperience]) -> Single<Void> {
+        store(object: workExperiences, entity: .workExperiences)
     }
     
     func set(education: Education) -> Single<Void> {

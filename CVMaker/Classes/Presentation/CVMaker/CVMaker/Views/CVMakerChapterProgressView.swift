@@ -82,7 +82,7 @@ private extension CVMakerChapterProgressView {
 private extension CVMakerChapterProgressView {
     func makeBackButton() -> TapAreaButton {
         let view = TapAreaButton()
-        view.setImage(UIImage(named: "SelectCity.Back"), for: .normal)
+        view.setImage(UIImage(named: "CVMaker.Back"), for: .normal)
         view.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)

@@ -49,6 +49,9 @@
 "Paygate.Error.Button" = "OK";
 
 // MARK: CVMaker
+"CVMaker.NeedInputFields" = "Fill in the fields";
+"CVMaker.SingleEntity.NoAction" = "No, just this one";
+"CVMaker.SingleEntity.YesAction" = "Yes";
 "CVMaker.Chapter.GeneralInfo" = "General information";
 "CVMaker.Chapter.WorkExperience" = "Work experience";
 "CVMaker.Chapter.Education" = "Education";
@@ -82,9 +85,27 @@
 "CVMaker.Photo.Title" = "Add photo";
 "CVMaker.Photo.SubTitle" = "Please add your photo. It would be best if it was a high-quality official-style photo";
 "CVMaker.Photo.UploadPhoto" = "Upload photo";
+"CVMaker.WorkExperience.List.Title" = "Work experience";
+"CVMaker.AddMore" = "Add more";
+"CVMaker.WorkExperience.Title" = "Describe your work";
+"CVMaker.WorkExperience.JobTitle.Title" = "Job title";
+"CVMaker.WorkExperience.JobTitle.Placeholder" = "Product designer";
+"CVMaker.WorkExperience.CompanyName.Title" = "Company name";
+"CVMaker.WorkExperience.CompanyName.Placeholder" = "Apple";
+"CVMaker.WorkExperience.StartDate.Title" = "Start date";
+"CVMaker.WorkExperience.StartDate.Placeholder" = "01.2020";
+"CVMaker.WorkExperience.EndDate.Title" = "End date";
+"CVMaker.WorkExperience.EndDate.Placeholder" = "01.2022";
+"CVMaker.WorkExperience.Results.Title" = "Results";
+"CVMaker.WorkExperience.Results.Placeholder" = "Describe your work or results";
+"CVMaker.WorkExperience.SE.Title" = "One more company?";
+"CVMaker.WorkExperience.SE.Text" = "If you would like to describe your experience at another company, please choose the second option";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";
 "SelectCity.City" = "City";
 "SelectCity.Search" = "􀊫 Search";
 "SelectCity.Progress" = "%i of %i";
+
+// MARK: Wrapper
+"Wrapper.Save" = "Save";

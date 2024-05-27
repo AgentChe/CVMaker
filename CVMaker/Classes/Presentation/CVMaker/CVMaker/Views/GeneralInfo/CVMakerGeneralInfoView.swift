@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CVMakerGeneralInfoView: CVMakerChapterView {
+final class CVMakerGeneralInfoView: UIView {
     enum Step: Int {
         case name, aboutYourself, contactInfo, photo
     }
@@ -36,7 +36,7 @@ final class CVMakerGeneralInfoView: CVMakerChapterView {
         self.vc = vc
         self.flowFinished = flowFinished
         
-        super.init(chapter: .generalInfo)
+        super.init(frame: .zero)
         
         makeConstraints()
         initialize()

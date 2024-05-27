@@ -22,25 +22,33 @@ final class CVMakerView: UIView {
         case references
     }
     
-    var finished: (() -> Void)?
-    
     lazy var chaptersView = makeChaptersView()
     lazy var container = makeContainer()
-    lazy var chaptersViews: [CVMakerChapterView] = [
-        generalInfoView
+    lazy var chaptersViews: [Chapter: UIView] = [
+        .generalInfo: generalInfoView,
+        .workExperience: workExperienceView
     ]
     lazy var generalInfoView = CVMakerGeneralInfoView(vc: vc) { [weak self] generalInfo in
         self?.didCollectedGeneralInfoTrigger.accept(generalInfo)
+        self?.slideViewDidNext(from: .generalInfo)
     }
+    lazy var workExperienceView = CVMakerWorkExperienceView(vc: vc, bind: { [weak self] workExperiences in
+        self?.didCollectedWorkExperienceTrigger.accept(workExperiences)
+    }, flowFinished: { [weak self] in
+        self?.slideViewDidNext(from: .workExperience)
+    })
     
     private lazy var didCollectedGeneralInfoTrigger = PublishRelay<GeneralInfo>()
+    private lazy var didCollectedWorkExperienceTrigger = PublishRelay<[WorkExperience]>()
     
     private var chapter = Chapter.generalInfo
     
     private weak var vc: UIViewController?
+    private let finished: (() -> Void)
     
-    init(vc: UIViewController) {
+    init(vc: UIViewController, finished: @escaping (() -> Void)) {
         self.vc = vc
+        self.finished = finished
         
         super.init(frame: .zero)
         
@@ -51,20 +59,61 @@ final class CVMakerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        chaptersViews.forEach { chapter, view in
+            view.frame.size = container.bounds.size
+        }
+    }
 }
 
-// MARK: CVMakerChapterViewDelegate
-extension CVMakerView: CVMakerChapterViewDelegate {
+// MARK: Public
+extension CVMakerView {
+    var didCollectedGeneralInfo: Signal<GeneralInfo> {
+        didCollectedGeneralInfoTrigger.asSignal()
+    }
+    
+    var didCollectedWorkExperience: Signal<[WorkExperience]> {
+        didCollectedWorkExperienceTrigger.asSignal()
+    }
+}
+
+// MARK: Private
+private extension CVMakerView {
+    func initialize() {
+        backgroundColor = Appearance.main100
+        
+        chaptersViews
+            .forEach { [weak self] chapter, view in
+                guard let self else { return }
+                
+                view.clipsToBounds = true
+                
+                if chapter == self.chapter {
+                    container.addSubview(view)
+                }
+            }
+        
+        chaptersView.didSelect = { [weak self] chapter in
+            self?.scroll(to: chapter)
+        }
+        
+        chaptersView.setup(chapter: chapter)
+    }
+    
     func slideViewDidNext(from chapter: Chapter) {
         let nextRawValue = chapter.rawValue + 1
         
         guard let nextChapter = Chapter(rawValue: nextRawValue) else {
-            finished?()
+            finished()
             
             return
         }
         
         scroll(to: nextChapter)
+        chaptersView.setup(chapter: nextChapter)
     }
     
     func slideViewDidBack(from chapter: Chapter) {
@@ -75,67 +124,30 @@ extension CVMakerView: CVMakerChapterViewDelegate {
         }
         
         scroll(to: previousChapter)
-    }
-}
-
-// MARK: Public
-extension CVMakerView {
-    var didCollectedGeneralInfo: Signal<GeneralInfo> {
-        didCollectedGeneralInfoTrigger.asSignal()
-    }
-}
-
-// MARK: Private
-private extension CVMakerView {
-    func initialize() {
-        backgroundColor = Appearance.main100
-        
-        chaptersViews
-            .forEach { [weak self] view in
-                guard let self else { return }
-                
-                view.clipsToBounds = true
-                view.delegate = self
-                
-                if view.chapter == self.chapter {
-                    view.translatesAutoresizingMaskIntoConstraints = false
-                    container.addSubview(view)
-                    
-                    NSLayoutConstraint.activate([
-                        view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-                        view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-                        view.topAnchor.constraint(equalTo: container.topAnchor),
-                        view.bottomAnchor.constraint(equalTo: container.bottomAnchor)
-                    ])
-                    
-                    view.layoutIfNeeded()
-                    
-                    view.moveToThis()
-                }
-            }
-        
-        chaptersView.setup(chapter: chapter)
+        chaptersView.setup(chapter: previousChapter)
     }
     
     func scroll(to newChapter: Chapter) {
         let currentIndex = chapter.rawValue
         let scrollToIndex = newChapter.rawValue
         
+        guard scrollToIndex != currentIndex else {
+            return 
+        }
+        
         let direction = scrollToIndex > currentIndex ? 1 : -1
         
-        let indices = chaptersViews.indices
-        
-        guard indices.contains(currentIndex), indices.contains(scrollToIndex) else {
+        guard
+            let currentView = chaptersViews[chapter],
+            let scrollToView = chaptersViews[newChapter]
+        else {
             return
         }
-
-        let currentView = chaptersViews[currentIndex]
-        let scrollToView = chaptersViews[scrollToIndex]
         
         scrollToView.frame.size = container.bounds.size
         scrollToView.frame.origin = CGPoint(x: 393.scale * CGFloat(direction), y: 0)
         
-        addSubview(scrollToView)
+        container.addSubview(scrollToView)
         
         UIView.animate(withDuration: 0.3, animations: {
             currentView.frame.origin = CGPoint(x: 393.scale * CGFloat(-direction), y: 0)
@@ -146,8 +158,6 @@ private extension CVMakerView {
             }
             
             currentView.removeFromSuperview()
-            
-            scrollToView.moveToThis()
             
             self.chapter = newChapter
         })

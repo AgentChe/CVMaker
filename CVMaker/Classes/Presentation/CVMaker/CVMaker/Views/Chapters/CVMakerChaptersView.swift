@@ -64,6 +64,8 @@ private extension CVMakerChaptersView {
         }
         
         buttons.forEach { $0.marked = $0.chapter == chapterButton.chapter }
+        
+        didSelect?(chapterButton.chapter)
     }
 }
 
