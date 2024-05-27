@@ -26,13 +26,15 @@ final class CVMakerViewController: UIViewController {
         
         let output = viewModel.configure(input: CVMakerViewModel.Input(
             didSaveGeneralInfo: mainView.didCollectedGeneralInfo,
-            didSaveWorkExperiences: mainView.didCollectedWorkExperience
+            didSaveWorkExperiences: mainView.didCollectedWorkExperience,
+            didSaveEducations: mainView.didCollectedEducations
         ))
         
         output.profile
             .drive(Binder(mainView) { base, profile in
                 base.generalInfoView.setup(generalInfo: profile.generalInfo)
-                base.workExperienceView.setup(workExperiences: profile.workExperience ?? [])
+                base.workExperienceView.setup(workExperiences: profile.workExperiences ?? [])
+                base.educationsView.setup(educations: profile.educations ?? [])
             })
             .disposed(by: disposeBag)
         

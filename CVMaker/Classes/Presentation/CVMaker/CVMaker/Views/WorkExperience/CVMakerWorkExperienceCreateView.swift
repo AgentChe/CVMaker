@@ -41,6 +41,7 @@ extension CVMakerWorkExperienceCreateView {
     }
 }
 
+// MARK: Private
 private extension CVMakerWorkExperienceCreateView {
     func initialize() {
         rx.keyboardHeight

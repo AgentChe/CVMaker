@@ -54,14 +54,20 @@
 		DE42B22C2C00B17000FF61B0 /* CVMakerWorkExperienceCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B22B2C00B17000FF61B0 /* CVMakerWorkExperienceCreateView.swift */; };
 		DE42B22F2C00B27700FF61B0 /* WrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B22E2C00B27700FF61B0 /* WrapperController.swift */; };
 		DE42B2332C00B93500FF61B0 /* CVMWETableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2322C00B93500FF61B0 /* CVMWETableView.swift */; };
-		DE42B2352C00B93D00FF61B0 /* CVMWEEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2342C00B93D00FF61B0 /* CVMWEEntityCell.swift */; };
-		DE42B2382C00B95F00FF61B0 /* CVMWEAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2372C00B95F00FF61B0 /* CVMWEAddCell.swift */; };
-		DE42B23A2C00B96700FF61B0 /* CVMWETitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2392C00B96700FF61B0 /* CVMWETitleCell.swift */; };
+		DE42B23A2C00B96700FF61B0 /* CVMakerTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2392C00B96700FF61B0 /* CVMakerTitleCell.swift */; };
 		DE42B23C2C00B9F600FF61B0 /* DottedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B23B2C00B9F600FF61B0 /* DottedButton.swift */; };
 		DE42B23E2C00BB7B00FF61B0 /* CVMWETableElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B23D2C00BB7B00FF61B0 /* CVMWETableElement.swift */; };
 		DE42B2402C00C79D00FF61B0 /* DateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B23F2C00C79D00FF61B0 /* DateField.swift */; };
 		DE42B2422C00CAE900FF61B0 /* CVMWECreateFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2412C00CAE900FF61B0 /* CVMWECreateFieldsView.swift */; };
 		DE42B2482C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2472C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift */; };
+		DE42B24C2C04E3C700FF61B0 /* CVMakerEducationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B24B2C04E3C700FF61B0 /* CVMakerEducationView.swift */; };
+		DE42B24E2C04E3D800FF61B0 /* CVMakerEducationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B24D2C04E3D800FF61B0 /* CVMakerEducationListView.swift */; };
+		DE42B2502C04E3DF00FF61B0 /* CVMakerEducationCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B24F2C04E3DF00FF61B0 /* CVMakerEducationCreateView.swift */; };
+		DE42B2562C04E40B00FF61B0 /* CVMETableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2552C04E40B00FF61B0 /* CVMETableView.swift */; };
+		DE42B2582C04E41300FF61B0 /* CVMETableElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2572C04E41300FF61B0 /* CVMETableElement.swift */; };
+		DE42B25B2C04E45900FF61B0 /* CVMakerEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B25A2C04E45900FF61B0 /* CVMakerEntityCell.swift */; };
+		DE42B25D2C04E7D700FF61B0 /* CVMakerAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B25C2C04E7D700FF61B0 /* CVMakerAddCell.swift */; };
+		DE42B25F2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B25E2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift */; };
 		DE83F5B02BFB444100439D14 /* DefaultPaygate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A42BFB444100439D14 /* DefaultPaygate.swift */; };
 		DE83F5B12BFB444100439D14 /* PaygateOptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A52BFB444100439D14 /* PaygateOptionInfo.swift */; };
 		DE83F5B22BFB444100439D14 /* PaygateInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A72BFB444100439D14 /* PaygateInfoCell.swift */; };
@@ -206,14 +212,20 @@
 		DE42B22B2C00B17000FF61B0 /* CVMakerWorkExperienceCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerWorkExperienceCreateView.swift; sourceTree = "<group>"; };
 		DE42B22E2C00B27700FF61B0 /* WrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperController.swift; sourceTree = "<group>"; };
 		DE42B2322C00B93500FF61B0 /* CVMWETableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMWETableView.swift; sourceTree = "<group>"; };
-		DE42B2342C00B93D00FF61B0 /* CVMWEEntityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMWEEntityCell.swift; sourceTree = "<group>"; };
-		DE42B2372C00B95F00FF61B0 /* CVMWEAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMWEAddCell.swift; sourceTree = "<group>"; };
-		DE42B2392C00B96700FF61B0 /* CVMWETitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMWETitleCell.swift; sourceTree = "<group>"; };
+		DE42B2392C00B96700FF61B0 /* CVMakerTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerTitleCell.swift; sourceTree = "<group>"; };
 		DE42B23B2C00B9F600FF61B0 /* DottedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedButton.swift; sourceTree = "<group>"; };
 		DE42B23D2C00BB7B00FF61B0 /* CVMWETableElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMWETableElement.swift; sourceTree = "<group>"; };
 		DE42B23F2C00C79D00FF61B0 /* DateField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateField.swift; sourceTree = "<group>"; };
 		DE42B2412C00CAE900FF61B0 /* CVMWECreateFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMWECreateFieldsView.swift; sourceTree = "<group>"; };
 		DE42B2472C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerSingleEntityView.swift; sourceTree = "<group>"; };
+		DE42B24B2C04E3C700FF61B0 /* CVMakerEducationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerEducationView.swift; sourceTree = "<group>"; };
+		DE42B24D2C04E3D800FF61B0 /* CVMakerEducationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerEducationListView.swift; sourceTree = "<group>"; };
+		DE42B24F2C04E3DF00FF61B0 /* CVMakerEducationCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerEducationCreateView.swift; sourceTree = "<group>"; };
+		DE42B2552C04E40B00FF61B0 /* CVMETableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMETableView.swift; sourceTree = "<group>"; };
+		DE42B2572C04E41300FF61B0 /* CVMETableElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMETableElement.swift; sourceTree = "<group>"; };
+		DE42B25A2C04E45900FF61B0 /* CVMakerEntityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerEntityCell.swift; sourceTree = "<group>"; };
+		DE42B25C2C04E7D700FF61B0 /* CVMakerAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerAddCell.swift; sourceTree = "<group>"; };
+		DE42B25E2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMECreateFieldsView.swift; sourceTree = "<group>"; };
 		DE83F5A42BFB444100439D14 /* DefaultPaygate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPaygate.swift; sourceTree = "<group>"; };
 		DE83F5A52BFB444100439D14 /* PaygateOptionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaygateOptionInfo.swift; sourceTree = "<group>"; };
 		DE83F5A72BFB444100439D14 /* PaygateInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaygateInfoCell.swift; sourceTree = "<group>"; };
@@ -377,9 +389,11 @@
 		DE42B0B72BFBCB8600FF61B0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DE42B2592C04E44E00FF61B0 /* Atoms */,
 				DE42B0BA2BFBCBB800FF61B0 /* Chapters */,
 				DE42B0BD2BFC950F00FF61B0 /* GeneralInfo */,
 				DE42B2242C00B02900FF61B0 /* WorkExperience */,
+				DE42B2492C04E2AB00FF61B0 /* Education */,
 				DE42B0FA2BFD1EC900FF61B0 /* CVMakerChapterProgressView.swift */,
 				DE42B2472C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift */,
 			);
@@ -520,7 +534,6 @@
 			isa = PBXGroup;
 			children = (
 				DE42B2312C00B91E00FF61B0 /* List */,
-				DE42B23B2C00B9F600FF61B0 /* DottedButton.swift */,
 				DE42B2412C00CAE900FF61B0 /* CVMWECreateFieldsView.swift */,
 			);
 			path = Atoms;
@@ -529,21 +542,49 @@
 		DE42B2312C00B91E00FF61B0 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				DE42B2362C00B94800FF61B0 /* Cells */,
 				DE42B2322C00B93500FF61B0 /* CVMWETableView.swift */,
 				DE42B23D2C00BB7B00FF61B0 /* CVMWETableElement.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
 		};
-		DE42B2362C00B94800FF61B0 /* Cells */ = {
+		DE42B2492C04E2AB00FF61B0 /* Education */ = {
 			isa = PBXGroup;
 			children = (
-				DE42B2342C00B93D00FF61B0 /* CVMWEEntityCell.swift */,
-				DE42B2372C00B95F00FF61B0 /* CVMWEAddCell.swift */,
-				DE42B2392C00B96700FF61B0 /* CVMWETitleCell.swift */,
+				DE42B2512C04E3E200FF61B0 /* Atoms */,
+				DE42B24B2C04E3C700FF61B0 /* CVMakerEducationView.swift */,
+				DE42B24D2C04E3D800FF61B0 /* CVMakerEducationListView.swift */,
+				DE42B24F2C04E3DF00FF61B0 /* CVMakerEducationCreateView.swift */,
 			);
-			path = Cells;
+			path = Education;
+			sourceTree = "<group>";
+		};
+		DE42B2512C04E3E200FF61B0 /* Atoms */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B2522C04E3E600FF61B0 /* List */,
+				DE42B25E2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift */,
+			);
+			path = Atoms;
+			sourceTree = "<group>";
+		};
+		DE42B2522C04E3E600FF61B0 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B2552C04E40B00FF61B0 /* CVMETableView.swift */,
+				DE42B2572C04E41300FF61B0 /* CVMETableElement.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		DE42B2592C04E44E00FF61B0 /* Atoms */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B2392C00B96700FF61B0 /* CVMakerTitleCell.swift */,
+				DE42B25A2C04E45900FF61B0 /* CVMakerEntityCell.swift */,
+				DE42B25C2C04E7D700FF61B0 /* CVMakerAddCell.swift */,
+			);
+			path = Atoms;
 			sourceTree = "<group>";
 		};
 		DE83F5A62BFB444100439D14 /* Models */ = {
@@ -690,6 +731,7 @@
 				DE42B0CC2BFCAA9F00FF61B0 /* InputField.swift */,
 				DE42B0F82BFD182000FF61B0 /* SelectField.swift */,
 				DE42B23F2C00C79D00FF61B0 /* DateField.swift */,
+				DE42B23B2C00B9F600FF61B0 /* DottedButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1084,7 +1126,6 @@
 				DE42B2402C00C79D00FF61B0 /* DateField.swift in Sources */,
 				DEFA93CE2BE94AED00F892BC /* UIColor+Extension.swift in Sources */,
 				DEFA93D42BE94AED00F892BC /* APIRequestBody.swift in Sources */,
-				DE42B2352C00B93D00FF61B0 /* CVMWEEntityCell.swift in Sources */,
 				DEFA93D82BE94AED00F892BC /* PushNotificationsManager.swift in Sources */,
 				DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */,
 				DEFA93C52BE94AED00F892BC /* CircleView.swift in Sources */,
@@ -1093,8 +1134,10 @@
 				DE42B09E2BFBB86D00FF61B0 /* Education.swift in Sources */,
 				DE42B0E92BFD008A00FF61B0 /* GetCitiesRequest.swift in Sources */,
 				DE42B0C12BFC967900FF61B0 /* CVMakerGeneralInfoFlowView.swift in Sources */,
+				DE42B2582C04E41300FF61B0 /* CVMETableElement.swift in Sources */,
 				DE42B2262C00B03C00FF61B0 /* CVMakerWorkExperienceView.swift in Sources */,
 				DEFA93D22BE94AED00F892BC /* UIView+RxExtension.swift in Sources */,
+				DE42B2562C04E40B00FF61B0 /* CVMETableView.swift in Sources */,
 				DE42B0D92BFCCE2400FF61B0 /* SelectCityViewController.swift in Sources */,
 				DE42B0962BFBB3CD00FF61B0 /* GeneralInfo.swift in Sources */,
 				DEFA93E32BE94AED00F892BC /* XOREncryption.swift in Sources */,
@@ -1110,12 +1153,15 @@
 				DE42B22A2C00B15E00FF61B0 /* CVMakerWorkExperienceListView.swift in Sources */,
 				DE83F5BC2BFB44AB00439D14 /* Paygate.swift in Sources */,
 				DEFA94112BE94AED00F892BC /* PurchaseValidationObserver.swift in Sources */,
+				DE42B25D2C04E7D700FF61B0 /* CVMakerAddCell.swift in Sources */,
 				DEFA940C2BE94AED00F892BC /* IAPErrorHelper.swift in Sources */,
 				DE42B0E72BFCFF8100FF61B0 /* GetCountriesRequest.swift in Sources */,
 				DEFA93D12BE94AED00F892BC /* UITapGestureRecognizer+Extension.swift in Sources */,
+				DE42B24C2C04E3C700FF61B0 /* CVMakerEducationView.swift in Sources */,
 				DE42B0C92BFC970C00FF61B0 /* CVMakerGeneralInfoPhotoView.swift in Sources */,
 				DEFA93D32BE94AED00F892BC /* DefaultRequestWrapper.swift in Sources */,
 				DEFA93CF2BE94AED00F892BC /* UIDevice+Extension.swift in Sources */,
+				DE42B2502C04E3DF00FF61B0 /* CVMakerEducationCreateView.swift in Sources */,
 				DEFA940B2BE94AED00F892BC /* IAPError.swift in Sources */,
 				DE42B23E2C00BB7B00FF61B0 /* CVMWETableElement.swift in Sources */,
 				DEFA93DA2BE94AED00F892BC /* NetworkError.swift in Sources */,
@@ -1130,7 +1176,7 @@
 				DE42B0B22BFBC73200FF61B0 /* CVMakerViewController.swift in Sources */,
 				DE42B2422C00CAE900FF61B0 /* CVMWECreateFieldsView.swift in Sources */,
 				DEFA93ED2BE94AED00F892BC /* OnboardingViewModel.swift in Sources */,
-				DE42B23A2C00B96700FF61B0 /* CVMWETitleCell.swift in Sources */,
+				DE42B23A2C00B96700FF61B0 /* CVMakerTitleCell.swift in Sources */,
 				DE42B0A62BFBBB2400FF61B0 /* Reference.swift in Sources */,
 				DEFA940D2BE94AED00F892BC /* IAPActionResult.swift in Sources */,
 				DEFA93C82BE94AED00F892BC /* PaddingTextField.swift in Sources */,
@@ -1185,8 +1231,8 @@
 				DED6C71D2BEA7FD9001DE5B2 /* OLinkedInView.swift in Sources */,
 				DE83F5B22BFB444100439D14 /* PaygateInfoCell.swift in Sources */,
 				DE42B0E22BFCF91C00FF61B0 /* Country.swift in Sources */,
-				DE42B2382C00B95F00FF61B0 /* CVMWEAddCell.swift in Sources */,
 				DE42B0B92BFBCB9700FF61B0 /* CVMakerChaptersView.swift in Sources */,
+				DE42B25B2C04E45900FF61B0 /* CVMakerEntityCell.swift in Sources */,
 				DE42B0BC2BFBCBD800FF61B0 /* CVMakerChapterButton.swift in Sources */,
 				DE42B0C52BFC96FA00FF61B0 /* CVMakerGeneralInfoAboutYourselfView.swift in Sources */,
 				DEFA93CA2BE94AED00F892BC /* Collection+Extension.swift in Sources */,
@@ -1207,7 +1253,9 @@
 				DEFA93CD2BE94AED00F892BC /* UIApplication+Extension.swift in Sources */,
 				DE42B0D52BFCBC4300FF61B0 /* CVMGIAboutYourselfTipsView.swift in Sources */,
 				DEFA93BB2BE94AED00F892BC /* BranchManager.swift in Sources */,
+				DE42B24E2C04E3D800FF61B0 /* CVMakerEducationListView.swift in Sources */,
 				DE42B0F32BFD102D00FF61B0 /* SelectCityAssemby.swift in Sources */,
+				DE42B25F2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift in Sources */,
 				DE42B2482C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

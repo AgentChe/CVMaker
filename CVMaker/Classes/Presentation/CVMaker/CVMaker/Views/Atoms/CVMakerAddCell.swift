@@ -1,13 +1,13 @@
 //
-//  CVMWEAddCell.swift
+//  CVMakerAddCell.swift
 //  CVMaker
 //
-//  Created by Андрей Чернышев on 24.05.2024.
+//  Created by Андрей Чернышев on 27.05.2024.
 //
 
 import UIKit
 
-final class CVMWEAddCell: UITableViewCell {
+final class CVMakerAddCell: UITableViewCell {
     var didTap: (() -> Void)?
     
     lazy var button = makeButton()
@@ -25,7 +25,7 @@ final class CVMWEAddCell: UITableViewCell {
 }
 
 // MARK: Private
-private extension CVMWEAddCell {
+private extension CVMakerAddCell {
     func initialize() {
         backgroundColor = UIColor.clear
         contentView.backgroundColor = UIColor.clear
@@ -40,7 +40,7 @@ private extension CVMWEAddCell {
 }
 
 // MARK: Make constraints
-private extension CVMWEAddCell {
+private extension CVMakerAddCell {
     func makeConstraints() {
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.scale),
@@ -53,7 +53,7 @@ private extension CVMWEAddCell {
 }
 
 // MARK: Lazy initialization
-private extension CVMWEAddCell {
+private extension CVMakerAddCell {
     func makeButton() -> DottedButton {
         let view = DottedButton()
         view.backgroundColor = UIColor.clear

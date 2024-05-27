@@ -9,8 +9,8 @@ import Foundation
 
 struct Profile: Codable {
     let generalInfo: GeneralInfo?
-    let workExperience: [WorkExperience]?
-    let education: Education?
+    let workExperiences: [WorkExperience]?
+    let educations: [Education]?
     let professionalSkills: [String]?
     let languages: [Language]?
     let interests: [String]?

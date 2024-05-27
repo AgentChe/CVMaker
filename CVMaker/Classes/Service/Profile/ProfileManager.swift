@@ -11,7 +11,7 @@ protocol ProfileManagerProtocol {
     func obtainProfile() -> Single<Profile>
     func set(generalInfo: GeneralInfo) -> Single<Void>
     func set(workExperiences: [WorkExperience]) -> Single<Void>
-    func set(education: Education) -> Single<Void>
+    func set(educations: [Education]) -> Single<Void>
     func set(professionalSkills: [String]) -> Single<Void>
     func set(languages: [Language]) -> Single<Void>
     func set(interests: [String]) -> Single<Void>
@@ -25,7 +25,7 @@ final class ProfileManager {
     enum Entity: String {
         case generalInfo = "generalInfo"
         case workExperiences = "workExperience"
-        case education = "education"
+        case educations = "educations"
         case professionalSkills = "professionalSkills"
         case languages = "languages"
         case interests = "interests"
@@ -45,8 +45,8 @@ extension ProfileManager: ProfileManagerProtocol {
             
             let profile = Profile(
                 generalInfo: cached(entity: .generalInfo),
-                workExperience: cached(entity: .workExperiences),
-                education: cached(entity: .education),
+                workExperiences: cached(entity: .workExperiences),
+                educations: cached(entity: .educations),
                 professionalSkills: cached(entity: .professionalSkills),
                 languages: cached(entity: .languages),
                 interests: cached(entity: .interests),
@@ -69,8 +69,8 @@ extension ProfileManager: ProfileManagerProtocol {
         store(object: workExperiences, entity: .workExperiences)
     }
     
-    func set(education: Education) -> Single<Void> {
-        store(object: education, entity: .education)
+    func set(educations: [Education]) -> Single<Void> {
+        store(object: educations, entity: .educations)
     }
     
     func set(professionalSkills: [String]) -> Single<Void> {

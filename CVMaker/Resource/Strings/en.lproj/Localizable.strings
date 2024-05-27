@@ -52,6 +52,7 @@
 "CVMaker.NeedInputFields" = "Fill in the fields";
 "CVMaker.SingleEntity.NoAction" = "No, just this one";
 "CVMaker.SingleEntity.YesAction" = "Yes";
+"CVMaker.AddMore" = "Add more";
 "CVMaker.Chapter.GeneralInfo" = "General information";
 "CVMaker.Chapter.WorkExperience" = "Work experience";
 "CVMaker.Chapter.Education" = "Education";
@@ -86,7 +87,6 @@
 "CVMaker.Photo.SubTitle" = "Please add your photo. It would be best if it was a high-quality official-style photo";
 "CVMaker.Photo.UploadPhoto" = "Upload photo";
 "CVMaker.WorkExperience.List.Title" = "Work experience";
-"CVMaker.AddMore" = "Add more";
 "CVMaker.WorkExperience.Title" = "Describe your work";
 "CVMaker.WorkExperience.JobTitle.Title" = "Job title";
 "CVMaker.WorkExperience.JobTitle.Placeholder" = "Product designer";
@@ -100,6 +100,21 @@
 "CVMaker.WorkExperience.Results.Placeholder" = "Describe your work or results";
 "CVMaker.WorkExperience.SE.Title" = "One more company?";
 "CVMaker.WorkExperience.SE.Text" = "If you would like to describe your experience at another company, please choose the second option";
+"CVMaker.Education.Title" = "Where did you study?";
+"CVMaker.Education.SubTitle" = "Please enter the name of your university, your field of study, the period of time you studied, and your degree";
+"CVMaker.Education.ListTitle" = "Education";
+"CVMaker.Education.University.Title" = "University";
+"CVMaker.Education.University.Placeholder" = "Garvard";
+"CVMaker.Education.FieldStudy.Title" = "Field of study";
+"CVMaker.Education.FieldStudy.Placeholder" = "Design";
+"CVMaker.Education.Degree.Title" = "Degree";
+"CVMaker.Education.Degree.Placeholder" = "Master";
+"CVMaker.Education.StartDate.Title" = "Start date";
+"CVMaker.Education.StartDate.Placeholder" = "01.2020";
+"CVMaker.Education.EndDate.Title" = "End date";
+"CVMaker.Education.EndDate.Placeholder" = "01.2022";
+"CVMaker.Education.SE.Title" = "Do you have another degree?";
+"CVMaker.Education.SE.Text" = "If you have another degree, choose the second option";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";

@@ -1,5 +1,5 @@
 //
-//  CVMWETitleCell.swift
+//  CVMakerTitleCell.swift
 //  CVMaker
 //
 //  Created by Андрей Чернышев on 24.05.2024.
@@ -7,8 +7,14 @@
 
 import UIKit
 
-final class CVMWETitleCell: UITableViewCell {
+final class CVMakerTitleCell: UITableViewCell {
     lazy var label = makeLabel()
+    
+    private lazy var attrs = TextAttributes()
+        .textColor(Appearance.mono200)
+        .font(Fonts.Bitter.bold(size: 23.scale))
+        .lineHeight(27.6.scale)
+        .textAlignment(.left)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,8 +28,15 @@ final class CVMWETitleCell: UITableViewCell {
     }
 }
 
+// MARK: Public
+extension CVMakerTitleCell {
+    func setup(title: String) {
+        label.attributedText = title.attributed(with: attrs)
+    }
+}
+
 // MARK: Private
-private extension CVMWETitleCell {
+private extension CVMakerTitleCell {
     func initialize() {
         backgroundColor = UIColor.clear
         contentView.backgroundColor = UIColor.clear
@@ -33,7 +46,7 @@ private extension CVMWETitleCell {
 }
 
 // MARK: Make constraints
-private extension CVMWETitleCell {
+private extension CVMakerTitleCell {
     func makeConstraints() {
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.scale),
@@ -45,16 +58,9 @@ private extension CVMWETitleCell {
 }
 
 // MARK: Lazy initialization
-private extension CVMWETitleCell {
+private extension CVMakerTitleCell {
     func makeLabel() -> UILabel {
-        let attrs = TextAttributes()
-            .textColor(Appearance.mono200)
-            .font(Fonts.Bitter.bold(size: 23.scale))
-            .lineHeight(27.6.scale)
-            .textAlignment(.left)
-        
         let view = UILabel()
-        view.attributedText = "CVMaker.WorkExperience.List.Title".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(view)
         return view

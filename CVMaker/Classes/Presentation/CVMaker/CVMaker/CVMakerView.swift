@@ -26,7 +26,8 @@ final class CVMakerView: UIView {
     lazy var container = makeContainer()
     lazy var chaptersViews: [Chapter: UIView] = [
         .generalInfo: generalInfoView,
-        .workExperience: workExperienceView
+        .workExperience: workExperienceView,
+        .education: educationsView
     ]
     lazy var generalInfoView = CVMakerGeneralInfoView(vc: vc) { [weak self] generalInfo in
         self?.didCollectedGeneralInfoTrigger.accept(generalInfo)
@@ -37,9 +38,15 @@ final class CVMakerView: UIView {
     }, flowFinished: { [weak self] in
         self?.slideViewDidNext(from: .workExperience)
     })
+    lazy var educationsView = CVMakerEducationView(vc: vc, bind: { [weak self] educations in
+        self?.didCollectedEducationsTrigger.accept(educations)
+    }, flowFinished: { [weak self] in
+        self?.slideViewDidNext(from: .education)
+    })
     
     private lazy var didCollectedGeneralInfoTrigger = PublishRelay<GeneralInfo>()
     private lazy var didCollectedWorkExperienceTrigger = PublishRelay<[WorkExperience]>()
+    private lazy var didCollectedEducationsTrigger = PublishRelay<[Education]>()
     
     private var chapter = Chapter.generalInfo
     
@@ -77,6 +84,10 @@ extension CVMakerView {
     
     var didCollectedWorkExperience: Signal<[WorkExperience]> {
         didCollectedWorkExperienceTrigger.asSignal()
+    }
+    
+    var didCollectedEducations: Signal<[Education]> {
+        didCollectedEducationsTrigger.asSignal()
     }
 }
 
