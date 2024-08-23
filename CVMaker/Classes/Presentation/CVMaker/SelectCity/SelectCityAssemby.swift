@@ -17,7 +17,7 @@ final class SelectCityAssemby {
             })
             selectCountryVC.navigationController?.pushViewController(selectCityVC, animated: true)
         })
-        let nc = UINavigationController(rootViewController: selectCountryVC)
+        let nc = NavigationController(rootViewController: selectCountryVC)
         vc.present(nc, animated: true)
     }
 }

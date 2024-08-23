@@ -11,7 +11,7 @@ struct Profile: Codable {
     let generalInfo: GeneralInfo?
     let workExperiences: [WorkExperience]?
     let educations: [Education]?
-    let professionalSkills: [String]?
+    let professionalSkills: [ProfessionalSkill]?
     let languages: [Language]?
     let interests: [String]?
     let certificates: [Certificate]?

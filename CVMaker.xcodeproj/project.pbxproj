@@ -68,6 +68,12 @@
 		DE42B25B2C04E45900FF61B0 /* CVMakerEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B25A2C04E45900FF61B0 /* CVMakerEntityCell.swift */; };
 		DE42B25D2C04E7D700FF61B0 /* CVMakerAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B25C2C04E7D700FF61B0 /* CVMakerAddCell.swift */; };
 		DE42B25F2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B25E2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift */; };
+		DE42B2612C0523E900FF61B0 /* ProfessionalSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2602C0523E900FF61B0 /* ProfessionalSkill.swift */; };
+		DE42B2642C05241F00FF61B0 /* SelectProfessionalSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2632C05241F00FF61B0 /* SelectProfessionalSkillViewController.swift */; };
+		DE42B2662C05242500FF61B0 /* SelectProfessionalSkillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2652C05242500FF61B0 /* SelectProfessionalSkillViewModel.swift */; };
+		DE42B2682C05242900FF61B0 /* SelectProfessionalSkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B2672C05242900FF61B0 /* SelectProfessionalSkillView.swift */; };
+		DE42B26C2C05245800FF61B0 /* SelectProfessionalSkillTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B26B2C05245800FF61B0 /* SelectProfessionalSkillTableView.swift */; };
+		DE42B2702C05246C00FF61B0 /* SelectProfessionalSkillTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B26F2C05246C00FF61B0 /* SelectProfessionalSkillTableCell.swift */; };
 		DE83F5B02BFB444100439D14 /* DefaultPaygate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A42BFB444100439D14 /* DefaultPaygate.swift */; };
 		DE83F5B12BFB444100439D14 /* PaygateOptionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A52BFB444100439D14 /* PaygateOptionInfo.swift */; };
 		DE83F5B22BFB444100439D14 /* PaygateInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE83F5A72BFB444100439D14 /* PaygateInfoCell.swift */; };
@@ -84,6 +90,15 @@
 		DED6C71F2BEA8154001DE5B2 /* OCoverLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */; };
 		DED6C7212BEA815C001DE5B2 /* OLandOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */; };
 		DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */; };
+		DED8FB1C2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB1B2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift */; };
+		DED8FB1E2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB1D2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift */; };
+		DED8FB212C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB202C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift */; };
+		DED8FB252C7885FE001DAAE2 /* CVMPSCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB242C7885FE001DAAE2 /* CVMPSCollectionView.swift */; };
+		DED8FB272C788612001DAAE2 /* CVMPSCollectionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB262C788612001DAAE2 /* CVMPSCollectionElement.swift */; };
+		DED8FB2A2C788625001DAAE2 /* CVMPSCollectionTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB292C788625001DAAE2 /* CVMPSCollectionTitleCell.swift */; };
+		DED8FB2C2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB2B2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift */; };
+		DED8FB2E2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB2D2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift */; };
+		DED8FB302C78A6F2001DAAE2 /* CVMPSCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB2F2C78A6F2001DAAE2 /* CVMPSCollectionLayout.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -226,6 +241,12 @@
 		DE42B25A2C04E45900FF61B0 /* CVMakerEntityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerEntityCell.swift; sourceTree = "<group>"; };
 		DE42B25C2C04E7D700FF61B0 /* CVMakerAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerAddCell.swift; sourceTree = "<group>"; };
 		DE42B25E2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMECreateFieldsView.swift; sourceTree = "<group>"; };
+		DE42B2602C0523E900FF61B0 /* ProfessionalSkill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalSkill.swift; sourceTree = "<group>"; };
+		DE42B2632C05241F00FF61B0 /* SelectProfessionalSkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillViewController.swift; sourceTree = "<group>"; };
+		DE42B2652C05242500FF61B0 /* SelectProfessionalSkillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillViewModel.swift; sourceTree = "<group>"; };
+		DE42B2672C05242900FF61B0 /* SelectProfessionalSkillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillView.swift; sourceTree = "<group>"; };
+		DE42B26B2C05245800FF61B0 /* SelectProfessionalSkillTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillTableView.swift; sourceTree = "<group>"; };
+		DE42B26F2C05246C00FF61B0 /* SelectProfessionalSkillTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillTableCell.swift; sourceTree = "<group>"; };
 		DE83F5A42BFB444100439D14 /* DefaultPaygate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPaygate.swift; sourceTree = "<group>"; };
 		DE83F5A52BFB444100439D14 /* PaygateOptionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaygateOptionInfo.swift; sourceTree = "<group>"; };
 		DE83F5A72BFB444100439D14 /* PaygateInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaygateInfoCell.swift; sourceTree = "<group>"; };
@@ -242,6 +263,15 @@
 		DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCoverLetterView.swift; sourceTree = "<group>"; };
 		DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLandOfferView.swift; sourceTree = "<group>"; };
 		DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedIn.swift; sourceTree = "<group>"; };
+		DED8FB1B2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfessionalSkillsRequest.swift; sourceTree = "<group>"; };
+		DED8FB1D2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillAssembly.swift; sourceTree = "<group>"; };
+		DED8FB202C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerProfessionalSkillsView.swift; sourceTree = "<group>"; };
+		DED8FB242C7885FE001DAAE2 /* CVMPSCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMPSCollectionView.swift; sourceTree = "<group>"; };
+		DED8FB262C788612001DAAE2 /* CVMPSCollectionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMPSCollectionElement.swift; sourceTree = "<group>"; };
+		DED8FB292C788625001DAAE2 /* CVMPSCollectionTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMPSCollectionTitleCell.swift; sourceTree = "<group>"; };
+		DED8FB2B2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMPSCollectionAddCell.swift; sourceTree = "<group>"; };
+		DED8FB2D2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMPSCollectionSkillCell.swift; sourceTree = "<group>"; };
+		DED8FB2F2C78A6F2001DAAE2 /* CVMPSCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMPSCollectionLayout.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -379,6 +409,7 @@
 		DE42B0B02BFBC71700FF61B0 /* CVMaker */ = {
 			isa = PBXGroup;
 			children = (
+				DE42B2622C05240C00FF61B0 /* SelectProfessionalSkill */,
 				DE42B22D2C00B26700FF61B0 /* Wrapper */,
 				DE42B0D72BFCCE0E00FF61B0 /* SelectCity */,
 				DE42B0D62BFCCDFF00FF61B0 /* CVMaker */,
@@ -394,6 +425,7 @@
 				DE42B0BD2BFC950F00FF61B0 /* GeneralInfo */,
 				DE42B2242C00B02900FF61B0 /* WorkExperience */,
 				DE42B2492C04E2AB00FF61B0 /* Education */,
+				DED8FB1F2C7882F0001DAAE2 /* ProfessionalSkills */,
 				DE42B0FA2BFD1EC900FF61B0 /* CVMakerChapterProgressView.swift */,
 				DE42B2472C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift */,
 			);
@@ -480,6 +512,7 @@
 			children = (
 				DE42B0E12BFCF91C00FF61B0 /* Country.swift */,
 				DE42B0EA2BFD011E00FF61B0 /* City.swift */,
+				DE42B2602C0523E900FF61B0 /* ProfessionalSkill.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -489,6 +522,7 @@
 			children = (
 				DE42B0E62BFCFF8100FF61B0 /* GetCountriesRequest.swift */,
 				DE42B0E82BFD008A00FF61B0 /* GetCitiesRequest.swift */,
+				DED8FB1B2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -587,6 +621,35 @@
 			path = Atoms;
 			sourceTree = "<group>";
 		};
+		DE42B2622C05240C00FF61B0 /* SelectProfessionalSkill */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B2692C05242C00FF61B0 /* Views */,
+				DE42B2632C05241F00FF61B0 /* SelectProfessionalSkillViewController.swift */,
+				DE42B2652C05242500FF61B0 /* SelectProfessionalSkillViewModel.swift */,
+				DE42B2672C05242900FF61B0 /* SelectProfessionalSkillView.swift */,
+				DED8FB1D2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift */,
+			);
+			path = SelectProfessionalSkill;
+			sourceTree = "<group>";
+		};
+		DE42B2692C05242C00FF61B0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B26A2C05244700FF61B0 /* TableView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DE42B26A2C05244700FF61B0 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				DE42B26B2C05245800FF61B0 /* SelectProfessionalSkillTableView.swift */,
+				DE42B26F2C05246C00FF61B0 /* SelectProfessionalSkillTableCell.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
 		DE83F5A62BFB444100439D14 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,6 +710,44 @@
 				DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DED8FB1F2C7882F0001DAAE2 /* ProfessionalSkills */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB222C78855C001DAAE2 /* Atoms */,
+				DED8FB202C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift */,
+			);
+			path = ProfessionalSkills;
+			sourceTree = "<group>";
+		};
+		DED8FB222C78855C001DAAE2 /* Atoms */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB232C788562001DAAE2 /* CollectionView */,
+			);
+			path = Atoms;
+			sourceTree = "<group>";
+		};
+		DED8FB232C788562001DAAE2 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB282C788619001DAAE2 /* Cells */,
+				DED8FB242C7885FE001DAAE2 /* CVMPSCollectionView.swift */,
+				DED8FB262C788612001DAAE2 /* CVMPSCollectionElement.swift */,
+				DED8FB2F2C78A6F2001DAAE2 /* CVMPSCollectionLayout.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		DED8FB282C788619001DAAE2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB292C788625001DAAE2 /* CVMPSCollectionTitleCell.swift */,
+				DED8FB2B2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift */,
+				DED8FB2D2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		DEFA931C2BE949F900F892BC = {
@@ -1157,15 +1258,21 @@
 				DEFA940C2BE94AED00F892BC /* IAPErrorHelper.swift in Sources */,
 				DE42B0E72BFCFF8100FF61B0 /* GetCountriesRequest.swift in Sources */,
 				DEFA93D12BE94AED00F892BC /* UITapGestureRecognizer+Extension.swift in Sources */,
+				DED8FB212C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift in Sources */,
+				DED8FB1E2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift in Sources */,
+				DE42B2702C05246C00FF61B0 /* SelectProfessionalSkillTableCell.swift in Sources */,
+				DE42B26C2C05245800FF61B0 /* SelectProfessionalSkillTableView.swift in Sources */,
 				DE42B24C2C04E3C700FF61B0 /* CVMakerEducationView.swift in Sources */,
 				DE42B0C92BFC970C00FF61B0 /* CVMakerGeneralInfoPhotoView.swift in Sources */,
 				DEFA93D32BE94AED00F892BC /* DefaultRequestWrapper.swift in Sources */,
+				DE42B2662C05242500FF61B0 /* SelectProfessionalSkillViewModel.swift in Sources */,
 				DEFA93CF2BE94AED00F892BC /* UIDevice+Extension.swift in Sources */,
 				DE42B2502C04E3DF00FF61B0 /* CVMakerEducationCreateView.swift in Sources */,
 				DEFA940B2BE94AED00F892BC /* IAPError.swift in Sources */,
 				DE42B23E2C00BB7B00FF61B0 /* CVMWETableElement.swift in Sources */,
 				DEFA93DA2BE94AED00F892BC /* NetworkError.swift in Sources */,
 				DEFA93E12BE94AED00F892BC /* TextAttributes.swift in Sources */,
+				DED8FB302C78A6F2001DAAE2 /* CVMPSCollectionLayout.swift in Sources */,
 				DE42B0A02BFBB92700FF61B0 /* Language.swift in Sources */,
 				DE83F5B12BFB444100439D14 /* PaygateOptionInfo.swift in Sources */,
 				DE83F5B32BFB444100439D14 /* PaygateProductButton.swift in Sources */,
@@ -1204,6 +1311,7 @@
 				DE42B0DD2BFCCE2F00FF61B0 /* SelectCityView.swift in Sources */,
 				DE42B22F2C00B27700FF61B0 /* WrapperController.swift in Sources */,
 				DEFA93E72BE94AED00F892BC /* SceneDelegate.swift in Sources */,
+				DE42B2642C05241F00FF61B0 /* SelectProfessionalSkillViewController.swift in Sources */,
 				DEFA93D02BE94AED00F892BC /* UIEdgeInsets+Extension.swift in Sources */,
 				DEFA940E2BE94AED00F892BC /* IAPProduct.swift in Sources */,
 				DE42B0F72BFD121C00FF61B0 /* SelectCityTableCell.swift in Sources */,
@@ -1220,8 +1328,10 @@
 				DEFA93E42BE94AED00F892BC /* AppDelegate.swift in Sources */,
 				DE42B0D32BFCBAC500FF61B0 /* CVMGIAboutYourselfTipCell.swift in Sources */,
 				DE42B0C32BFC96E400FF61B0 /* CVMakerGeneralInfoNameView.swift in Sources */,
+				DE42B2682C05242900FF61B0 /* SelectProfessionalSkillView.swift in Sources */,
 				DE42B0F92BFD182000FF61B0 /* SelectField.swift in Sources */,
 				DE42B0ED2BFD016F00FF61B0 /* ContentManager.swift in Sources */,
+				DED8FB272C788612001DAAE2 /* CVMPSCollectionElement.swift in Sources */,
 				DEFA93EC2BE94AED00F892BC /* OnboardingViewController.swift in Sources */,
 				DEFA93DD2BE94AED00F892BC /* NumberLaunches.swift in Sources */,
 				DE42B21E2BFF906500FF61B0 /* CVMGIPhotoContainer.swift in Sources */,
@@ -1232,27 +1342,33 @@
 				DE83F5B22BFB444100439D14 /* PaygateInfoCell.swift in Sources */,
 				DE42B0E22BFCF91C00FF61B0 /* Country.swift in Sources */,
 				DE42B0B92BFBCB9700FF61B0 /* CVMakerChaptersView.swift in Sources */,
+				DED8FB1C2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift in Sources */,
 				DE42B25B2C04E45900FF61B0 /* CVMakerEntityCell.swift in Sources */,
+				DED8FB252C7885FE001DAAE2 /* CVMPSCollectionView.swift in Sources */,
 				DE42B0BC2BFBCBD800FF61B0 /* CVMakerChapterButton.swift in Sources */,
 				DE42B0C52BFC96FA00FF61B0 /* CVMakerGeneralInfoAboutYourselfView.swift in Sources */,
 				DEFA93CA2BE94AED00F892BC /* Collection+Extension.swift in Sources */,
 				DEFA93E92BE94AED00F892BC /* OSlideView.swift in Sources */,
 				DEFA93DB2BE94AED00F892BC /* SignError.swift in Sources */,
+				DE42B2612C0523E900FF61B0 /* ProfessionalSkill.swift in Sources */,
 				DEFA93BE2BE94AED00F892BC /* ImagePicker.swift in Sources */,
 				DEFA93C02BE94AED00F892BC /* RxActivityIndicator.swift in Sources */,
 				DEFA93EB2BE94AED00F892BC /* OnboardingView.swift in Sources */,
 				DEFA93E22BE94AED00F892BC /* Weak.swift in Sources */,
+				DED8FB2A2C788625001DAAE2 /* CVMPSCollectionTitleCell.swift in Sources */,
 				DE42B0A42BFBBAB700FF61B0 /* SocialMedia.swift in Sources */,
 				DEFA93DE2BE94AED00F892BC /* ObservableRetrySingle.swift in Sources */,
 				DEFA93C62BE94AED00F892BC /* GradientView.swift in Sources */,
 				DE42B0982BFBB58000FF61B0 /* ContactInfo.swift in Sources */,
 				DE83F5B42BFB444100439D14 /* PaygateInteractor.swift in Sources */,
 				DE42B0A92BFBBC1A00FF61B0 /* ProfileManager.swift in Sources */,
+				DED8FB2C2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift in Sources */,
 				DEFA94102BE94AED00F892BC /* IAPManager.swift in Sources */,
 				DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */,
 				DEFA93CD2BE94AED00F892BC /* UIApplication+Extension.swift in Sources */,
 				DE42B0D52BFCBC4300FF61B0 /* CVMGIAboutYourselfTipsView.swift in Sources */,
 				DEFA93BB2BE94AED00F892BC /* BranchManager.swift in Sources */,
+				DED8FB2E2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift in Sources */,
 				DE42B24E2C04E3D800FF61B0 /* CVMakerEducationListView.swift in Sources */,
 				DE42B0F32BFD102D00FF61B0 /* SelectCityAssemby.swift in Sources */,
 				DE42B25F2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift in Sources */,
@@ -1409,6 +1525,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GY8CB289H;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CVMaker/Info.plist;
@@ -1424,7 +1541,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = train.somatic;
+				PRODUCT_BUNDLE_IDENTIFIER = cnmaker.local;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1444,6 +1561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GY8CB289H;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CVMaker/Info.plist;
@@ -1459,7 +1577,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = train.somatic;
+				PRODUCT_BUNDLE_IDENTIFIER = cnmaker.local;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -10,6 +10,7 @@ import RxSwift
 protocol ContentManagerProtocol {
     func obtainCountries() -> Single<[Country]>
     func obtainCities(iso2: String) -> Single<[City]>
+    func obtainProfessionalSkills(search: String) -> Single<[ProfessionalSkill]>
 }
 
 final class ContentManager {
@@ -30,5 +31,13 @@ extension ContentManager: ContentManagerProtocol {
         return restApiTransport
             .callServerApi(requestBody: request)
             .map { City.map(from: $0) }
+    }
+    
+    func obtainProfessionalSkills(search: String) -> Single<[ProfessionalSkill]> {
+        let request = GetProfessionalSkillsRequest(search: search)
+        
+        return restApiTransport
+            .callServerApi(requestBody: request)
+            .map { ProfessionalSkill.map(apilayerResponse: $0) }
     }
 }

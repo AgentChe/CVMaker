@@ -12,7 +12,7 @@ protocol ProfileManagerProtocol {
     func set(generalInfo: GeneralInfo) -> Single<Void>
     func set(workExperiences: [WorkExperience]) -> Single<Void>
     func set(educations: [Education]) -> Single<Void>
-    func set(professionalSkills: [String]) -> Single<Void>
+    func set(professionalSkills: [ProfessionalSkill]) -> Single<Void>
     func set(languages: [Language]) -> Single<Void>
     func set(interests: [String]) -> Single<Void>
     func set(certificates: [Certificate]) -> Single<Void>
@@ -73,7 +73,7 @@ extension ProfileManager: ProfileManagerProtocol {
         store(object: educations, entity: .educations)
     }
     
-    func set(professionalSkills: [String]) -> Single<Void> {
+    func set(professionalSkills: [ProfessionalSkill]) -> Single<Void> {
         store(object: professionalSkills, entity: .professionalSkills)
     }
     

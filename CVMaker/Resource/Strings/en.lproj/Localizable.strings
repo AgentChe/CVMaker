@@ -115,12 +115,19 @@
 "CVMaker.Education.EndDate.Placeholder" = "01.2022";
 "CVMaker.Education.SE.Title" = "Do you have another degree?";
 "CVMaker.Education.SE.Text" = "If you have another degree, choose the second option";
+"CVMaker.ProfessionalSkills.Title" = "Enter your professional\nskills";
+"CVMaker.ProfessionalSkills.AddSkiils" = "Add skiils";
+"CVMaker.ProfessionalSkills.AddOneMore" = "Add one more";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";
 "SelectCity.City" = "City";
-"SelectCity.Search" = "􀊫 Search";
+"SelectCity.Search" = "Search";
 "SelectCity.Progress" = "%i of %i";
 
 // MARK: Wrapper
 "Wrapper.Save" = "Save";
+
+// MARK: SelectProfessionalSkill
+"SelectProfessionalSkill.Title" = "Skills";
+"SelectProfessionalSkill.Search" = "Search";

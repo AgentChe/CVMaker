@@ -9,6 +9,7 @@ import UIKit
 
 final class SelectCityView: UIView {
     lazy var searchField = makeSearchField()
+    lazy var searchIconView = makeSearchIconView()
     lazy var tableView = makeTableView()
     lazy var preloader = makePreloader()
     
@@ -49,6 +50,13 @@ private extension SelectCityView {
         ])
         
         NSLayoutConstraint.activate([
+            searchIconView.widthAnchor.constraint(equalToConstant: 16.scale),
+            searchIconView.heightAnchor.constraint(equalToConstant: 16.scale),
+            searchIconView.leadingAnchor.constraint(equalTo: searchField.leadingAnchor, constant: 8.scale),
+            searchIconView.centerYAnchor.constraint(equalTo: searchField.centerYAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 15.scale),
@@ -84,10 +92,19 @@ private extension SelectCityView {
         view.delegate = self
         view.defaultTextAttributes = textAttrs.dictionary
         view.attributedPlaceholder = "SelectCity.Search".localized.attributed(with: placeholderAttrs)
-        view.textPadding = UIEdgeInsets(vertical: 7.scale, horizontal: 8.scale)
+        view.textPadding = UIEdgeInsets(t: 7.scale, l: 32.scale, b: 7.scale, r: 8.scale)
         view.backgroundColor = UIColor(integralRed: 118, green: 118, blue: 128, alpha: 0.12)
         view.layer.cornerRadius = 10.scale
         view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(view)
+        return view
+    }
+    
+    func makeSearchIconView() -> UIImageView {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.image = UIImage(named: "CVMaker.Search")
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

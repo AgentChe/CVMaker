@@ -45,7 +45,7 @@ private extension SplashViewController {
     
     // TODO
     func goNext() {
-        UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make()
+        UIApplication.shared.keyWindow?.rootViewController = OnboardingViewController.make()
         
 //        let nc = NavigationController(rootViewController: WhipsViewController.make())
 //        nc.setNavigationBarHidden(true, animated: false)
