@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Language: Codable {
-    enum Level: Codable {
+struct Language: Codable, Equatable {
+    enum Level: Codable, Equatable {
         case beginner
         case preIntermediate
         case intermediate

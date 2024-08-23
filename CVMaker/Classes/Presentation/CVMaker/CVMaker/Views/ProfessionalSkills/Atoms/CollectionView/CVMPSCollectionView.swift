@@ -59,11 +59,6 @@ extension CVMPSCollectionView: UICollectionViewDataSource {
     }
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
-extension CVMPSCollectionView: UICollectionViewDelegateFlowLayout {
-    
-}
-
 // MARK: Private
 private extension CVMPSCollectionView {
     func initialize() {
@@ -72,6 +67,5 @@ private extension CVMPSCollectionView {
         register(CVMPSCollectionSkillCell.self, forCellWithReuseIdentifier: String(describing: CVMPSCollectionSkillCell.self))
         
         dataSource = self
-        delegate = self
     }
 }

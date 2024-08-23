@@ -118,6 +118,10 @@
 "CVMaker.ProfessionalSkills.Title" = "Enter your professional\nskills";
 "CVMaker.ProfessionalSkills.AddSkiils" = "Add skiils";
 "CVMaker.ProfessionalSkills.AddOneMore" = "Add one more";
+"CVMaker.Languages.Title" = "What languages do you speak?";
+"CVMaker.Languages.SubTitle" = "Please select the language and your level of proficiency in that language";
+"CVMaker.Languages.Add" = "Add language";
+"CVMaker.Languages.SelectLevel" = "Level";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";
@@ -131,3 +135,15 @@
 // MARK: SelectProfessionalSkill
 "SelectProfessionalSkill.Title" = "Skills";
 "SelectProfessionalSkill.Search" = "Search";
+
+// MARK: SelectLanguage
+"SelectLanguage.Title" = "Languages";
+"SelectLanguage.Search" = "Search";
+
+// MARK: Language
+"Language.Beginner" = "Beginner";
+"Language.PreIntermediate" = "Pre Intermediate";
+"Language.Intermediate" = "Intermediate";
+"Language.UpperIntermediate" = "Upper Intermediate";
+"Language.Advanced" = "Advanced";
+"Language.Proficient" = "Proficient";

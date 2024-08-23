@@ -11,6 +11,7 @@ protocol ContentManagerProtocol {
     func obtainCountries() -> Single<[Country]>
     func obtainCities(iso2: String) -> Single<[City]>
     func obtainProfessionalSkills(search: String) -> Single<[ProfessionalSkill]>
+    func obtainLanguages() -> Single<ISOLanguages>
 }
 
 final class ContentManager {
@@ -39,5 +40,22 @@ extension ContentManager: ContentManagerProtocol {
         return restApiTransport
             .callServerApi(requestBody: request)
             .map { ProfessionalSkill.map(apilayerResponse: $0) }
+    }
+    
+    func obtainLanguages() -> Single<ISOLanguages> {
+        Single<ISOLanguages>.create { single in
+            let result: ISOLanguages = {
+                guard
+                    let url = Bundle.main.url(forResource: "Languages", withExtension: "json"),
+                    let data = try? Data(contentsOf: url),
+                    let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+                else { return [] }
+                
+                return ISOLanguages.map(resourceJSON: json)
+            }()
+            single(.success(result))
+            
+            return Disposables.create()
+        }
     }
 }

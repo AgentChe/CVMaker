@@ -18,7 +18,8 @@ extension CVMakerViewModel {
         let didSaveGeneralInfo: Signal<GeneralInfo>
         let didSaveWorkExperiences: Signal<[WorkExperience]>
         let didSaveEducations: Signal<[Education]>
-        let didCollectedProfessionalSkills: Signal<[ProfessionalSkill]>
+        let didSaveProfessionalSkills: Signal<[ProfessionalSkill]>
+        let didSaveLanguages: Signal<[Language]>
     }
     
     struct Output {
@@ -33,7 +34,8 @@ extension CVMakerViewModel {
                 didSaveGeneralInfo: input.didSaveGeneralInfo,
                 didSaveWorkExperiences: input.didSaveWorkExperiences,
                 didSaveEducations: input.didSaveEducations,
-                didCollectedProfessionalSkills: input.didCollectedProfessionalSkills
+                didSaveProfessionalSkills: input.didSaveProfessionalSkills,
+                didSaveLanguages: input.didSaveLanguages
             )
         )
     }
@@ -51,7 +53,8 @@ private extension CVMakerViewModel {
         didSaveGeneralInfo: Signal<GeneralInfo>,
         didSaveWorkExperiences: Signal<[WorkExperience]>,
         didSaveEducations: Signal<[Education]>,
-        didCollectedProfessionalSkills: Signal<[ProfessionalSkill]>
+        didSaveProfessionalSkills: Signal<[ProfessionalSkill]>,
+        didSaveLanguages: Signal<[Language]>
     ) -> Disposable {
         let generalInfo = didSaveGeneralInfo
             .flatMapLatest { [weak self] generalInfo -> Signal<Void> in
@@ -83,7 +86,7 @@ private extension CVMakerViewModel {
             }
             .emit()
         
-        let professionalSkills = didCollectedProfessionalSkills
+        let professionalSkills = didSaveProfessionalSkills
             .flatMapLatest { [weak self] skills -> Signal<Void> in
                 guard let self else { return .never() }
                 
@@ -93,11 +96,22 @@ private extension CVMakerViewModel {
             }
             .emit()
         
+        let languages = didSaveLanguages
+            .flatMapLatest { [weak self] languages -> Signal<Void> in
+                guard let self else { return .never() }
+                
+                return self.profileManager
+                    .set(languages: languages)
+                    .asSignal(onErrorSignalWith: .never())
+            }
+            .emit()
+        
         return Disposables.create([
             generalInfo,
             workExperiences,
             educations,
-            professionalSkills
+            professionalSkills,
+            languages
         ])
     }
 }

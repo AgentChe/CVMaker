@@ -77,5 +77,4 @@ private extension CVMPSCollectionAddCell {
         contentView.addSubview(view)
         return view
     }
-
 }
