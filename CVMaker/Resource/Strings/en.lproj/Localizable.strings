@@ -157,6 +157,8 @@
 "CVMaker.References.SE.Title" = "Do you want to add more references ?";
 "CVMaker.References.SE.SubTitle" = "If you have another references, choose the second option";
 "CVMaker.References.List.Title" = "References";
+"CVMaker.Crafting.Title" = "Well done!\n";
+"CVMaker.Crafting.SubTitle" = "We’re crafting your resume";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";

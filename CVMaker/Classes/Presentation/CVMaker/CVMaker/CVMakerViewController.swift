@@ -25,28 +25,28 @@ final class CVMakerViewController: UIViewController {
         super.viewDidLoad()
         
         let output = viewModel.configure(input: CVMakerViewModel.Input(
-            didSaveGeneralInfo: mainView.didCollectedGeneralInfo,
-            didSaveWorkExperiences: mainView.didCollectedWorkExperience,
-            didSaveEducations: mainView.didCollectedEducations,
-            didSaveProfessionalSkills: mainView.didCollectedProfessionalSkills,
-            didSaveLanguages: mainView.didCollectedLanguages,
-            didSaveInterests: mainView.didCollectedInterests,
-            didSaveCertificates: mainView.didCollectedCertificates,
-            didSaveSocialMedia: mainView.didCollectedSocialMedia,
-            didSaveReferences: mainView.didCollectedReferences
+            didSaveGeneralInfo: mainView.onboardinView.didCollectedGeneralInfo,
+            didSaveWorkExperiences: mainView.onboardinView.didCollectedWorkExperience,
+            didSaveEducations: mainView.onboardinView.didCollectedEducations,
+            didSaveProfessionalSkills: mainView.onboardinView.didCollectedProfessionalSkills,
+            didSaveLanguages: mainView.onboardinView.didCollectedLanguages,
+            didSaveInterests: mainView.onboardinView.didCollectedInterests,
+            didSaveCertificates: mainView.onboardinView.didCollectedCertificates,
+            didSaveSocialMedia: mainView.onboardinView.didCollectedSocialMedia,
+            didSaveReferences: mainView.onboardinView.didCollectedReferences
         ))
         
         output.profile
             .drive(Binder(mainView) { base, profile in
-                base.generalInfoView.setup(generalInfo: profile.generalInfo)
-                base.workExperienceView.setup(workExperiences: profile.workExperiences ?? [])
-                base.educationsView.setup(educations: profile.educations ?? [])
-                base.professionalSkillsView.setup(professionalSkills: profile.professionalSkills ?? [])
-                base.languagesView.setup(languages: profile.languages ?? [])
-                base.interestsView.setup(interests: profile.interests ?? [])
-                base.certificatesView.setup(certificates: profile.certificates ?? [])
-                base.socialMediaView.setup(socialMedia: profile.socialMedia)
-                base.referencesView.setup(references: profile.references ?? [])
+                base.onboardinView.generalInfoView.setup(generalInfo: profile.generalInfo)
+                base.onboardinView.workExperienceView.setup(workExperiences: profile.workExperiences ?? [])
+                base.onboardinView.educationsView.setup(educations: profile.educations ?? [])
+                base.onboardinView.professionalSkillsView.setup(professionalSkills: profile.professionalSkills ?? [])
+                base.onboardinView.languagesView.setup(languages: profile.languages ?? [])
+                base.onboardinView.interestsView.setup(interests: profile.interests ?? [])
+                base.onboardinView.certificatesView.setup(certificates: profile.certificates ?? [])
+                base.onboardinView.socialMediaView.setup(socialMedia: profile.socialMedia)
+                base.onboardinView.referencesView.setup(references: profile.references ?? [])
             })
             .disposed(by: disposeBag)
         

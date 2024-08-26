@@ -6,6 +6,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'CVMaker' do
   pod 'Toast-Swift'
+  pod 'lottie-ios'
   
   pod 'RxSwift'
   pod 'RxCocoa'

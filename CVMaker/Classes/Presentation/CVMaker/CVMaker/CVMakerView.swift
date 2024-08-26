@@ -2,100 +2,35 @@
 //  CVMakerView.swift
 //  CVMaker
 //
-//  Created by Андрей Чернышев on 20.05.2024.
+//  Created by Андрей Чернышев on 26.08.2024.
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
 final class CVMakerView: UIView {
-    enum Chapter: Int {
-        case generalInfo
-        case workExperience
-        case education
-        case professionalSkills
-        case languages
-        case interests
-        case certificates
-        case socialMedia
-        case references
+    enum Flow: Int {
+        case onboarding
+        case crafting
     }
     
-    lazy var chaptersView = makeChaptersView()
     lazy var container = makeContainer()
-    lazy var chaptersViews: [Chapter: UIView] = [
-        .generalInfo: generalInfoView,
-        .workExperience: workExperienceView,
-        .education: educationsView,
-        .professionalSkills: professionalSkillsView,
-        .languages: languagesView,
-        .interests: interestsView,
-        .certificates: certificatesView,
-        .socialMedia: socialMediaView,
-        .references: referencesView
+    lazy var flowViews: [Flow: CVMakerFlowView] = [
+        .onboarding: onboardinView,
+        .crafting: craftingView
     ]
-    lazy var generalInfoView = CVMakerGeneralInfoView(vc: vc) { [weak self] generalInfo in
-        self?.didCollectedGeneralInfoTrigger.accept(generalInfo)
-        self?.slideViewDidNext(from: .generalInfo)
+    lazy var onboardinView = CVMakerOnboardingView(vc: vc) { [weak self] in
+        self?.scroll(to: .crafting)
     }
-    lazy var workExperienceView = CVMakerWorkExperienceView(vc: vc, bind: { [weak self] workExperiences in
-        self?.didCollectedWorkExperienceTrigger.accept(workExperiences)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .workExperience)
-    })
-    lazy var educationsView = CVMakerEducationView(vc: vc, bind: { [weak self] educations in
-        self?.didCollectedEducationsTrigger.accept(educations)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .education)
-    })
-    lazy var professionalSkillsView = CVMakerProfessionalSkillsView(vc: vc, bind: { [weak self] skills in
-        self?.didCollectedProfessionalSkillsTrigger.accept(skills)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .professionalSkills)
-    })
-    lazy var languagesView = CVMakerLanguagesView(vc: vc, bind: { [weak self] languages in
-        self?.didCollectedLanguagesTrigger.accept(languages)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .languages)
-    })
-    lazy var interestsView = CVMakerInterestsView(bind: { [weak self] interests in
-        self?.didCollectedInterestsTrigger.accept(interests)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .interests)
-    })
-    lazy var certificatesView = CVMakerCertificatesView(vc: vc, bind: { [weak self] certificates in
-        self?.didCollectedCertificatesTrigger.accept(certificates)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .certificates)
-    })
-    lazy var socialMediaView = CVMakerSocialMediaView(bind: { [weak self] socialMedia in
-        self?.didCollectedSocialMediaTrigger.accept(socialMedia)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .socialMedia)
-    })
-    lazy var referencesView = CVMakerReferencesView(vc: vc, bind: { [weak self] references in
-        self?.didCollectedReferencesTrigger.accept(references)
-    }, flowFinished: { [weak self] in
-        self?.slideViewDidNext(from: .references)
-    })
+    lazy var craftingView = CVMakerCraftingView { [weak self] in
+        self?.finished()
+    }
     
-    private lazy var didCollectedGeneralInfoTrigger = PublishRelay<GeneralInfo>()
-    private lazy var didCollectedWorkExperienceTrigger = PublishRelay<[WorkExperience]>()
-    private lazy var didCollectedEducationsTrigger = PublishRelay<[Education]>()
-    private lazy var didCollectedProfessionalSkillsTrigger = PublishRelay<[ProfessionalSkill]>()
-    private lazy var didCollectedLanguagesTrigger = PublishRelay<[Language]>()
-    private lazy var didCollectedInterestsTrigger = PublishRelay<[Interest]>()
-    private lazy var didCollectedCertificatesTrigger = PublishRelay<[Certificate]>()
-    private lazy var didCollectedSocialMediaTrigger = PublishRelay<SocialMedia>()
-    private lazy var didCollectedReferencesTrigger = PublishRelay<[Reference]>()
-    
-    private var chapter = Chapter.generalInfo
+    private var flow = Flow.onboarding
     
     private weak var vc: UIViewController?
-    private let finished: (() -> Void)
+    private let finished: () -> Void
     
-    init(vc: UIViewController, finished: @escaping (() -> Void)) {
+    init(vc: UIViewController?, finished: @escaping () -> Void) {
         self.vc = vc
         self.finished = finished
         
@@ -112,48 +47,9 @@ final class CVMakerView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        chaptersViews.forEach { chapter, view in
+        flowViews.forEach { flow, view in
             view.frame.size = container.bounds.size
         }
-    }
-}
-
-// MARK: Public
-extension CVMakerView {
-    var didCollectedGeneralInfo: Signal<GeneralInfo> {
-        didCollectedGeneralInfoTrigger.asSignal()
-    }
-    
-    var didCollectedWorkExperience: Signal<[WorkExperience]> {
-        didCollectedWorkExperienceTrigger.asSignal()
-    }
-    
-    var didCollectedEducations: Signal<[Education]> {
-        didCollectedEducationsTrigger.asSignal()
-    }
-    
-    var didCollectedProfessionalSkills: Signal<[ProfessionalSkill]> {
-        didCollectedProfessionalSkillsTrigger.asSignal()
-    }
-    
-    var didCollectedLanguages: Signal<[Language]> {
-        didCollectedLanguagesTrigger.asSignal()
-    }
-    
-    var didCollectedInterests: Signal<[Interest]> {
-        didCollectedInterestsTrigger.asSignal()
-    }
-    
-    var didCollectedCertificates: Signal<[Certificate]> {
-        didCollectedCertificatesTrigger.asSignal()
-    }
-    
-    var didCollectedSocialMedia: Signal<SocialMedia> {
-        didCollectedSocialMediaTrigger.asSignal()
-    }
-    
-    var didCollectedReferences: Signal<[Reference]> {
-        didCollectedReferencesTrigger.asSignal()
     }
 }
 
@@ -162,61 +58,31 @@ private extension CVMakerView {
     func initialize() {
         backgroundColor = Appearance.main100
         
-        chaptersViews
-            .forEach { [weak self] chapter, view in
+        flowViews
+            .forEach { [weak self] flow, view in
                 guard let self else { return }
                 
                 view.clipsToBounds = true
                 
-                if chapter == self.chapter {
+                if flow == self.flow {
                     container.addSubview(view)
                 }
             }
-        
-        chaptersView.didSelect = { [weak self] chapter in
-            self?.scroll(to: chapter)
-        }
-        
-        chaptersView.setup(chapter: chapter)
     }
     
-    func slideViewDidNext(from chapter: Chapter) {
-        let nextRawValue = chapter.rawValue + 1
-        
-        guard let nextChapter = Chapter(rawValue: nextRawValue) else {
-            finished()
-            
-            return
-        }
-        
-        scroll(to: nextChapter)
-        chaptersView.setup(chapter: nextChapter)
-    }
-    
-    func slideViewDidBack(from chapter: Chapter) {
-        let previousRawValue = chapter.rawValue - 1
-        
-        guard let previousChapter = Chapter(rawValue: previousRawValue) else {
-            return
-        }
-        
-        scroll(to: previousChapter)
-        chaptersView.setup(chapter: previousChapter)
-    }
-    
-    func scroll(to newChapter: Chapter) {
-        let currentIndex = chapter.rawValue
-        let scrollToIndex = newChapter.rawValue
+    func scroll(to newFlow: Flow) {
+        let currentIndex = flow.rawValue
+        let scrollToIndex = newFlow.rawValue
         
         guard scrollToIndex != currentIndex else {
-            return 
+            return
         }
         
         let direction = scrollToIndex > currentIndex ? 1 : -1
         
         guard
-            let currentView = chaptersViews[chapter],
-            let scrollToView = chaptersViews[newChapter]
+            let currentView = flowViews[flow],
+            let scrollToView = flowViews[newFlow]
         else {
             return
         }
@@ -236,7 +102,9 @@ private extension CVMakerView {
             
             currentView.removeFromSuperview()
             
-            self.chapter = newChapter
+            self.flow = newFlow
+            
+            scrollToView.moveToThis()
         })
     }
 }
@@ -245,16 +113,9 @@ private extension CVMakerView {
 private extension CVMakerView {
     func makeConstraints() {
         NSLayoutConstraint.activate([
-            chaptersView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            chaptersView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            chaptersView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12.scale),
-            chaptersView.heightAnchor.constraint(equalToConstant: 28.scale)
-        ])
-        
-        NSLayoutConstraint.activate([
             container.leadingAnchor.constraint(equalTo: leadingAnchor),
             container.trailingAnchor.constraint(equalTo: trailingAnchor),
-            container.topAnchor.constraint(equalTo: chaptersView.bottomAnchor),
+            container.topAnchor.constraint(equalTo: topAnchor),
             container.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
@@ -262,14 +123,6 @@ private extension CVMakerView {
 
 // MARK: Lazy initialization
 private extension CVMakerView {
-    func makeChaptersView() -> CVMakerChaptersView {
-        let view = CVMakerChaptersView()
-        view.backgroundColor = UIColor.clear
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        return view
-    }
-    
     func makeContainer() -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.clear

@@ -17,9 +17,9 @@ final class CVMakerChapterButton: UIButton {
     lazy var label = makeLabel()
     lazy var divider = makeDivider()
     
-    let chapter: CVMakerView.Chapter
+    let chapter: CVMakerOnboardingView.Chapter
     
-    init(chapter: CVMakerView.Chapter) {
+    init(chapter: CVMakerOnboardingView.Chapter) {
         self.chapter = chapter
         
         super.init(frame: .zero)
@@ -85,7 +85,7 @@ private extension CVMakerChapterButton {
 }
 
 // MARK: Additional
-private extension CVMakerView.Chapter {
+private extension CVMakerOnboardingView.Chapter {
     var title: String {
         switch self {
         case .generalInfo:

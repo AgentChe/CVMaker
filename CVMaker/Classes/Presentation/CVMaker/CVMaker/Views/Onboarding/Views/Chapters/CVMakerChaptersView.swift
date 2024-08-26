@@ -8,7 +8,7 @@
 import UIKit
 
 final class CVMakerChaptersView: UIView {
-    var didSelect: ((CVMakerView.Chapter) -> Void)?
+    var didSelect: ((CVMakerOnboardingView.Chapter) -> Void)?
     
     lazy var scrollView = makeScrollView()
     lazy var generalInfoButton = makeChapterButton(chapter: .generalInfo)
@@ -46,7 +46,7 @@ final class CVMakerChaptersView: UIView {
 
 // MARK: Public
 extension CVMakerChaptersView {
-    func setup(chapter: CVMakerView.Chapter, withCallback: Bool = false) {
+    func setup(chapter: CVMakerOnboardingView.Chapter, withCallback: Bool = false) {
         buttons.forEach { $0.marked = $0.chapter == chapter }
         
         if withCallback {
@@ -151,7 +151,7 @@ private extension CVMakerChaptersView {
         return view
     }
     
-    func makeChapterButton(chapter: CVMakerView.Chapter) -> CVMakerChapterButton {
+    func makeChapterButton(chapter: CVMakerOnboardingView.Chapter) -> CVMakerChapterButton {
         let view = CVMakerChapterButton(chapter: chapter)
         view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
