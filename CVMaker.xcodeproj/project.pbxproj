@@ -120,6 +120,12 @@
 		DED8FB612C78F00C001DAAE2 /* CVMICollectionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB602C78F00C001DAAE2 /* CVMICollectionElement.swift */; };
 		DED8FB642C78F020001DAAE2 /* CVMICollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB632C78F020001DAAE2 /* CVMICollectionHeaderCell.swift */; };
 		DED8FB662C78F029001DAAE2 /* CVMICollectionInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB652C78F029001DAAE2 /* CVMICollectionInterestCell.swift */; };
+		DED8FB6B2C7C673D001DAAE2 /* CVMakerCertificatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB6A2C7C673D001DAAE2 /* CVMakerCertificatesView.swift */; };
+		DED8FB6E2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB6D2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift */; };
+		DED8FB702C7C676E001DAAE2 /* CVMakerCertificatesCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB6F2C7C676E001DAAE2 /* CVMakerCertificatesCreateView.swift */; };
+		DED8FB732C7C678A001DAAE2 /* CVMCTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB722C7C678A001DAAE2 /* CVMCTableView.swift */; };
+		DED8FB752C7C6797001DAAE2 /* CVMCTableElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB742C7C6797001DAAE2 /* CVMCTableElement.swift */; };
+		DED8FB772C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB762C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -314,6 +320,12 @@
 		DED8FB602C78F00C001DAAE2 /* CVMICollectionElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMICollectionElement.swift; sourceTree = "<group>"; };
 		DED8FB632C78F020001DAAE2 /* CVMICollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMICollectionHeaderCell.swift; sourceTree = "<group>"; };
 		DED8FB652C78F029001DAAE2 /* CVMICollectionInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMICollectionInterestCell.swift; sourceTree = "<group>"; };
+		DED8FB6A2C7C673D001DAAE2 /* CVMakerCertificatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerCertificatesView.swift; sourceTree = "<group>"; };
+		DED8FB6D2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerCertificatesListView.swift; sourceTree = "<group>"; };
+		DED8FB6F2C7C676E001DAAE2 /* CVMakerCertificatesCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerCertificatesCreateView.swift; sourceTree = "<group>"; };
+		DED8FB722C7C678A001DAAE2 /* CVMCTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMCTableView.swift; sourceTree = "<group>"; };
+		DED8FB742C7C6797001DAAE2 /* CVMCTableElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMCTableElement.swift; sourceTree = "<group>"; };
+		DED8FB762C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMCCreateFieldsView.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -469,6 +481,7 @@
 				DED8FB1F2C7882F0001DAAE2 /* ProfessionalSkills */,
 				DED8FB462C78C5CC001DAAE2 /* Languages */,
 				DED8FB5A2C78EE15001DAAE2 /* Interests */,
+				DED8FB692C7C672C001DAAE2 /* Certificates */,
 				DE42B0FA2BFD1EC900FF61B0 /* CVMakerChapterProgressView.swift */,
 				DE42B2472C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift */,
 			);
@@ -907,6 +920,35 @@
 				DED8FB652C78F029001DAAE2 /* CVMICollectionInterestCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		DED8FB692C7C672C001DAAE2 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB6C2C7C6741001DAAE2 /* Atoms */,
+				DED8FB6A2C7C673D001DAAE2 /* CVMakerCertificatesView.swift */,
+				DED8FB6D2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift */,
+				DED8FB6F2C7C676E001DAAE2 /* CVMakerCertificatesCreateView.swift */,
+			);
+			path = Certificates;
+			sourceTree = "<group>";
+		};
+		DED8FB6C2C7C6741001DAAE2 /* Atoms */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB712C7C677C001DAAE2 /* List */,
+				DED8FB762C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift */,
+			);
+			path = Atoms;
+			sourceTree = "<group>";
+		};
+		DED8FB712C7C677C001DAAE2 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB722C7C678A001DAAE2 /* CVMCTableView.swift */,
+				DED8FB742C7C6797001DAAE2 /* CVMCTableElement.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		DEFA931C2BE949F900F892BC = {
@@ -1399,6 +1441,7 @@
 				DED8FB4C2C78C88E001DAAE2 /* CVMLCollectionView.swift in Sources */,
 				DE42B0C12BFC967900FF61B0 /* CVMakerGeneralInfoFlowView.swift in Sources */,
 				DE42B2582C04E41300FF61B0 /* CVMETableElement.swift in Sources */,
+				DED8FB732C7C678A001DAAE2 /* CVMCTableView.swift in Sources */,
 				DE42B2262C00B03C00FF61B0 /* CVMakerWorkExperienceView.swift in Sources */,
 				DEFA93D22BE94AED00F892BC /* UIView+RxExtension.swift in Sources */,
 				DE42B2562C04E40B00FF61B0 /* CVMETableView.swift in Sources */,
@@ -1441,6 +1484,7 @@
 				DEFA93DA2BE94AED00F892BC /* NetworkError.swift in Sources */,
 				DEFA93E12BE94AED00F892BC /* TextAttributes.swift in Sources */,
 				DED8FB302C78A6F2001DAAE2 /* CVMPSCollectionLayout.swift in Sources */,
+				DED8FB6B2C7C673D001DAAE2 /* CVMakerCertificatesView.swift in Sources */,
 				DE42B0A02BFBB92700FF61B0 /* Language.swift in Sources */,
 				DE83F5B12BFB444100439D14 /* PaygateOptionInfo.swift in Sources */,
 				DE83F5B32BFB444100439D14 /* PaygateProductButton.swift in Sources */,
@@ -1473,6 +1517,7 @@
 				DEFA940F2BE94AED00F892BC /* ProductPrice.swift in Sources */,
 				DE42B0F52BFD121400FF61B0 /* SelectCityTableView.swift in Sources */,
 				DED8FB552C78C8BA001DAAE2 /* CVMLCollectionLanguageCell.swift in Sources */,
+				DED8FB702C7C676E001DAAE2 /* CVMakerCertificatesCreateView.swift in Sources */,
 				DEFA93DC2BE94AED00F892BC /* Fonts.swift in Sources */,
 				DE42B0A22BFBBA4C00FF61B0 /* Certificate.swift in Sources */,
 				DE83F5C02BFB44C600439D14 /* PaygateOptionConfig.swift in Sources */,
@@ -1502,6 +1547,7 @@
 				DEFA93C72BE94AED00F892BC /* PaddingLabel.swift in Sources */,
 				DED8FB5C2C78EE27001DAAE2 /* CVMakerInterestsView.swift in Sources */,
 				DEFA93E42BE94AED00F892BC /* AppDelegate.swift in Sources */,
+				DED8FB772C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift in Sources */,
 				DE42B0D32BFCBAC500FF61B0 /* CVMGIAboutYourselfTipCell.swift in Sources */,
 				DE42B0C32BFC96E400FF61B0 /* CVMakerGeneralInfoNameView.swift in Sources */,
 				DE42B2682C05242900FF61B0 /* SelectProfessionalSkillView.swift in Sources */,
@@ -1530,8 +1576,10 @@
 				DEFA93DB2BE94AED00F892BC /* SignError.swift in Sources */,
 				DED8FB452C78C122001DAAE2 /* SelectLanguageTableCell.swift in Sources */,
 				DE42B2612C0523E900FF61B0 /* ProfessionalSkill.swift in Sources */,
+				DED8FB752C7C6797001DAAE2 /* CVMCTableElement.swift in Sources */,
 				DEFA93BE2BE94AED00F892BC /* ImagePicker.swift in Sources */,
 				DEFA93C02BE94AED00F892BC /* RxActivityIndicator.swift in Sources */,
+				DED8FB6E2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift in Sources */,
 				DED8FB572C78EC10001DAAE2 /* Interest.swift in Sources */,
 				DEFA93EB2BE94AED00F892BC /* OnboardingView.swift in Sources */,
 				DEFA93E22BE94AED00F892BC /* Weak.swift in Sources */,

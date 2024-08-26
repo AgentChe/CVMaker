@@ -124,6 +124,19 @@
 "CVMaker.Languages.SelectLevel" = "Level";
 "CVMaker.Interests.Title" = "Pick a few interests of yours";
 "CVMaker.Interests.SubTitle" = "Please provide information about your hobbies and leisure activities";
+"CVMaker.Certificates.Title" = "Do you have any certificates or awards?";
+"CVMaker.Certificates.SubTitle" = "Please provide the name of the organization, the dates of the training, and a brief description";
+"CVMaker.Certificates.OgranizationName.Title" = "Organization name";
+"CVMaker.Certificates.OgranizationName.Placeholder" = "Google";
+"CVMaker.Certificates.StartDate.Title" = "Start date";
+"CVMaker.Certificates.StartDate.Placeholder" = "02.2022";
+"CVMaker.Certificates.EndDate.Title" = "End date";
+"CVMaker.Certificates.EndDate.Placeholder" = "04.2022";
+"CVMaker.Certificates.ShortDescription.Title" = "Short description";
+"CVMaker.Certificates.ShortDescription.Placeholder" = "Describe what it was about";
+"CVMaker.Certificates.List.Title" = "Certificates and awards";
+"CVMaker.Certificates.SE.Title" = "Do you want to add more certificates or awards ?";
+"CVMaker.Certificates.SE.SubTitle" = "If you have another certificates or awards, choose the second option";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";

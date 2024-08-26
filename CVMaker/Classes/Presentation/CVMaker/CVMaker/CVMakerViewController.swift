@@ -30,7 +30,8 @@ final class CVMakerViewController: UIViewController {
             didSaveEducations: mainView.didCollectedEducations,
             didSaveProfessionalSkills: mainView.didCollectedProfessionalSkills,
             didSaveLanguages: mainView.didCollectedLanguages,
-            didSaveInterests: mainView.didCollectedInterests
+            didSaveInterests: mainView.didCollectedInterests,
+            didSaveCertificates: mainView.didCollectedCertificates
         ))
         
         output.profile
@@ -41,6 +42,7 @@ final class CVMakerViewController: UIViewController {
                 base.professionalSkillsView.setup(professionalSkills: profile.professionalSkills ?? [])
                 base.languagesView.setup(languages: profile.languages ?? [])
                 base.interestsView.setup(interests: profile.interests ?? [])
+                base.certificatesView.setup(certificates: profile.certificates ?? [])
             })
             .disposed(by: disposeBag)
         
