@@ -5,8 +5,8 @@
 //  Created by Андрей Чернышев on 26.08.2024.
 //
 
-struct CVTemplate {
-    enum Identifier: Int {
+struct CVTemplate: Codable {
+    enum Identifier: Int, Codable {
         case template1
         case template2
         case template3

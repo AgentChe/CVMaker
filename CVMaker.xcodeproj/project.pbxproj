@@ -146,6 +146,7 @@
 		DED8FBB72C7CB31F001DAAE2 /* CVMTemplatesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBB62C7CB31F001DAAE2 /* CVMTemplatesCollectionCell.swift */; };
 		DED8FBBB2C7CB4F2001DAAE2 /* CVTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBBA2C7CB4F2001DAAE2 /* CVTemplate.swift */; };
 		DED8FBBD2C7CB60A001DAAE2 /* ResumeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBBC2C7CB60A001DAAE2 /* ResumeManager.swift */; };
+		DED8FBBF2C7CC353001DAAE2 /* CV.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBBE2C7CC353001DAAE2 /* CV.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -366,6 +367,7 @@
 		DED8FBB62C7CB31F001DAAE2 /* CVMTemplatesCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMTemplatesCollectionCell.swift; sourceTree = "<group>"; };
 		DED8FBBA2C7CB4F2001DAAE2 /* CVTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVTemplate.swift; sourceTree = "<group>"; };
 		DED8FBBC2C7CB60A001DAAE2 /* ResumeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeManager.swift; sourceTree = "<group>"; };
+		DED8FBBE2C7CC353001DAAE2 /* CV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CV.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1126,6 +1128,7 @@
 			isa = PBXGroup;
 			children = (
 				DED8FBBA2C7CB4F2001DAAE2 /* CVTemplate.swift */,
+				DED8FBBE2C7CC353001DAAE2 /* CV.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1754,6 +1757,7 @@
 				DEFA93EC2BE94AED00F892BC /* OnboardingViewController.swift in Sources */,
 				DEFA93DD2BE94AED00F892BC /* NumberLaunches.swift in Sources */,
 				DE42B21E2BFF906500FF61B0 /* CVMGIPhotoContainer.swift in Sources */,
+				DED8FBBF2C7CC353001DAAE2 /* CV.swift in Sources */,
 				DE83F5B52BFB444100439D14 /* PaygateView.swift in Sources */,
 				DEFA93FA2BE94AED00F892BC /* SplashView.swift in Sources */,
 				DE42B0FB2BFD1EC900FF61B0 /* CVMakerChapterProgressView.swift in Sources */,

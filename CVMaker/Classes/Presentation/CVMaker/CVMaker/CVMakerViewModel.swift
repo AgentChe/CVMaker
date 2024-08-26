@@ -10,6 +10,7 @@ import RxCocoa
 
 final class CVMakerViewModel {
     private lazy var profileManager = ProfileManager()
+    private lazy var resumeManager = ResumeManager()
 }
 
 // MARK: Public
@@ -25,6 +26,7 @@ extension CVMakerViewModel {
         let didSaveCertificates: Signal<[Certificate]>
         let didSaveSocialMedia: Signal<SocialMedia>
         let didSaveReferences: Signal<[Reference]>
+        let didCreateCV: Signal<Void>
     }
     
     struct Output {
@@ -44,7 +46,9 @@ extension CVMakerViewModel {
                 didSaveInterests: input.didSaveInterests,
                 didSaveCertificates: input.didSaveCertificates,
                 didSaveSocialMedia: input.didSaveSocialMedia,
-                didSaveReferences: input.didSaveReferences
+                didSaveReferences: input.didSaveReferences,
+                didSelectTemplate: input.didSelectTemplate,
+                didCreateCV: input.didCreateCV
             )
         )
     }
@@ -67,7 +71,9 @@ private extension CVMakerViewModel {
         didSaveInterests: Signal<[Interest]>,
         didSaveCertificates: Signal<[Certificate]>,
         didSaveSocialMedia: Signal<SocialMedia>,
-        didSaveReferences: Signal<[Reference]>
+        didSaveReferences: Signal<[Reference]>,
+        didSelectTemplate: Signal<CVTemplate>,
+        didCreateCV: Signal<Void>
     ) -> Disposable {
         let generalInfo = didSaveGeneralInfo
             .flatMapLatest { [weak self] generalInfo -> Signal<Void> in
@@ -159,6 +165,22 @@ private extension CVMakerViewModel {
             }
             .emit()
         
+        let createCV = didCreateCV
+            .withLatestFrom(didSelectTemplate)
+            .flatMapLatest { [weak self] template -> Signal<Void> in
+                guard let self else { return .never() }
+                
+                return self.profileManager
+                    .obtainProfile()
+                    .flatMap { profile -> Single<Void> in
+                        self.resumeManager
+                            .createCV(template: template, profile: profile)
+                            .mapToVoid()
+                    }
+                    .asSignal(onErrorSignalWith: .never())
+            }
+            .emit()
+        
         return Disposables.create([
             generalInfo,
             workExperiences,
@@ -168,7 +190,8 @@ private extension CVMakerViewModel {
             interests,
             certificates,
             socialMedia,
-            references
+            references,
+            createCV
         ])
     }
 }

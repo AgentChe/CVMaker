@@ -20,7 +20,7 @@ final class CVMakerViewController: UIViewController {
     override func loadView() {
         view = mainView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +34,8 @@ final class CVMakerViewController: UIViewController {
             didSaveInterests: mainView.onboardingView.didCollectedInterests,
             didSaveCertificates: mainView.onboardingView.didCollectedCertificates,
             didSaveSocialMedia: mainView.onboardingView.didCollectedSocialMedia,
-            didSaveReferences: mainView.onboardingView.didCollectedReferences
+            didSaveReferences: mainView.onboardingView.didCollectedReferences,
+            didCreateCV: mainView.didCreateCV
         ))
         
         output.profile

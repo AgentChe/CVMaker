@@ -30,10 +30,12 @@ final class CVMakerView: UIView {
         self?.scroll(to: .crafting)
     }
     lazy var craftingView = CVMakerCraftingView { [weak self] in
+        self?.didCreateCVTrigger.accept(Void())
         self?.finished()
     }
     
     private lazy var didSelectTemplateTrigger = PublishRelay<CVTemplate>()
+    private lazy var didCreateCVTrigger = PublishRelay<Void>()
     
     private var flow = Flow.template
     
@@ -67,6 +69,10 @@ final class CVMakerView: UIView {
 extension CVMakerView {
     var didSelectTemplate: Signal<CVTemplate> {
         didSelectTemplateTrigger.asSignal()
+    }
+    
+    var didCreateCV: Signal<Void> {
+        didCreateCVTrigger.asSignal()
     }
 }
 
