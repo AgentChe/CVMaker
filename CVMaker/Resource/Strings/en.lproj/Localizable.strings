@@ -49,6 +49,8 @@
 "Paygate.Error.Button" = "OK";
 
 // MARK: CVMaker
+"CVMaker.Templates.Title" = "Create your CV in a few clicks";
+"CVMaker.Templates.SubTitle" = "Choose a template for your resume";
 "CVMaker.NeedInputFields" = "Fill in the fields";
 "CVMaker.SingleEntity.NoAction" = "No, just this one";
 "CVMaker.SingleEntity.YesAction" = "Yes";

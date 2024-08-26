@@ -6,26 +6,36 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class CVMakerView: UIView {
     enum Flow: Int {
+        case template
         case onboarding
         case crafting
     }
     
     lazy var container = makeContainer()
     lazy var flowViews: [Flow: CVMakerFlowView] = [
-        .onboarding: onboardinView,
+        .template: templateView,
+        .onboarding: onboardingView,
         .crafting: craftingView
     ]
-    lazy var onboardinView = CVMakerOnboardingView(vc: vc) { [weak self] in
+    lazy var templateView = CVMakerTemplateView { [weak self] template in
+        self?.didSelectTemplateTrigger.accept(template)
+        self?.scroll(to: .onboarding)
+    }
+    lazy var onboardingView = CVMakerOnboardingView(vc: vc) { [weak self] in
         self?.scroll(to: .crafting)
     }
     lazy var craftingView = CVMakerCraftingView { [weak self] in
         self?.finished()
     }
     
-    private var flow = Flow.onboarding
+    private lazy var didSelectTemplateTrigger = PublishRelay<CVTemplate>()
+    
+    private var flow = Flow.template
     
     private weak var vc: UIViewController?
     private let finished: () -> Void
@@ -50,6 +60,13 @@ final class CVMakerView: UIView {
         flowViews.forEach { flow, view in
             view.frame.size = container.bounds.size
         }
+    }
+}
+
+// MARK: Public
+extension CVMakerView {
+    var didSelectTemplate: Signal<CVTemplate> {
+        didSelectTemplateTrigger.asSignal()
     }
 }
 

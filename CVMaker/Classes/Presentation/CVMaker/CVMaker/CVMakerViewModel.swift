@@ -15,6 +15,7 @@ final class CVMakerViewModel {
 // MARK: Public
 extension CVMakerViewModel {
     struct Input {
+        let didSelectTemplate: Signal<CVTemplate>
         let didSaveGeneralInfo: Signal<GeneralInfo>
         let didSaveWorkExperiences: Signal<[WorkExperience]>
         let didSaveEducations: Signal<[Education]>
