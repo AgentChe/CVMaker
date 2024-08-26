@@ -32,7 +32,8 @@ final class CVMakerView: UIView {
         .languages: languagesView,
         .interests: interestsView,
         .certificates: certificatesView,
-        .socialMedia: socialMediaView
+        .socialMedia: socialMediaView,
+        .references: referencesView
     ]
     lazy var generalInfoView = CVMakerGeneralInfoView(vc: vc) { [weak self] generalInfo in
         self?.didCollectedGeneralInfoTrigger.accept(generalInfo)
@@ -73,6 +74,11 @@ final class CVMakerView: UIView {
     }, flowFinished: { [weak self] in
         self?.slideViewDidNext(from: .socialMedia)
     })
+    lazy var referencesView = CVMakerReferencesView(vc: vc, bind: { [weak self] references in
+        self?.didCollectedReferencesTrigger.accept(references)
+    }, flowFinished: { [weak self] in
+        self?.slideViewDidNext(from: .references)
+    })
     
     private lazy var didCollectedGeneralInfoTrigger = PublishRelay<GeneralInfo>()
     private lazy var didCollectedWorkExperienceTrigger = PublishRelay<[WorkExperience]>()
@@ -82,6 +88,7 @@ final class CVMakerView: UIView {
     private lazy var didCollectedInterestsTrigger = PublishRelay<[Interest]>()
     private lazy var didCollectedCertificatesTrigger = PublishRelay<[Certificate]>()
     private lazy var didCollectedSocialMediaTrigger = PublishRelay<SocialMedia>()
+    private lazy var didCollectedReferencesTrigger = PublishRelay<[Reference]>()
     
     private var chapter = Chapter.generalInfo
     
@@ -143,6 +150,10 @@ extension CVMakerView {
     
     var didCollectedSocialMedia: Signal<SocialMedia> {
         didCollectedSocialMediaTrigger.asSignal()
+    }
+    
+    var didCollectedReferences: Signal<[Reference]> {
+        didCollectedReferencesTrigger.asSignal()
     }
 }
 

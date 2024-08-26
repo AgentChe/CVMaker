@@ -144,6 +144,19 @@
 "CVMaker.SocialMedia.Linkedin" = "Linkedin";
 "CVMaker.SocialMedia.Twitter" = "X (twitter)";
 "CVMaker.SocialMedia.Link" = "Link";
+"CVMaker.References.Title" = "Add your references";
+"CVMaker.References.SubTitle" = "Please provide contact information of people who can vouch for your character, skills, and work performance";
+"CVMaker.References.Name.Title" = "Name";
+"CVMaker.References.Name.Placeholder" = "Ivan";
+"CVMaker.References.JobTitle.Title" = "Job title";
+"CVMaker.References.JobTitle.Placeholder" = "CEO";
+"CVMaker.References.Phone.Title" = "Phone";
+"CVMaker.References.Phone.Placeholder" = "+1 123 123 123";
+"CVMaker.References.Email.Title" = "Email";
+"CVMaker.References.Email.Placeholder" = "example@example.com";
+"CVMaker.References.SE.Title" = "Do you want to add more references ?";
+"CVMaker.References.SE.SubTitle" = "If you have another references, choose the second option";
+"CVMaker.References.List.Title" = "References";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";
