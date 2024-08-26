@@ -12,6 +12,7 @@ protocol ContentManagerProtocol {
     func obtainCities(iso2: String) -> Single<[City]>
     func obtainProfessionalSkills(search: String) -> Single<[ProfessionalSkill]>
     func obtainLanguages() -> Single<ISOLanguages>
+    func obtainInterests() -> Single<[Interest]>
 }
 
 final class ContentManager {
@@ -52,6 +53,23 @@ extension ContentManager: ContentManagerProtocol {
                 else { return [] }
                 
                 return ISOLanguages.map(resourceJSON: json)
+            }()
+            single(.success(result))
+            
+            return Disposables.create()
+        }
+    }
+    
+    func obtainInterests() -> Single<[Interest]> {
+        Single<[Interest]>.create { single in
+            let result: [Interest] = {
+                guard 
+                    let url = Bundle.main.url(forResource: "Interests", withExtension: "json"),
+                    let data = try? Data(contentsOf: url),
+                    let array = try? JSONDecoder().decode([String].self, from: data)
+                else { return [] }
+                
+                return array.map { Interest(name: $0) }
             }()
             single(.success(result))
             

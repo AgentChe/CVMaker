@@ -29,7 +29,8 @@ final class CVMakerView: UIView {
         .workExperience: workExperienceView,
         .education: educationsView,
         .professionalSkills: professionalSkillsView,
-        .languages: languagesView
+        .languages: languagesView,
+        .interests: interestsView
     ]
     lazy var generalInfoView = CVMakerGeneralInfoView(vc: vc) { [weak self] generalInfo in
         self?.didCollectedGeneralInfoTrigger.accept(generalInfo)
@@ -55,12 +56,18 @@ final class CVMakerView: UIView {
     }, flowFinished: { [weak self] in
         self?.slideViewDidNext(from: .languages)
     })
+    lazy var interestsView = CVMakerInterestsView(bind: { [weak self] interests in
+        self?.didCollectedInterestsTrigger.accept(interests)
+    }, flowFinished: { [weak self] in
+        self?.slideViewDidNext(from: .interests)
+    })
     
     private lazy var didCollectedGeneralInfoTrigger = PublishRelay<GeneralInfo>()
     private lazy var didCollectedWorkExperienceTrigger = PublishRelay<[WorkExperience]>()
     private lazy var didCollectedEducationsTrigger = PublishRelay<[Education]>()
     private lazy var didCollectedProfessionalSkillsTrigger = PublishRelay<[ProfessionalSkill]>()
     private lazy var didCollectedLanguagesTrigger = PublishRelay<[Language]>()
+    private lazy var didCollectedInterestsTrigger = PublishRelay<[Interest]>()
     
     private var chapter = Chapter.generalInfo
     
@@ -110,6 +117,10 @@ extension CVMakerView {
     
     var didCollectedLanguages: Signal<[Language]> {
         didCollectedLanguagesTrigger.asSignal()
+    }
+    
+    var didCollectedInterests: Signal<[Interest]> {
+        didCollectedInterestsTrigger.asSignal()
     }
 }
 

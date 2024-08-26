@@ -122,6 +122,8 @@
 "CVMaker.Languages.SubTitle" = "Please select the language and your level of proficiency in that language";
 "CVMaker.Languages.Add" = "Add language";
 "CVMaker.Languages.SelectLevel" = "Level";
+"CVMaker.Interests.Title" = "Pick a few interests of yours";
+"CVMaker.Interests.SubTitle" = "Please provide information about your hobbies and leisure activities";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";

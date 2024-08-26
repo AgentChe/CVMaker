@@ -13,7 +13,7 @@ struct Profile: Codable {
     let educations: [Education]?
     let professionalSkills: [ProfessionalSkill]?
     let languages: [Language]?
-    let interests: [String]?
+    let interests: [Interest]?
     let certificates: [Certificate]?
     let socialMedia: SocialMedia?
     let references: [Reference]?

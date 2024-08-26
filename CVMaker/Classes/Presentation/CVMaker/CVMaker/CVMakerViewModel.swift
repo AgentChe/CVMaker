@@ -20,6 +20,7 @@ extension CVMakerViewModel {
         let didSaveEducations: Signal<[Education]>
         let didSaveProfessionalSkills: Signal<[ProfessionalSkill]>
         let didSaveLanguages: Signal<[Language]>
+        let didSaveInterests: Signal<[Interest]>
     }
     
     struct Output {
@@ -35,7 +36,8 @@ extension CVMakerViewModel {
                 didSaveWorkExperiences: input.didSaveWorkExperiences,
                 didSaveEducations: input.didSaveEducations,
                 didSaveProfessionalSkills: input.didSaveProfessionalSkills,
-                didSaveLanguages: input.didSaveLanguages
+                didSaveLanguages: input.didSaveLanguages,
+                didSaveInterests: input.didSaveInterests
             )
         )
     }
@@ -54,7 +56,8 @@ private extension CVMakerViewModel {
         didSaveWorkExperiences: Signal<[WorkExperience]>,
         didSaveEducations: Signal<[Education]>,
         didSaveProfessionalSkills: Signal<[ProfessionalSkill]>,
-        didSaveLanguages: Signal<[Language]>
+        didSaveLanguages: Signal<[Language]>,
+        didSaveInterests: Signal<[Interest]>
     ) -> Disposable {
         let generalInfo = didSaveGeneralInfo
             .flatMapLatest { [weak self] generalInfo -> Signal<Void> in
@@ -106,12 +109,23 @@ private extension CVMakerViewModel {
             }
             .emit()
         
+        let interests = didSaveInterests
+            .flatMapLatest { [weak self] interests -> Signal<Void> in
+                guard let self else { return .never() }
+                
+                return self.profileManager
+                    .set(interests: interests)
+                    .asSignal(onErrorSignalWith: .never())
+            }
+            .emit()
+        
         return Disposables.create([
             generalInfo,
             workExperiences,
             educations,
             professionalSkills,
-            languages
+            languages,
+            interests
         ])
     }
 }
