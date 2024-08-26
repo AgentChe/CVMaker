@@ -137,6 +137,13 @@
 "CVMaker.Certificates.List.Title" = "Certificates and awards";
 "CVMaker.Certificates.SE.Title" = "Do you want to add more certificates or awards ?";
 "CVMaker.Certificates.SE.SubTitle" = "If you have another certificates or awards, choose the second option";
+"CVMaker.SocialMedia.Title" = "Add your social media";
+"CVMaker.SocialMedia.SubTitle" = "Please share your accounts on social media. We will never use or store your personal information";
+"CVMaker.SocialMedia.Instagram" = "Instagram";
+"CVMaker.SocialMedia.Facebook" = "Facebook";
+"CVMaker.SocialMedia.Linkedin" = "Linkedin";
+"CVMaker.SocialMedia.Twitter" = "X (twitter)";
+"CVMaker.SocialMedia.Link" = "Link";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";

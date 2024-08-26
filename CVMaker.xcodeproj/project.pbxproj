@@ -126,6 +126,7 @@
 		DED8FB732C7C678A001DAAE2 /* CVMCTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB722C7C678A001DAAE2 /* CVMCTableView.swift */; };
 		DED8FB752C7C6797001DAAE2 /* CVMCTableElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB742C7C6797001DAAE2 /* CVMCTableElement.swift */; };
 		DED8FB772C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB762C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift */; };
+		DED8FB802C7C73FD001DAAE2 /* CVMakerSocialMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB7F2C7C73FD001DAAE2 /* CVMakerSocialMediaView.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -326,6 +327,7 @@
 		DED8FB722C7C678A001DAAE2 /* CVMCTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMCTableView.swift; sourceTree = "<group>"; };
 		DED8FB742C7C6797001DAAE2 /* CVMCTableElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMCTableElement.swift; sourceTree = "<group>"; };
 		DED8FB762C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMCCreateFieldsView.swift; sourceTree = "<group>"; };
+		DED8FB7F2C7C73FD001DAAE2 /* CVMakerSocialMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerSocialMediaView.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 				DED8FB462C78C5CC001DAAE2 /* Languages */,
 				DED8FB5A2C78EE15001DAAE2 /* Interests */,
 				DED8FB692C7C672C001DAAE2 /* Certificates */,
+				DED8FB7E2C7C73EE001DAAE2 /* SocialMedia */,
 				DE42B0FA2BFD1EC900FF61B0 /* CVMakerChapterProgressView.swift */,
 				DE42B2472C04B1AF00FF61B0 /* CVMakerSingleEntityView.swift */,
 			);
@@ -949,6 +952,14 @@
 				DED8FB742C7C6797001DAAE2 /* CVMCTableElement.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		DED8FB7E2C7C73EE001DAAE2 /* SocialMedia */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FB7F2C7C73FD001DAAE2 /* CVMakerSocialMediaView.swift */,
+			);
+			path = SocialMedia;
 			sourceTree = "<group>";
 		};
 		DEFA931C2BE949F900F892BC = {
@@ -1535,6 +1546,7 @@
 				DEFA940E2BE94AED00F892BC /* IAPProduct.swift in Sources */,
 				DE42B0F72BFD121C00FF61B0 /* SelectCityTableCell.swift in Sources */,
 				DE42B0DB2BFCCE2A00FF61B0 /* SelectCityViewModel.swift in Sources */,
+				DED8FB802C7C73FD001DAAE2 /* CVMakerSocialMediaView.swift in Sources */,
 				DE42B09A2BFBB6E400FF61B0 /* WorkExperience.swift in Sources */,
 				DE42B2202BFF994D00FF61B0 /* DocumentsDirectory.swift in Sources */,
 				DED8FB3D2C78C0FB001DAAE2 /* SelectLanguageView.swift in Sources */,

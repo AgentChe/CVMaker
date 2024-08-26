@@ -22,6 +22,7 @@ extension CVMakerViewModel {
         let didSaveLanguages: Signal<[Language]>
         let didSaveInterests: Signal<[Interest]>
         let didSaveCertificates: Signal<[Certificate]>
+        let didSaveSocialMedia: Signal<SocialMedia>
     }
     
     struct Output {
@@ -39,7 +40,8 @@ extension CVMakerViewModel {
                 didSaveProfessionalSkills: input.didSaveProfessionalSkills,
                 didSaveLanguages: input.didSaveLanguages,
                 didSaveInterests: input.didSaveInterests,
-                didSaveCertificates: input.didSaveCertificates
+                didSaveCertificates: input.didSaveCertificates,
+                didSaveSocialMedia: input.didSaveSocialMedia
             )
         )
     }
@@ -60,7 +62,8 @@ private extension CVMakerViewModel {
         didSaveProfessionalSkills: Signal<[ProfessionalSkill]>,
         didSaveLanguages: Signal<[Language]>,
         didSaveInterests: Signal<[Interest]>,
-        didSaveCertificates: Signal<[Certificate]>
+        didSaveCertificates: Signal<[Certificate]>,
+        didSaveSocialMedia: Signal<SocialMedia>
     ) -> Disposable {
         let generalInfo = didSaveGeneralInfo
             .flatMapLatest { [weak self] generalInfo -> Signal<Void> in
@@ -132,6 +135,16 @@ private extension CVMakerViewModel {
             }
             .emit()
         
+        let socialMedia = didSaveSocialMedia
+            .flatMapLatest { [weak self] socialMedia -> Signal<Void> in
+                guard let self else { return .never() }
+                
+                return self.profileManager
+                    .set(socialMedia: socialMedia)
+                    .asSignal(onErrorSignalWith: .never())
+            }
+            .emit()
+        
         return Disposables.create([
             generalInfo,
             workExperiences,
@@ -139,7 +152,8 @@ private extension CVMakerViewModel {
             professionalSkills,
             languages,
             interests,
-            certificates
+            certificates,
+            socialMedia
         ])
     }
 }
