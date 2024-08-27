@@ -14,11 +14,9 @@ final class OnboardingView: UIView {
     
     var didFinish: (() -> Void)?
     
-    lazy var linkedInView = OLinkedInView(step: .linkedIn)
-    
     lazy var contentViews: [OSlideView] = {
         [
-            linkedInView,
+            OLinkedInView(step: .linkedIn),
             OCoverLetterView(step: .coverLetter),
             OLandOfferView(step: .landOffer)
         ]

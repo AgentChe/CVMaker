@@ -12,7 +12,6 @@ final class OLinkedInView: OSlideView {
     lazy var titleLabel = makeTitleLabel()
     lazy var subTitleLabel = makeSubTitleLabel()
     lazy var continueButton = makeContinueButton()
-    lazy var linkedInButton = makeExportFromLinkedInButton()
     
     override init(step: OnboardingView.Step) {
         super.init(step: step)
@@ -59,14 +58,7 @@ private extension OLinkedInView {
             continueButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
             continueButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
             continueButton.heightAnchor.constraint(equalToConstant: 58.scale),
-            continueButton.bottomAnchor.constraint(equalTo: linkedInButton.topAnchor, constant: -16.scale)
-        ])
-        
-        NSLayoutConstraint.activate([
-            linkedInButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
-            linkedInButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
-            linkedInButton.heightAnchor.constraint(equalToConstant: 58.scale),
-            linkedInButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16.scale)
+            continueButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16.scale)
         ])
     }
 }
@@ -123,20 +115,6 @@ private extension OLinkedInView {
         view.layer.cornerRadius = 12.scale
         view.backgroundColor = Appearance.main200
         view.addTarget(self, action: #selector(onNext), for: .touchUpInside)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        return view
-    }
-    
-    func makeExportFromLinkedInButton() -> UIButton {
-        let attrs = TextAttributes()
-            .textColor(Appearance.mono100)
-            .font(Fonts.Nunito.semiBold(size: 17.scale))
-        
-        let view = UIButton()
-        view.setAttributedTitle("Onboarding.LinkedIN.ExportButton".localized.attributed(with: attrs), for: .normal)
-        view.layer.cornerRadius = 12.scale
-        view.backgroundColor = Appearance.main300
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

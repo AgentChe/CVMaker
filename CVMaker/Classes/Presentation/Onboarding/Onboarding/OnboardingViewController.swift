@@ -36,12 +36,6 @@ final class OnboardingViewController: UIViewController {
             let step = self.viewModel.whatNext()
             self.goToNext(at: step)
         }
-        
-        mainView.linkedInView.linkedInButton.rx.tap
-            .bind(to: Binder(self) { base, void in
-                base.exportFromLinkedIn()
-            })
-            .disposed(by: disposeBag)
     }
 }
 
@@ -78,10 +72,5 @@ private extension OnboardingViewController {
 //            }
 //            present(vc, animated: true)
 //        }
-    }
-    
-    // TODO
-    func exportFromLinkedIn() {
-        present(LinkedIn(), animated: true)
     }
 }

@@ -89,7 +89,6 @@
 		DED6C71D2BEA7FD9001DE5B2 /* OLinkedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C71C2BEA7FD9001DE5B2 /* OLinkedInView.swift */; };
 		DED6C71F2BEA8154001DE5B2 /* OCoverLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */; };
 		DED6C7212BEA815C001DE5B2 /* OLandOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */; };
-		DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */; };
 		DED8FB1C2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB1B2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift */; };
 		DED8FB1E2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB1D2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift */; };
 		DED8FB212C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FB202C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift */; };
@@ -311,7 +310,6 @@
 		DED6C71C2BEA7FD9001DE5B2 /* OLinkedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLinkedInView.swift; sourceTree = "<group>"; };
 		DED6C71E2BEA8154001DE5B2 /* OCoverLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCoverLetterView.swift; sourceTree = "<group>"; };
 		DED6C7202BEA815C001DE5B2 /* OLandOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLandOfferView.swift; sourceTree = "<group>"; };
-		DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedIn.swift; sourceTree = "<group>"; };
 		DED8FB1B2C787C33001DAAE2 /* GetProfessionalSkillsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfessionalSkillsRequest.swift; sourceTree = "<group>"; };
 		DED8FB1D2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfessionalSkillAssembly.swift; sourceTree = "<group>"; };
 		DED8FB202C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerProfessionalSkillsView.swift; sourceTree = "<group>"; };
@@ -804,7 +802,6 @@
 				DEFA937D2BE94AED00F892BC /* OnboardingViewController.swift */,
 				DEFA937E2BE94AED00F892BC /* OnboardingViewModel.swift */,
 				DEFA937C2BE94AED00F892BC /* OnboardingView.swift */,
-				DED6C7282BED4DA9001DE5B2 /* LinkedIn.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1628,7 +1625,6 @@
 				DEFA93D82BE94AED00F892BC /* PushNotificationsManager.swift in Sources */,
 				DED8FB512C78C8AA001DAAE2 /* CVMLCollectionHeaderCell.swift in Sources */,
 				DED8FB8C2C7C7D81001DAAE2 /* CVMRTableElement.swift in Sources */,
-				DED6C7292BED4DA9001DE5B2 /* LinkedIn.swift in Sources */,
 				DEFA93C52BE94AED00F892BC /* CircleView.swift in Sources */,
 				DE83F5BE2BFB44B700439D14 /* PaygateOptionLineComponent.swift in Sources */,
 				DE42B0C72BFC970400FF61B0 /* CVMakerGeneralInfoContactInfoView.swift in Sources */,
