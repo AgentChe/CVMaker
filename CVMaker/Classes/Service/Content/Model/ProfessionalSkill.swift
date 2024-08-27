@@ -8,10 +8,3 @@
 struct ProfessionalSkill: Codable {
     let name: String
 }
-
-extension ProfessionalSkill {
-    static func map(apilayerResponse: Any) -> [ProfessionalSkill] {
-        guard let array = apilayerResponse as? [String] else { return [] }
-        return array.map { ProfessionalSkill(name: $0) }
-    }
-}

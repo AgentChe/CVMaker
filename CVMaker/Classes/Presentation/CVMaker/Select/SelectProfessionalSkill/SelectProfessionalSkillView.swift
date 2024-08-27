@@ -13,9 +13,6 @@ final class SelectProfessionalSkillView: UIView {
     lazy var searchField = makeSearchField()
     lazy var searchIconView = makeSearchIconView()
     lazy var tableView = makeTableView()
-    lazy var preloader = makePreloader()
-    
-    private lazy var didSearchTrigger = PublishRelay<String>()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,22 +26,10 @@ final class SelectProfessionalSkillView: UIView {
     }
 }
 
-// MARK: Pubic
-extension SelectProfessionalSkillView {
-    var didSearch: Signal<String> {
-        didSearchTrigger.asSignal()
-    }
-}
-
 // MARK: UITextFieldDelegate
 extension SelectProfessionalSkillView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
-        if let filter = textField.text, !filter.isEmpty {
-            didSearchTrigger.accept(filter)
-        }
-        
         return true
     }
 }
@@ -78,13 +63,6 @@ private extension SelectProfessionalSkillView {
             tableView.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 15.scale),
             tableView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor)
         ])
-        
-        NSLayoutConstraint.activate([
-            preloader.widthAnchor.constraint(equalToConstant: 45.scale),
-            preloader.heightAnchor.constraint(equalToConstant: 45.scale),
-            preloader.centerXAnchor.constraint(equalTo: centerXAnchor),
-            preloader.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
     }
 }
 
@@ -106,7 +84,7 @@ private extension SelectProfessionalSkillView {
         
         let view = PaddingTextField()
         view.delegate = self
-        view.returnKeyType = .search
+        view.returnKeyType = .done
         view.defaultTextAttributes = textAttrs.dictionary
         view.attributedPlaceholder = "SelectProfessionalSkill.Search".localized.attributed(with: placeholderAttrs)
         view.textPadding = UIEdgeInsets(t: 7.scale, l: 32.scale, b: 7.scale, r: 8.scale)
@@ -135,15 +113,6 @@ private extension SelectProfessionalSkillView {
         view.backgroundColor = UIColor.clear
         view.separatorInset = UIEdgeInsets(l: 16.scale)
         view.separatorColor = Appearance.mono200.withAlphaComponent(0.1)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        return view
-    }
-    
-    func makePreloader() -> UIActivityIndicatorView {
-        let view = UIActivityIndicatorView()
-        view.color = Appearance.main200
-        view.style = .large
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

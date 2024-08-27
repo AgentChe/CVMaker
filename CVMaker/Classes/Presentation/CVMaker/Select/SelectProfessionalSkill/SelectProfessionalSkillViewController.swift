@@ -35,16 +35,9 @@ final class SelectProfessionalSkillViewController: UIViewController {
         super.viewDidLoad()
         
         let output = viewModel.configure(input: SelectProfessionalSkillViewModel.Input(
-            filter: mainView.didSearch,
+            filter: mainView.searchField.rx.text.compactMap { $0 }.asSignal(onErrorSignalWith: .never()),
             didSelect: mainView.tableView.didSelect
         ))
-        
-        output.activity
-            .drive(Binder(mainView) { base, activity in
-                activity ? base.preloader.startAnimating() : base.preloader.stopAnimating()
-                base.tableView.isHidden = activity
-            })
-            .disposed(by: disposeBag)
         
         output.skills
             .drive(Binder(mainView.tableView) { base, skills in

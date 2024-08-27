@@ -13,8 +13,6 @@ final class SelectProfessionalSkillViewModel {
         case selected(ProfessionalSkill)
     }
     
-    private lazy var activity = RxActivityIndicator()
-    
     private lazy var contentManager = ContentManager()
 }
 
@@ -26,14 +24,12 @@ extension SelectProfessionalSkillViewModel {
     }
     
     struct Output {
-        let activity: Driver<Bool>
         let skills: Driver<[ProfessionalSkill]>
         let route: Driver<Route>
     }
     
     func configure(input: Input) -> Output {
         Output(
-            activity: activity.asDriver(),
             skills: makeSkills(filter: input.filter),
             route: makeRoute(didSelect: input.didSelect)
         )
@@ -43,17 +39,17 @@ extension SelectProfessionalSkillViewModel {
 // MARK: Private
 private extension SelectProfessionalSkillViewModel {
     func makeSkills(filter: Signal<String>) -> Driver<[ProfessionalSkill]> {
-        filter
-            .asDriver(onErrorDriveWith: .never())
-            .flatMapLatest { [weak self] filter -> Driver<[ProfessionalSkill]> in
-                guard let self else { return .never() }
+        let skills = contentManager
+            .obtainProfessionalSkills()
+            .asSignal(onErrorJustReturn: [])
+        
+        return Signal
+            .combineLatest(skills, filter) { skills, filter -> [ProfessionalSkill] in
+                guard !filter.isEmpty else { return skills }
                 
-                return contentManager
-                    .obtainProfessionalSkills(search: filter)
-                    .trackActivity(activity)
-                    .asDriver(onErrorJustReturn: [])
+                return skills.filter { $0.name.range(of: filter, options: .caseInsensitive) != nil }
             }
-            .startWith([])
+            .asDriver(onErrorJustReturn: [])
     }
     
     func makeRoute(didSelect: Signal<ProfessionalSkill>) -> Driver<Route> {

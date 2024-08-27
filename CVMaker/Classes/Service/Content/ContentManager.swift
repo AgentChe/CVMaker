@@ -10,7 +10,7 @@ import RxSwift
 protocol ContentManagerProtocol {
     func obtainCountries() -> Single<[Country]>
     func obtainCities(iso2: String) -> Single<[City]>
-    func obtainProfessionalSkills(search: String) -> Single<[ProfessionalSkill]>
+    func obtainProfessionalSkills() -> Single<[ProfessionalSkill]>
     func obtainLanguages() -> Single<ISOLanguages>
     func obtainInterests() -> Single<[Interest]>
 }
@@ -35,12 +35,21 @@ extension ContentManager: ContentManagerProtocol {
             .map { City.map(from: $0) }
     }
     
-    func obtainProfessionalSkills(search: String) -> Single<[ProfessionalSkill]> {
-        let request = GetProfessionalSkillsRequest(search: search)
-        
-        return restApiTransport
-            .callServerApi(requestBody: request)
-            .map { ProfessionalSkill.map(apilayerResponse: $0) }
+    func obtainProfessionalSkills() -> Single<[ProfessionalSkill]> {
+        Single<[ProfessionalSkill]>.create { single in
+            let result: [ProfessionalSkill] = {
+                guard
+                    let url = Bundle.main.url(forResource: "ProfessionalSkills", withExtension: "json"),
+                    let data = try? Data(contentsOf: url),
+                    let array = try? JSONDecoder().decode([String].self, from: data)
+                else { return [] }
+                
+                return array.map { ProfessionalSkill(name: $0) }
+            }()
+            single(.success(result))
+            
+            return Disposables.create()
+        }
     }
     
     func obtainLanguages() -> Single<ISOLanguages> {
