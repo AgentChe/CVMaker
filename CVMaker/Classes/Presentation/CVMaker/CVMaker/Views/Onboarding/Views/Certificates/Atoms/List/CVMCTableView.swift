@@ -69,7 +69,7 @@ extension CVMCTableView: UITableViewDataSource {
                     
                     var date = self.dateFormatter.string(from: startDate)
                     if let endDate = certificate.endDate {
-                        date += "- \(self.dateFormatter.string(from: endDate))"
+                        date += "-\(self.dateFormatter.string(from: endDate))"
                     }
                     return date
                 }()

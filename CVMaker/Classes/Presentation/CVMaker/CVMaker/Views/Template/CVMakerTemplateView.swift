@@ -100,6 +100,7 @@ private extension CVMakerTemplateView {
             b: CGFloat.continueButtonBottomConstaint + CGFloat.continueButtonHeight + 8.scale,
             r: 16.scale
         )
+        view.showsVerticalScrollIndicator = false
         view.setContentOffset(CGPoint(x: 0, y: -20.scale), animated: false)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)

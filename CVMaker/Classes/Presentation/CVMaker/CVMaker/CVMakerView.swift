@@ -14,13 +14,15 @@ final class CVMakerView: UIView {
         case template
         case onboarding
         case crafting
+        case preview
     }
     
     lazy var container = makeContainer()
     lazy var flowViews: [Flow: CVMakerFlowView] = [
         .template: templateView,
         .onboarding: onboardingView,
-        .crafting: craftingView
+        .crafting: craftingView,
+        .preview: previewView
     ]
     lazy var templateView = CVMakerTemplateView { [weak self] template in
         self?.didSelectTemplateTrigger.accept(template)
@@ -31,8 +33,9 @@ final class CVMakerView: UIView {
     }
     lazy var craftingView = CVMakerCraftingView { [weak self] in
         self?.didCreateCVTrigger.accept(Void())
-        self?.finished()
+        self?.scroll(to: .preview)
     }
+    lazy var previewView = CVMakerPreviewView()
     
     private lazy var didSelectTemplateTrigger = PublishRelay<CVTemplate>()
     private lazy var didCreateCVTrigger = PublishRelay<Void>()
@@ -40,11 +43,9 @@ final class CVMakerView: UIView {
     private var flow = Flow.template
     
     private weak var vc: UIViewController?
-    private let finished: () -> Void
     
-    init(vc: UIViewController?, finished: @escaping () -> Void) {
+    init(vc: UIViewController?) {
         self.vc = vc
-        self.finished = finished
         
         super.init(frame: .zero)
         

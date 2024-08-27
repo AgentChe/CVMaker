@@ -31,10 +31,8 @@ final class CVMakerCraftingView: CVMakerFlowView {
         super.moveToThis()
         
         animationView.animation = LottieAnimation.named("CVMaker.Crafting.Animation")
-        animationView.play { result in
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [weak self] in
-                self?.finished()
-            }
+        animationView.play { [weak self] result in
+            self?.finished()
         }
     }
 }

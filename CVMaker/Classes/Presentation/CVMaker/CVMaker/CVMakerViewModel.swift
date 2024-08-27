@@ -9,6 +9,10 @@ import RxSwift
 import RxCocoa
 
 final class CVMakerViewModel {
+    enum Route {
+        case cancelFlow
+    }
+    
     private lazy var profileManager = ProfileManager()
     private lazy var resumeManager = ResumeManager()
 }
@@ -27,16 +31,21 @@ extension CVMakerViewModel {
         let didSaveSocialMedia: Signal<SocialMedia>
         let didSaveReferences: Signal<[Reference]>
         let didCreateCV: Signal<Void>
+        let didTapPreview: Signal<Void>
+        let didShareCV: Signal<Void>
+        let didCancelFlow: Signal<Void>
     }
     
     struct Output {
         let profile: Driver<Profile>
+        let route: Driver<Route>
         let disposable: Disposable
     }
     
     func configure(input: Input) -> Output {
         Output(
             profile: makeProfile(),
+            route: makeRoute(didCancelFlow: input.didCancelFlow),
             disposable: makeDisposable(
                 didSaveGeneralInfo: input.didSaveGeneralInfo,
                 didSaveWorkExperiences: input.didSaveWorkExperiences,
@@ -60,6 +69,15 @@ private extension CVMakerViewModel {
         profileManager
             .obtainProfile()
             .asDriver(onErrorDriveWith: .never())
+    }
+    
+    func makeRoute(didCancelFlow: Signal<Void>) -> Driver<Route> {
+        let cancelFlow = didCancelFlow
+            .map { Route.cancelFlow }
+            .asDriver(onErrorDriveWith: .never())
+        
+        return Driver
+            .merge(cancelFlow)
     }
     
     func makeDisposable(

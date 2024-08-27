@@ -161,6 +161,10 @@
 "CVMaker.References.List.Title" = "References";
 "CVMaker.Crafting.Title" = "Well done!\n";
 "CVMaker.Crafting.SubTitle" = "We’re crafting your resume";
+"CVMaker.Preview.Title" = "Everything is ready!";
+"CVMaker.Preview.SubTitle" = "We saved your resume in the app, so you can edit it anytime you want!";
+"CVMaker.Preview.PreviewAction" = "Preview";
+"CVMaker.Preview.ShareAction" = "Export PDF";
 
 // MARK: SelectCity
 "SelectCity.Country" = "Country";

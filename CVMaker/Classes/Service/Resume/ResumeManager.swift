@@ -70,7 +70,11 @@ extension ResumeManager: ResumeManagerProtocol {
                 return array ?? []
             }()
             
-            let cv = CV(template: template, profile: profile)
+            let cv = CV(
+                template: template, 
+                profile: profile,
+                created: Date()
+            )
             cvs.append(cv)
             
             if let data = try? JSONEncoder().encode(cvs) {

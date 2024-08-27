@@ -69,7 +69,7 @@ extension CVMWETableView: UITableViewDataSource {
                 if let startDate = element.startDate {
                     var date = dateFormatter.string(from: startDate)
                     if let endDate = element.endDate {
-                        date += "- \(dateFormatter.string(from: endDate))"
+                        date += "-\(dateFormatter.string(from: endDate))"
                     }
                     
                     result.append((date, .third))

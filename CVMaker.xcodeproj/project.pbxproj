@@ -147,6 +147,7 @@
 		DED8FBBB2C7CB4F2001DAAE2 /* CVTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBBA2C7CB4F2001DAAE2 /* CVTemplate.swift */; };
 		DED8FBBD2C7CB60A001DAAE2 /* ResumeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBBC2C7CB60A001DAAE2 /* ResumeManager.swift */; };
 		DED8FBBF2C7CC353001DAAE2 /* CV.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBBE2C7CC353001DAAE2 /* CV.swift */; };
+		DED8FBC22C7CC940001DAAE2 /* CVMakerPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FBC12C7CC940001DAAE2 /* CVMakerPreviewView.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -368,6 +369,7 @@
 		DED8FBBA2C7CB4F2001DAAE2 /* CVTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVTemplate.swift; sourceTree = "<group>"; };
 		DED8FBBC2C7CB60A001DAAE2 /* ResumeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeManager.swift; sourceTree = "<group>"; };
 		DED8FBBE2C7CC353001DAAE2 /* CV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CV.swift; sourceTree = "<group>"; };
+		DED8FBC12C7CC940001DAAE2 /* CVMakerPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerPreviewView.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				DED8FBAA2C7CB090001DAAE2 /* Template */,
 				DED8FBA22C7CA346001DAAE2 /* Onboarding */,
 				DED8FB9A2C7C9B18001DAAE2 /* Crafting */,
+				DED8FBC02C7CC930001DAAE2 /* Preview */,
 				DED8FBA82C7CA88C001DAAE2 /* CVMakerFlowView.swift */,
 			);
 			path = Views;
@@ -1133,6 +1136,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		DED8FBC02C7CC930001DAAE2 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FBC12C7CC940001DAAE2 /* CVMakerPreviewView.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
 		DEFA931C2BE949F900F892BC = {
 			isa = PBXGroup;
 			children = (
@@ -1656,6 +1667,7 @@
 				DE42B0E72BFCFF8100FF61B0 /* GetCountriesRequest.swift in Sources */,
 				DEFA93D12BE94AED00F892BC /* UITapGestureRecognizer+Extension.swift in Sources */,
 				DED8FB212C788316001DAAE2 /* CVMakerProfessionalSkillsView.swift in Sources */,
+				DED8FBC22C7CC940001DAAE2 /* CVMakerPreviewView.swift in Sources */,
 				DED8FB5F2C78F005001DAAE2 /* CVMICollectionView.swift in Sources */,
 				DED8FB1E2C7881A8001DAAE2 /* SelectProfessionalSkillAssembly.swift in Sources */,
 				DE42B2702C05246C00FF61B0 /* SelectProfessionalSkillTableCell.swift in Sources */,
