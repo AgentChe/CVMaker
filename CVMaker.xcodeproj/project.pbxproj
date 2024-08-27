@@ -236,6 +236,10 @@
 		DED8FC882C7E23A2001DAAE2 /* CLVacancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC872C7E23A2001DAAE2 /* CLVacancy.swift */; };
 		DED8FC8A2C7E2405001DAAE2 /* CLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC892C7E2405001DAAE2 /* CLInfo.swift */; };
 		DED8FC8C2C7E2448001DAAE2 /* CLTextBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC8B2C7E2448001DAAE2 /* CLTextBlock.swift */; };
+		DED8FC8F2C7E3358001DAAE2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC8E2C7E3358001DAAE2 /* MainViewController.swift */; };
+		DED8FC912C7E335E001DAAE2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC902C7E335E001DAAE2 /* MainViewModel.swift */; };
+		DED8FC932C7E3363001DAAE2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC922C7E3363001DAAE2 /* MainView.swift */; };
+		DED8FC952C7E3451001DAAE2 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC942C7E3451001DAAE2 /* SplashViewModel.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -533,6 +537,10 @@
 		DED8FC872C7E23A2001DAAE2 /* CLVacancy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLVacancy.swift; sourceTree = "<group>"; };
 		DED8FC892C7E2405001DAAE2 /* CLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLInfo.swift; sourceTree = "<group>"; };
 		DED8FC8B2C7E2448001DAAE2 /* CLTextBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTextBlock.swift; sourceTree = "<group>"; };
+		DED8FC8E2C7E3358001DAAE2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DED8FC902C7E335E001DAAE2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		DED8FC922C7E3363001DAAE2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DED8FC942C7E3451001DAAE2 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1541,6 +1549,16 @@
 			path = PDF;
 			sourceTree = "<group>";
 		};
+		DED8FC8D2C7E334B001DAAE2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DED8FC8E2C7E3358001DAAE2 /* MainViewController.swift */,
+				DED8FC902C7E335E001DAAE2 /* MainViewModel.swift */,
+				DED8FC922C7E3363001DAAE2 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		DEFA931C2BE949F900F892BC = {
 			isa = PBXGroup;
 			children = (
@@ -1757,6 +1775,7 @@
 			children = (
 				DEFA93922BE94AED00F892BC /* Utils */,
 				DEFA93942BE94AED00F892BC /* SplashViewController.swift */,
+				DED8FC942C7E3451001DAAE2 /* SplashViewModel.swift */,
 				DEFA93932BE94AED00F892BC /* SplashView.swift */,
 			);
 			path = Splash;
@@ -1765,6 +1784,7 @@
 		DEFA93A72BE94AED00F892BC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				DED8FC8D2C7E334B001DAAE2 /* Main */,
 				DE42B0B02BFBC71700FF61B0 /* CVMaker */,
 				DE83F5AF2BFB444100439D14 /* Paygate */,
 				DEFA937F2BE94AED00F892BC /* Onboarding */,
@@ -2117,6 +2137,7 @@
 				DEFA940D2BE94AED00F892BC /* IAPActionResult.swift in Sources */,
 				DED8FC702C7DF2D8001DAAE2 /* PDF12Generator.swift in Sources */,
 				DEFA93C82BE94AED00F892BC /* PaddingTextField.swift in Sources */,
+				DED8FC8F2C7E3358001DAAE2 /* MainViewController.swift in Sources */,
 				DED8FBBD2C7CB60A001DAAE2 /* ResumeManager.swift in Sources */,
 				DEFA93BF2BE94AED00F892BC /* RequestReview.swift in Sources */,
 				DEFA93DF2BE94AED00F892BC /* Scalable.swift in Sources */,
@@ -2140,6 +2161,7 @@
 				DED8FB552C78C8BA001DAAE2 /* CVMLCollectionLanguageCell.swift in Sources */,
 				DED8FB702C7C676E001DAAE2 /* CVMakerCertificatesCreateView.swift in Sources */,
 				DEFA93DC2BE94AED00F892BC /* Fonts.swift in Sources */,
+				DED8FC932C7E3363001DAAE2 /* MainView.swift in Sources */,
 				DED8FBA72C7CA422001DAAE2 /* CVMakerView.swift in Sources */,
 				DED8FBB22C7CB2FB001DAAE2 /* CVMTemplatesCollectionElement.swift in Sources */,
 				DED8FBB02C7CB2F3001DAAE2 /* CVMTemplatesCollectionView.swift in Sources */,
@@ -2191,6 +2213,7 @@
 				DEFA93EC2BE94AED00F892BC /* OnboardingViewController.swift in Sources */,
 				DEFA93DD2BE94AED00F892BC /* NumberLaunches.swift in Sources */,
 				DE42B21E2BFF906500FF61B0 /* CVMGIPhotoContainer.swift in Sources */,
+				DED8FC912C7E335E001DAAE2 /* MainViewModel.swift in Sources */,
 				DED8FBBF2C7CC353001DAAE2 /* CV.swift in Sources */,
 				DE83F5B52BFB444100439D14 /* PaygateView.swift in Sources */,
 				DEFA93FA2BE94AED00F892BC /* SplashView.swift in Sources */,
@@ -2221,6 +2244,7 @@
 				DEFA93C02BE94AED00F892BC /* RxActivityIndicator.swift in Sources */,
 				DED8FB6E2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift in Sources */,
 				DED8FB572C78EC10001DAAE2 /* Interest.swift in Sources */,
+				DED8FC952C7E3451001DAAE2 /* SplashViewModel.swift in Sources */,
 				DEFA93EB2BE94AED00F892BC /* OnboardingView.swift in Sources */,
 				DEFA93E22BE94AED00F892BC /* Weak.swift in Sources */,
 				DED8FB2A2C788625001DAAE2 /* CVMPSCollectionTitleCell.swift in Sources */,

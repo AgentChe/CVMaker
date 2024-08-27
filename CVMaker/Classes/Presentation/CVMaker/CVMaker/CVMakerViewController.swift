@@ -9,11 +9,28 @@ import UIKit
 import RxSwift
 
 final class CVMakerViewController: UIViewController {
+    enum StepAfterCancelFlow {
+        case main
+        case dismiss
+    }
+    
     private lazy var mainView = CVMakerView(vc: self)
     
     private lazy var viewModel = CVMakerViewModel()
     
     private lazy var disposeBag = DisposeBag()
+    
+    private let stepAfterCancelFlow: StepAfterCancelFlow
+    
+    private init(stepAfterCancelFlow: StepAfterCancelFlow) {
+        self.stepAfterCancelFlow = stepAfterCancelFlow
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = mainView
@@ -76,8 +93,8 @@ final class CVMakerViewController: UIViewController {
 
 // MARK: Public
 extension CVMakerViewController {
-    static func make() -> CVMakerViewController {
-        let vc = CVMakerViewController()
+    static func make(stepAfterCancelFlow: StepAfterCancelFlow) -> CVMakerViewController {
+        let vc = CVMakerViewController(stepAfterCancelFlow: stepAfterCancelFlow)
         vc.modalPresentationStyle = .fullScreen
         return vc
     }
@@ -88,7 +105,12 @@ private extension CVMakerViewController {
     func route(_ route: CVMakerViewModel.Route) {
         switch route {
         case .cancelFlow:
-            dismiss(animated: true)
+            switch stepAfterCancelFlow {
+            case .dismiss:
+                dismiss(animated: true)
+            case .main:
+                UIApplication.shared.keyWindow?.rootViewController = MainViewController.make()
+            }
         case .preview(let cv):
             let pdf = PDFFactory.create(cv: cv)
             let vc = PDFViewController(pdf: pdf)

@@ -7,13 +7,18 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 final class SplashViewController: UIViewController {
     private lazy var mainView = SplashView()
     
+    private lazy var viewModel = SplashViewModel()
+    
     private lazy var disposeBag = DisposeBag()
     
     private lazy var sdkInitialize = SplashReceiptValidationObserver()
+    
+    private lazy var didSDKConfiguredTrigger = PublishRelay<Void>()
     
     override func loadView() {
         view = mainView
@@ -22,8 +27,18 @@ final class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let output = viewModel.configure(input: SplashViewModel.Input(
+            didSDKConfigured: didSDKConfiguredTrigger.asSignal()
+        ))
+        
+        output.route
+            .drive(Binder(self) { base, route in
+                base.route(route)
+            })
+            .disposed(by: disposeBag)
+        
         sdkInitialize.observe { [weak self] in
-            self?.route()
+            self?.didSDKConfiguredTrigger.accept(Void())
         }
     }
 }
@@ -37,26 +52,30 @@ extension SplashViewController {
 
 // MARK: Private
 private extension SplashViewController {
-    func route() {
+    func route(_ route: SplashViewModel.Route) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak self] in
-            self?.goNext()
+            self?.goNext(route: route)
         }
     }
     
-    // TODO
-    func goNext() {
-        UIApplication.shared.keyWindow?.rootViewController = OnboardingViewController.make()
-        
-//        let nc = NavigationController(rootViewController: WhipsViewController.make())
-//        nc.setNavigationBarHidden(true, animated: false)
-//        
-//        if SessionManager().hasActiveSubscriptions() {
-//            UIApplication.shared.keyWindow?.rootViewController = nc
-//        } else {
-//            let vc = PaygateViewController.make {
-//                UIApplication.shared.keyWindow?.rootViewController = nc
-//            }
-//            present(vc, animated: true)
-//        }
+    func goNext(route: SplashViewModel.Route) {
+        switch route {
+        case .onboarding:
+            UIApplication.shared.keyWindow?.rootViewController = OnboardingViewController.make()
+        case .paygateTransitionMain:
+            let vc = PaygateViewController.make { [weak self] in
+                self?.goNext(route: .main)
+            }
+            present(vc, animated: true)
+        case .paygateTransitionCVMaker:
+            let vc = PaygateViewController.make { [weak self] in
+                self?.goNext(route: .cvMaker)
+            }
+            present(vc, animated: true)
+        case .main:
+            UIApplication.shared.keyWindow?.rootViewController = MainViewController.make()
+        case .cvMaker:
+            UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make(stepAfterCancelFlow: .main)
+        }
     }
 }
