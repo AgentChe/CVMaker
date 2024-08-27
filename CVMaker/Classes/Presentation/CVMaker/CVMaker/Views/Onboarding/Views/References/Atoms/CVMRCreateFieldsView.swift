@@ -56,6 +56,17 @@ extension CVMRCreateFieldsView {
         phoneField.textField.text = reference?.phone
         emailField.textField.text = reference?.email
     }
+    
+    var valid: Bool {
+        let name = nameField.textField.text ?? ""
+        let jobTitle = jobTitleField.textField.text ?? ""
+        let phone = phoneField.textField.text ?? ""
+        let email = emailField.textField.text ?? ""
+        
+        let empty = name.isEmpty && jobTitle.isEmpty && phone.isEmpty && email.isEmpty
+        
+        return !empty
+    }
 }
 
 // MARK: WrappedView
@@ -92,14 +103,7 @@ private extension CVMRCreateFieldsView {
     }
     
     func checkEnable() {
-        let name = nameField.textField.text ?? ""
-        let jobTitle = jobTitleField.textField.text ?? ""
-        let phone = phoneField.textField.text ?? ""
-        let email = emailField.textField.text ?? ""
-        
-        let empty = name.isEmpty && jobTitle.isEmpty && phone.isEmpty && email.isEmpty
-        
-        didChangeCanComplete?(!empty)
+        didChangeCanComplete?(valid)
     }
 }
 

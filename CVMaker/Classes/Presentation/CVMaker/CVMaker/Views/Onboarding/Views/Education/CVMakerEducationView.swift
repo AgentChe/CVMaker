@@ -66,7 +66,7 @@ private extension CVMakerEducationView {
     func createView(educations: [Education]) -> CVMakerEducationCreateView {
         var result = educations
         
-        return CVMakerEducationCreateView { [weak self] education in
+        return CVMakerEducationCreateView(finish: { [weak self] education in
             guard let self else { return }
             
             result.append(education)
@@ -118,7 +118,9 @@ private extension CVMakerEducationView {
             UIView.animate(withDuration: 0.3, animations: {
                 singleEntityView.frame.origin = CGPoint.zero
             })
-        }
+        }, skip: { [weak self] in
+            self?.flowFinished()
+        })
     }
     
     func listView(educations: [Education]) -> UIView {

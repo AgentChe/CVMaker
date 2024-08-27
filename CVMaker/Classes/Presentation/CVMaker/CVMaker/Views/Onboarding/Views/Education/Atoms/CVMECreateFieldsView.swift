@@ -61,6 +61,17 @@ extension CVMECreateFieldsView {
         startDateField.setup(date: education?.startDate)
         endDateField.setup(date: education?.endDate)
     }
+    
+    var valid: Bool {
+        let university = universityField.textField.text ?? ""
+        let fieldStudy = fieldStudyField.textField.text ?? ""
+        let degree = degreeField.textField.text ?? ""
+        let startDate = startDateField.date
+        
+        let empty = university.isEmpty || fieldStudy.isEmpty || degree.isEmpty || (startDate == nil)
+        
+        return !empty
+    }
 }
 
 // MARK: WrappedView
@@ -98,14 +109,7 @@ private extension CVMECreateFieldsView {
     }
     
     func checkEnable() {
-        let university = universityField.textField.text ?? ""
-        let fieldStudy = fieldStudyField.textField.text ?? ""
-        let degree = degreeField.textField.text ?? ""
-        let startDate = startDateField.date
-        
-        let empty = university.isEmpty || fieldStudy.isEmpty || degree.isEmpty || (startDate == nil)
-        
-        didChangeCanComplete?(!empty)
+        didChangeCanComplete?(valid)
     }
 }
 

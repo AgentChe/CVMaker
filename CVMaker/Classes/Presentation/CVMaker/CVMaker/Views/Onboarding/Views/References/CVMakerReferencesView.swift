@@ -66,7 +66,7 @@ private extension CVMakerReferencesView {
     func createView(references: [Reference]) -> CVMakerReferencesCreateView {
         var result = references
         
-        return CVMakerReferencesCreateView { [weak self] reference in
+        return CVMakerReferencesCreateView(finish: { [weak self] reference in
             guard let self else { return }
             
             result.append(reference)
@@ -118,7 +118,9 @@ private extension CVMakerReferencesView {
             UIView.animate(withDuration: 0.3, animations: {
                 singleEntityView.frame.origin = CGPoint.zero
             })
-        }
+        }, skip: { [weak self] in
+            self?.flowFinished()
+        })
     }
     
     func listView(references: [Reference]) -> UIView {

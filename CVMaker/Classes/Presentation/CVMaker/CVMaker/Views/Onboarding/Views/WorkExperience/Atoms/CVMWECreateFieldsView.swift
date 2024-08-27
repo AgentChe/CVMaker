@@ -61,6 +61,17 @@ extension CVMWECreateFieldsView {
         endDateField.setup(date: workExperience?.endDate)
         resultsField.textField.text = workExperience?.results
     }
+    
+    var valid: Bool {
+        let jobTitle = jobTitleField.textField.text ?? ""
+        let companyName = companyNameField.textField.text ?? ""
+        let startDate = startDateField.date
+        let results = resultsField.textField.text ?? ""
+        
+        let empty = jobTitle.isEmpty || companyName.isEmpty || (startDate == nil) || results.isEmpty
+        
+        return !empty
+    }
 }
 
 // MARK: WrappedView
@@ -98,14 +109,7 @@ private extension CVMWECreateFieldsView {
     }
     
     func checkEnable() {
-        let jobTitle = jobTitleField.textField.text ?? ""
-        let companyName = companyNameField.textField.text ?? ""
-        let startDate = startDateField.date
-        let results = resultsField.textField.text ?? ""
-        
-        let empty = jobTitle.isEmpty || companyName.isEmpty || (startDate == nil) || results.isEmpty
-        
-        didChangeCanComplete?(!empty)
+        didChangeCanComplete?(valid)
     }
 }
 

@@ -20,9 +20,11 @@ final class CVMakerCertificatesCreateView: UIView {
     private lazy var continueBottomConstraint = NSLayoutConstraint()
     
     private let finish: (Certificate) -> Void
+    private let skip: () -> Void
     
-    init(finish: @escaping (Certificate) -> Void) {
+    init(finish: @escaping (Certificate) -> Void, skip: @escaping () -> Void) {
         self.finish = finish
+        self.skip = skip
         
         super.init(frame: .zero)
         
@@ -56,16 +58,15 @@ private extension CVMakerCertificatesCreateView {
                 })
             })
             .disposed(by: disposeBag)
-        
-        fieldsView.didChangeCanComplete = { [weak self] enable in
-            self?.continueButton.alpha = enable ? 1 : 0.4
-            self?.continueButton.isEnabled = enable
-        }
     }
     
     @objc
     func continueTapped() {
-        fieldsView.complete()
+        if fieldsView.valid {
+            fieldsView.complete()
+        } else {
+            skip()
+        }
     }
 }
 

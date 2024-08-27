@@ -33,7 +33,6 @@ final class CVMakerGeneralInfoNameView: CVMakerGeneralInfoFlowView {
         
         makeConstraints()
         initialize()
-        checkEnableContinue()
     }
     
     required init?(coder: NSCoder) {
@@ -45,14 +44,10 @@ final class CVMakerGeneralInfoNameView: CVMakerGeneralInfoFlowView {
 extension CVMakerGeneralInfoNameView {
     func setup(firstName: String?) {
         firstNameField.textField.text = firstName
-        
-        checkEnableContinue()
     }
     
     func setup(lastName: String?) {
         lastNameField.textField.text = lastName
-        
-        checkEnableContinue()
     }
 }
 
@@ -70,14 +65,6 @@ private extension CVMakerGeneralInfoNameView {
                 })
             })
             .disposed(by: disposeBag)
-        
-        firstNameField.editing = { [weak self] text in
-            self?.checkEnableContinue()
-        }
-        
-        lastNameField.editing = { [weak self] text in
-            self?.checkEnableContinue()
-        }
     }
     
     @objc
@@ -91,14 +78,6 @@ private extension CVMakerGeneralInfoNameView {
         )
         
         onNext()
-    }
-    
-    func checkEnableContinue() {
-        let firstNameEmpty = (firstNameField.textField.text ?? "").isEmpty
-        let lastNameEmpty = (lastNameField.textField.text ?? "").isEmpty
-        let isEmpty = firstNameEmpty || lastNameEmpty
-        continueButton.isEnabled = !isEmpty
-        continueButton.alpha = isEmpty ? 0.4 : 1
     }
 }
 

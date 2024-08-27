@@ -66,7 +66,7 @@ private extension CVMakerWorkExperienceView {
     func createView(workExperiences: [WorkExperience]) -> CVMakerWorkExperienceCreateView {
         var result = workExperiences
         
-        return CVMakerWorkExperienceCreateView { [weak self] workExperience in
+        return CVMakerWorkExperienceCreateView(finish: { [weak self] workExperience in
             guard let self else { return }
             
             result.append(workExperience)
@@ -118,7 +118,9 @@ private extension CVMakerWorkExperienceView {
             UIView.animate(withDuration: 0.3, animations: {
                 singleEntityView.frame.origin = CGPoint.zero
             })
-        }
+        }, skip: { [weak self] in
+            self?.flowFinished()
+        })
     }
     
     func listView(workExperiences: [WorkExperience]) -> UIView {

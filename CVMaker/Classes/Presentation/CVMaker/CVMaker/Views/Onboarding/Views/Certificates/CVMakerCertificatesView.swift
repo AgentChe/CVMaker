@@ -66,7 +66,7 @@ private extension CVMakerCertificatesView {
     func createView(certificates: [Certificate]) -> CVMakerCertificatesCreateView {
         var result = certificates
         
-        return CVMakerCertificatesCreateView { [weak self] certificate in
+        return CVMakerCertificatesCreateView(finish: { [weak self] certificate in
             guard let self else { return }
             
             result.append(certificate)
@@ -118,7 +118,9 @@ private extension CVMakerCertificatesView {
             UIView.animate(withDuration: 0.3, animations: {
                 singleEntityView.frame.origin = CGPoint.zero
             })
-        }
+        }, skip: { [weak self] in
+            self?.flowFinished()
+        })
     }
     
     func listView(certificates: [Certificate]) -> UIView {

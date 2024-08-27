@@ -19,9 +19,11 @@ final class CVMakerWorkExperienceCreateView: UIView {
     private lazy var continueBottomConstraint = NSLayoutConstraint()
     
     private let finish: (WorkExperience) -> Void
+    private let skip: () -> Void
     
-    init(finish: @escaping (WorkExperience) -> Void) {
+    init(finish: @escaping (WorkExperience) -> Void, skip: @escaping () -> Void) {
         self.finish = finish
+        self.skip = skip
         
         super.init(frame: .zero)
         
@@ -55,16 +57,15 @@ private extension CVMakerWorkExperienceCreateView {
                 })
             })
             .disposed(by: disposeBag)
-        
-        fieldsView.didChangeCanComplete = { [weak self] enable in
-            self?.continueButton.alpha = enable ? 1 : 0.4
-            self?.continueButton.isEnabled = enable
-        }
     }
     
     @objc
     func continueTapped() {
-        fieldsView.complete()
+        if fieldsView.valid {
+            fieldsView.complete()
+        } else {
+            skip()
+        }
     }
 }
 
@@ -125,7 +126,7 @@ private extension CVMakerWorkExperienceCreateView {
         
         let view = UILabel()
         view.numberOfLines = 0
-        view.attributedText = "CVMaker.GeneralInfo.Name.Title".localized.attributed(with: attrs)
+        view.attributedText = "CVMaker.WorkExperience.Title".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(view)
         return view

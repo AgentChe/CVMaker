@@ -56,6 +56,17 @@ extension CVMCCreateFieldsView {
         endDateField.setup(date: certificate?.endDate)
         shortDescriptionField.textField.text = certificate?.description
     }
+    
+    var valid: Bool {
+        let organizationName = organizationNameField.textField.text ?? ""
+        let startDate = startDateField.date
+        let endDate = endDateField.date
+        let shortDescription = shortDescriptionField.textField.text ?? ""
+        
+        let empty = organizationName.isEmpty || (startDate == nil) || (endDate == nil) || shortDescription.isEmpty
+        
+        return !empty
+    }
 }
 
 // MARK: WrappedView
@@ -92,14 +103,7 @@ private extension CVMCCreateFieldsView {
     }
     
     func checkEnable() {
-        let organizationName = organizationNameField.textField.text ?? ""
-        let startDate = startDateField.date
-        let endDate = endDateField.date
-        let shortDescription = shortDescriptionField.textField.text ?? ""
-        
-        let empty = organizationName.isEmpty || (startDate == nil) || (endDate == nil) || shortDescription.isEmpty
-        
-        didChangeCanComplete?(!empty)
+        didChangeCanComplete?(valid)
     }
 }
 
