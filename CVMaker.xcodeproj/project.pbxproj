@@ -229,6 +229,13 @@
 		DED8FC782C7DF2D8001DAAE2 /* PDF8Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC682C7DF2D7001DAAE2 /* PDF8Generator.swift */; };
 		DED8FC7B2C7DF4D8001DAAE2 /* PDFFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC7A2C7DF4D8001DAAE2 /* PDFFactory.swift */; };
 		DED8FC7E2C7E0C83001DAAE2 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC7D2C7E0C83001DAAE2 /* PDFViewController.swift */; };
+		DED8FC802C7E2116001DAAE2 /* CL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC7F2C7E2116001DAAE2 /* CL.swift */; };
+		DED8FC822C7E211D001DAAE2 /* CLTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC812C7E211D001DAAE2 /* CLTemplate.swift */; };
+		DED8FC842C7E22F7001DAAE2 /* CLHiringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC832C7E22F7001DAAE2 /* CLHiringManager.swift */; };
+		DED8FC862C7E232F001DAAE2 /* CLCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC852C7E232F001DAAE2 /* CLCompany.swift */; };
+		DED8FC882C7E23A2001DAAE2 /* CLVacancy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC872C7E23A2001DAAE2 /* CLVacancy.swift */; };
+		DED8FC8A2C7E2405001DAAE2 /* CLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC892C7E2405001DAAE2 /* CLInfo.swift */; };
+		DED8FC8C2C7E2448001DAAE2 /* CLTextBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8FC8B2C7E2448001DAAE2 /* CLTextBlock.swift */; };
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
@@ -519,6 +526,13 @@
 		DED8FC682C7DF2D7001DAAE2 /* PDF8Generator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDF8Generator.swift; sourceTree = "<group>"; };
 		DED8FC7A2C7DF4D8001DAAE2 /* PDFFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFFactory.swift; sourceTree = "<group>"; };
 		DED8FC7D2C7E0C83001DAAE2 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		DED8FC7F2C7E2116001DAAE2 /* CL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CL.swift; sourceTree = "<group>"; };
+		DED8FC812C7E211D001DAAE2 /* CLTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTemplate.swift; sourceTree = "<group>"; };
+		DED8FC832C7E22F7001DAAE2 /* CLHiringManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLHiringManager.swift; sourceTree = "<group>"; };
+		DED8FC852C7E232F001DAAE2 /* CLCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCompany.swift; sourceTree = "<group>"; };
+		DED8FC872C7E23A2001DAAE2 /* CLVacancy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLVacancy.swift; sourceTree = "<group>"; };
+		DED8FC892C7E2405001DAAE2 /* CLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLInfo.swift; sourceTree = "<group>"; };
+		DED8FC8B2C7E2448001DAAE2 /* CLTextBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTextBlock.swift; sourceTree = "<group>"; };
 		DEFA93252BE949F900F892BC /* CVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFA93312BE949FB00F892BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1269,6 +1283,13 @@
 			children = (
 				DED8FBBA2C7CB4F2001DAAE2 /* CVTemplate.swift */,
 				DED8FBBE2C7CC353001DAAE2 /* CV.swift */,
+				DED8FC7F2C7E2116001DAAE2 /* CL.swift */,
+				DED8FC812C7E211D001DAAE2 /* CLTemplate.swift */,
+				DED8FC832C7E22F7001DAAE2 /* CLHiringManager.swift */,
+				DED8FC852C7E232F001DAAE2 /* CLCompany.swift */,
+				DED8FC872C7E23A2001DAAE2 /* CLVacancy.swift */,
+				DED8FC8B2C7E2448001DAAE2 /* CLTextBlock.swift */,
+				DED8FC892C7E2405001DAAE2 /* CLInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2014,6 +2035,7 @@
 				DED8FB512C78C8AA001DAAE2 /* CVMLCollectionHeaderCell.swift in Sources */,
 				DED8FB8C2C7C7D81001DAAE2 /* CVMRTableElement.swift in Sources */,
 				DEFA93C52BE94AED00F892BC /* CircleView.swift in Sources */,
+				DED8FC882C7E23A2001DAAE2 /* CLVacancy.swift in Sources */,
 				DE83F5BE2BFB44B700439D14 /* PaygateOptionLineComponent.swift in Sources */,
 				DE42B0C72BFC970400FF61B0 /* CVMakerGeneralInfoContactInfoView.swift in Sources */,
 				DE42B09E2BFBB86D00FF61B0 /* Education.swift in Sources */,
@@ -2022,6 +2044,7 @@
 				DED8FBB72C7CB31F001DAAE2 /* CVMTemplatesCollectionCell.swift in Sources */,
 				DE42B0C12BFC967900FF61B0 /* CVMakerGeneralInfoFlowView.swift in Sources */,
 				DED8FC6A2C7DF2D8001DAAE2 /* PDF7Generator.swift in Sources */,
+				DED8FC8A2C7E2405001DAAE2 /* CLInfo.swift in Sources */,
 				DE42B2582C04E41300FF61B0 /* CVMETableElement.swift in Sources */,
 				DED8FB732C7C678A001DAAE2 /* CVMCTableView.swift in Sources */,
 				DE42B2262C00B03C00FF61B0 /* CVMakerWorkExperienceView.swift in Sources */,
@@ -2061,6 +2084,7 @@
 				DE42B26C2C05245800FF61B0 /* SelectProfessionalSkillTableView.swift in Sources */,
 				DE42B24C2C04E3C700FF61B0 /* CVMakerEducationView.swift in Sources */,
 				DE42B0C92BFC970C00FF61B0 /* CVMakerGeneralInfoPhotoView.swift in Sources */,
+				DED8FC822C7E211D001DAAE2 /* CLTemplate.swift in Sources */,
 				DEFA93D32BE94AED00F892BC /* DefaultRequestWrapper.swift in Sources */,
 				DE42B2662C05242500FF61B0 /* SelectProfessionalSkillViewModel.swift in Sources */,
 				DED8FC722C7DF2D8001DAAE2 /* PDF2Generator.swift in Sources */,
@@ -2156,6 +2180,7 @@
 				DED8FC692C7DF2D8001DAAE2 /* PDF14Generator.swift in Sources */,
 				DED8FB772C7C6AB4001DAAE2 /* CVMCCreateFieldsView.swift in Sources */,
 				DE42B0D32BFCBAC500FF61B0 /* CVMGIAboutYourselfTipCell.swift in Sources */,
+				DED8FC802C7E2116001DAAE2 /* CL.swift in Sources */,
 				DE42B0C32BFC96E400FF61B0 /* CVMakerGeneralInfoNameView.swift in Sources */,
 				DE42B2682C05242900FF61B0 /* SelectProfessionalSkillView.swift in Sources */,
 				DE42B0F92BFD182000FF61B0 /* SelectField.swift in Sources */,
@@ -2169,6 +2194,7 @@
 				DED8FBBF2C7CC353001DAAE2 /* CV.swift in Sources */,
 				DE83F5B52BFB444100439D14 /* PaygateView.swift in Sources */,
 				DEFA93FA2BE94AED00F892BC /* SplashView.swift in Sources */,
+				DED8FC862C7E232F001DAAE2 /* CLCompany.swift in Sources */,
 				DE42B0FB2BFD1EC900FF61B0 /* CVMakerChapterProgressView.swift in Sources */,
 				DED6C71D2BEA7FD9001DE5B2 /* OLinkedInView.swift in Sources */,
 				DE83F5B22BFB444100439D14 /* PaygateInfoCell.swift in Sources */,
@@ -2206,6 +2232,7 @@
 				DE83F5B42BFB444100439D14 /* PaygateInteractor.swift in Sources */,
 				DE42B0A92BFBBC1A00FF61B0 /* ProfileManager.swift in Sources */,
 				DED8FB2C2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift in Sources */,
+				DED8FC8C2C7E2448001DAAE2 /* CLTextBlock.swift in Sources */,
 				DEFA94102BE94AED00F892BC /* IAPManager.swift in Sources */,
 				DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */,
 				DEFA93CD2BE94AED00F892BC /* UIApplication+Extension.swift in Sources */,
@@ -2213,6 +2240,7 @@
 				DEFA93BB2BE94AED00F892BC /* BranchManager.swift in Sources */,
 				DED8FB2E2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift in Sources */,
 				DED8FC762C7DF2D8001DAAE2 /* PDF10Generator.swift in Sources */,
+				DED8FC842C7E22F7001DAAE2 /* CLHiringManager.swift in Sources */,
 				DE42B24E2C04E3D800FF61B0 /* CVMakerEducationListView.swift in Sources */,
 				DE42B0F32BFD102D00FF61B0 /* SelectCityAssemby.swift in Sources */,
 				DE42B25F2C04EE3C00FF61B0 /* CVMECreateFieldsView.swift in Sources */,
