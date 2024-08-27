@@ -189,3 +189,15 @@
 "Language.UpperIntermediate" = "Upper Intermediate";
 "Language.Advanced" = "Advanced";
 "Language.Proficient" = "Proficient";
+
+// MARK: Main
+"Main.Title" = "Your CVs";
+
+// MARK: Profile
+"Profile.Title" = "Your Account";
+
+// MARK: Settings
+"Settings.Title" = "Settings";
+"Settings.TermsOfUse" = "Terms of use";
+"Settings.PrivacyPolicy" = "Privacy Policy";
+"Settings.ContactUs" = "Contact us";

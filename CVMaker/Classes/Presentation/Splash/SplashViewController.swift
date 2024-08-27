@@ -73,7 +73,7 @@ private extension SplashViewController {
             }
             present(vc, animated: true)
         case .main:
-            UIApplication.shared.keyWindow?.rootViewController = MainViewController.make()
+            UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make())
         case .cvMaker:
             UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make(stepAfterCancelFlow: .main)
         }
