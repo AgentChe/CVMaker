@@ -27,16 +27,69 @@
 		<string>SF-Pro-Text-Bold.otf</string>
 		<string>SF-Pro-Text-Regular.otf</string>
 		<string>SF-Pro-Text-Semibold.otf</string>
-		<string>Nunito-SemiBold.ttf</string>
-		<string>Nunito-Regular.ttf</string>
-		<string>Nunito-Medium.ttf</string>
-		<string>Nunito-ExtraBold.ttf</string>
-		<string>Nunito-Bold.ttf</string>
-		<string>Bitter-Medium.ttf</string>
-		<string>Bitter-SemiBold.ttf</string>
-		<string>Bitter-ExtraBold.ttf</string>
 		<string>Bitter-Bold.ttf</string>
+		<string>Bitter-ExtraBold.ttf</string>
+		<string>Bitter-Medium.ttf</string>
 		<string>Bitter-Regular.ttf</string>
+		<string>Bitter-SemiBold.ttf</string>
+		<string>Nunito-Bold.ttf</string>
+		<string>Nunito-ExtraBold.ttf</string>
+		<string>Nunito-Medium.ttf</string>
+		<string>Nunito-Regular.ttf</string>
+		<string>Nunito-SemiBold.ttf</string>
+		<string>SpaceGrotesk-Bold.ttf</string>
+		<string>SpaceGrotesk-Light.ttf</string>
+		<string>SpaceGrotesk-Medium.ttf</string>
+		<string>SpaceGrotesk-Regular.ttf</string>
+		<string>SpaceGrotesk-Semibold.ttf</string>
+		<string>Inter_18pt-BlackItalic.ttf</string>
+		<string>Inter_18pt-SemiBoldItalic.ttf</string>
+		<string>Inter_18pt-ExtraBoldItalic.ttf</string>
+		<string>Inter_18pt-LightItalic.ttf</string>
+		<string>Inter_18pt-ExtraLightItalic.ttf</string>
+		<string>Inter_18pt-ThinItalic.ttf</string>
+		<string>Inter_18pt-BoldItalic.ttf</string>
+		<string>Inter_18pt-MediumItalic.ttf</string>
+		<string>Inter_18pt-Italic.ttf</string>
+		<string>Inter_18pt-Black.ttf</string>
+		<string>Inter_18pt-Bold.ttf</string>
+		<string>Inter_18pt-ExtraBold.ttf</string>
+		<string>Inter_18pt-SemiBold.ttf</string>
+		<string>InterRegular.ttf</string>
+		<string>Inter_18pt-Medium.ttf</string>
+		<string>Inter_18pt-Light.ttf</string>
+		<string>Inter_18pt-ExtraLight.ttf</string>
+		<string>Inter_18pt-Thin.ttf</string>
+		<string>Archivo-Bold.ttf</string>
+		<string>Archivo-Medium.ttf</string>
+		<string>Archivo-Regular.ttf</string>
+		<string>Archivo-RegularItalic.ttf</string>
+		<string>Lora-Bold.ttf</string>
+		<string>SplineSans-Bold.ttf</string>
+		<string>SplineSans-Regular.ttf</string>
+		<string>SplineSans-Medium.ttf</string>
+		<string>Poppins-Medium.ttf</string>
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-Bold.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>PlayfairDisplay-Bold.ttf</string>
+		<string>PlayfairDisplay-Medium.ttf</string>
+		<string>PlayfairDisplay-Regular.ttf</string>
+		<string>Mulish-Bold.ttf</string>
+		<string>Mulish-Medium.ttf</string>
+		<string>Mulish-Regular.ttf</string>
+		<string>Arial-Medium.ttf</string>
+		<string>Arial-Regular.ttf</string>
+		<string>Manrope-Bold.ttf</string>
+		<string>Manrope-Regular.ttf</string>
+		<string>Manrope-Medium.ttf</string>
+		<string>Lato-Bold.ttf</string>
+		<string>Lato-Regular.ttf</string>
+		<string>Lato-Heavy.ttf</string>
+		<string>SourceSansPro-Bold.ttf</string>
+		<string>SourceSansPro-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -10,7 +10,7 @@ import RxCocoa
 
 final class CVMakerViewModel {
     enum Route {
-        case cancelFlow
+        case cancelFlow, preview(CV), share(CV)
     }
     
     private lazy var profileManager = ProfileManager()
@@ -43,9 +43,28 @@ extension CVMakerViewModel {
     }
     
     func configure(input: Input) -> Output {
-        Output(
+        let cv = input.didCreateCV
+            .withLatestFrom(input.didSelectTemplate)
+            .flatMapLatest { [weak self] template -> Driver<CV> in
+                guard let self else { return .never() }
+                
+                return self.profileManager
+                    .obtainProfile()
+                    .flatMap { profile -> Single<CV> in
+                        self.resumeManager
+                            .createCV(template: template, profile: profile)
+                    }
+                    .asDriver(onErrorDriveWith: .never())
+            }
+        
+        return Output(
             profile: makeProfile(),
-            route: makeRoute(didCancelFlow: input.didCancelFlow),
+            route: makeRoute(
+                didCancelFlow: input.didCancelFlow,
+                didTapPreview: input.didTapPreview,
+                didShareCV: input.didShareCV,
+                cv: cv
+            ),
             disposable: makeDisposable(
                 didSaveGeneralInfo: input.didSaveGeneralInfo,
                 didSaveWorkExperiences: input.didSaveWorkExperiences,
@@ -57,7 +76,7 @@ extension CVMakerViewModel {
                 didSaveSocialMedia: input.didSaveSocialMedia,
                 didSaveReferences: input.didSaveReferences,
                 didSelectTemplate: input.didSelectTemplate,
-                didCreateCV: input.didCreateCV
+                createCV: cv
             )
         )
     }
@@ -71,13 +90,28 @@ private extension CVMakerViewModel {
             .asDriver(onErrorDriveWith: .never())
     }
     
-    func makeRoute(didCancelFlow: Signal<Void>) -> Driver<Route> {
+    func makeRoute(
+        didCancelFlow: Signal<Void>,
+        didTapPreview: Signal<Void>,
+        didShareCV: Signal<Void>,
+        cv: Driver<CV>
+    ) -> Driver<Route> {
         let cancelFlow = didCancelFlow
             .map { Route.cancelFlow }
             .asDriver(onErrorDriveWith: .never())
         
+        let preview = didTapPreview
+            .withLatestFrom(cv)
+            .asDriver(onErrorDriveWith: .never())
+            .map { Route.preview($0) }
+        
+        let share = didShareCV
+            .withLatestFrom(cv)
+            .asDriver(onErrorDriveWith: .never())
+            .map { Route.share($0) }
+        
         return Driver
-            .merge(cancelFlow)
+            .merge(cancelFlow, preview, share)
     }
     
     func makeDisposable(
@@ -91,7 +125,7 @@ private extension CVMakerViewModel {
         didSaveSocialMedia: Signal<SocialMedia>,
         didSaveReferences: Signal<[Reference]>,
         didSelectTemplate: Signal<CVTemplate>,
-        didCreateCV: Signal<Void>
+        createCV: Driver<CV>
     ) -> Disposable {
         let generalInfo = didSaveGeneralInfo
             .flatMapLatest { [weak self] generalInfo -> Signal<Void> in
@@ -183,22 +217,6 @@ private extension CVMakerViewModel {
             }
             .emit()
         
-        let createCV = didCreateCV
-            .withLatestFrom(didSelectTemplate)
-            .flatMapLatest { [weak self] template -> Signal<Void> in
-                guard let self else { return .never() }
-                
-                return self.profileManager
-                    .obtainProfile()
-                    .flatMap { profile -> Single<Void> in
-                        self.resumeManager
-                            .createCV(template: template, profile: profile)
-                            .mapToVoid()
-                    }
-                    .asSignal(onErrorSignalWith: .never())
-            }
-            .emit()
-        
         return Disposables.create([
             generalInfo,
             workExperiences,
@@ -209,7 +227,7 @@ private extension CVMakerViewModel {
             certificates,
             socialMedia,
             references,
-            createCV
+            createCV.drive()
         ])
     }
 }
