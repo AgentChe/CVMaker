@@ -63,7 +63,7 @@ private extension ProfileViewModel {
                     photoFileName: profile.generalInfo?.photoFileName,
                     firstName: profile.generalInfo?.firstName,
                     lastName: profile.generalInfo?.lastName,
-                    jobTitle: profile.workExperiences?.first?.jobTitle
+                    jobTitle: profile.workExperiences?.last?.jobTitle
                 )
                 result.append(.info(info))
                 

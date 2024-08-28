@@ -192,6 +192,7 @@
 
 // MARK: Main
 "Main.Title" = "Your CVs";
+"Main.Menu.Delete" = "Delete";
 
 // MARK: Profile
 "Profile.Title" = "Your Account";
@@ -213,3 +214,6 @@
 "Settings.TermsOfUse" = "Terms of use";
 "Settings.PrivacyPolicy" = "Privacy Policy";
 "Settings.ContactUs" = "Contact us";
+
+// MARK: Resume Group
+"ResumeGroup.DefaultName" = "Company name";

@@ -8,6 +8,7 @@
 import Foundation
 
 struct CV: Codable {
+    let id: String
     let template: CVTemplate
     let profile: Profile
     let created: Date

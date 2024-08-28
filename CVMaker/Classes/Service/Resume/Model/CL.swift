@@ -8,6 +8,7 @@
 import Foundation
 
 struct CL: Codable {
+    let id: String
     let template: CLTemplate
     let info: CLInfo
     let created: Date

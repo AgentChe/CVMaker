@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B5C9BBF5FFE35DA448FFC151 /* Pods_CVMaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */; };
+		DE31A9882C7F520C0089C7C9 /* ResumeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A9872C7F520C0089C7C9 /* ResumeGroup.swift */; };
+		DE31A98C2C7F68DC0089C7C9 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A98B2C7F68DC0089C7C9 /* MainCollectionView.swift */; };
+		DE31A98E2C7F68E30089C7C9 /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A98D2C7F68E30089C7C9 /* MainCollectionCell.swift */; };
+		DE31A9902C7F68FC0089C7C9 /* ResumeMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A98F2C7F68FC0089C7C9 /* ResumeMediator.swift */; };
 		DE42B0962BFBB3CD00FF61B0 /* GeneralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */; };
 		DE42B0982BFBB58000FF61B0 /* ContactInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */; };
 		DE42B09A2BFBB6E400FF61B0 /* WorkExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */; };
@@ -323,6 +327,10 @@
 		2BEF1F182D56DC405C4242E2 /* Pods-CVMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CVMaker.release.xcconfig"; path = "Target Support Files/Pods-CVMaker/Pods-CVMaker.release.xcconfig"; sourceTree = "<group>"; };
 		BE5A295E0D0738953EA22F78 /* Pods-CVMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CVMaker.debug.xcconfig"; path = "Target Support Files/Pods-CVMaker/Pods-CVMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CVMaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE31A9872C7F520C0089C7C9 /* ResumeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeGroup.swift; sourceTree = "<group>"; };
+		DE31A98B2C7F68DC0089C7C9 /* MainCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionView.swift; sourceTree = "<group>"; };
+		DE31A98D2C7F68E30089C7C9 /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
+		DE31A98F2C7F68FC0089C7C9 /* ResumeMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeMediator.swift; sourceTree = "<group>"; };
 		DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfo.swift; sourceTree = "<group>"; };
 		DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfo.swift; sourceTree = "<group>"; };
 		DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExperience.swift; sourceTree = "<group>"; };
@@ -663,6 +671,23 @@
 				C1CC6AF55F069F1E0D4AD1AB /* Pods_CVMaker.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE31A9892C7F68C90089C7C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE31A98A2C7F68D00089C7C9 /* CollectionView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DE31A98A2C7F68D00089C7C9 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				DE31A98B2C7F68DC0089C7C9 /* MainCollectionView.swift */,
+				DE31A98D2C7F68E30089C7C9 /* MainCollectionCell.swift */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		DE42B0922BFBB2E100FF61B0 /* Profile */ = {
@@ -1311,6 +1336,7 @@
 				DED8FC582C7DF2A7001DAAE2 /* PDFFactory */,
 				DED8FBB92C7CB4E9001DAAE2 /* Model */,
 				DED8FBBC2C7CB60A001DAAE2 /* ResumeManager.swift */,
+				DE31A98F2C7F68FC0089C7C9 /* ResumeMediator.swift */,
 			);
 			path = Resume;
 			sourceTree = "<group>";
@@ -1327,6 +1353,7 @@
 				DED8FC872C7E23A2001DAAE2 /* CLVacancy.swift */,
 				DED8FC8B2C7E2448001DAAE2 /* CLTextBlock.swift */,
 				DED8FC892C7E2405001DAAE2 /* CLInfo.swift */,
+				DE31A9872C7F520C0089C7C9 /* ResumeGroup.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1592,6 +1619,7 @@
 		DED8FC962C7E7682001DAAE2 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DE31A9892C7F68C90089C7C9 /* Views */,
 				DED8FC8E2C7E3358001DAAE2 /* MainViewController.swift */,
 				DED8FC902C7E335E001DAAE2 /* MainViewModel.swift */,
 				DED8FC922C7E3363001DAAE2 /* MainView.swift */,
@@ -2198,6 +2226,7 @@
 				DE42B2332C00B93500FF61B0 /* CVMWETableView.swift in Sources */,
 				DE42B22A2C00B15E00FF61B0 /* CVMakerWorkExperienceListView.swift in Sources */,
 				DED8FB612C78F00C001DAAE2 /* CVMICollectionElement.swift in Sources */,
+				DE31A98C2C7F68DC0089C7C9 /* MainCollectionView.swift in Sources */,
 				DE83F5BC2BFB44AB00439D14 /* Paygate.swift in Sources */,
 				DEFA94112BE94AED00F892BC /* PurchaseValidationObserver.swift in Sources */,
 				DE42B25D2C04E7D700FF61B0 /* CVMakerAddCell.swift in Sources */,
@@ -2286,6 +2315,7 @@
 				DED8FCA72C7E7B59001DAAE2 /* SettingsLinkButton.swift in Sources */,
 				DED8FB992C7C8853001DAAE2 /* CVMRListInfoView.swift in Sources */,
 				DED8FB392C78C0F1001DAAE2 /* SelectLanguageViewController.swift in Sources */,
+				DE31A9882C7F520C0089C7C9 /* ResumeGroup.swift in Sources */,
 				DE42B0DD2BFCCE2F00FF61B0 /* SelectCityView.swift in Sources */,
 				DE42B22F2C00B27700FF61B0 /* WrapperController.swift in Sources */,
 				DEFA93E72BE94AED00F892BC /* SceneDelegate.swift in Sources */,
@@ -2363,6 +2393,7 @@
 				DEFA93C02BE94AED00F892BC /* RxActivityIndicator.swift in Sources */,
 				DED8FB6E2C7C6767001DAAE2 /* CVMakerCertificatesListView.swift in Sources */,
 				DED8FB572C78EC10001DAAE2 /* Interest.swift in Sources */,
+				DE31A98E2C7F68E30089C7C9 /* MainCollectionCell.swift in Sources */,
 				DED8FC952C7E3451001DAAE2 /* SplashViewModel.swift in Sources */,
 				DEFA93EB2BE94AED00F892BC /* OnboardingView.swift in Sources */,
 				DEFA93E22BE94AED00F892BC /* Weak.swift in Sources */,
@@ -2373,6 +2404,7 @@
 				DEFA93C62BE94AED00F892BC /* GradientView.swift in Sources */,
 				DE42B0982BFBB58000FF61B0 /* ContactInfo.swift in Sources */,
 				DE83F5B42BFB444100439D14 /* PaygateInteractor.swift in Sources */,
+				DE31A9902C7F68FC0089C7C9 /* ResumeMediator.swift in Sources */,
 				DE42B0A92BFBBC1A00FF61B0 /* ProfileManager.swift in Sources */,
 				DED8FB2C2C78862B001DAAE2 /* CVMPSCollectionAddCell.swift in Sources */,
 				DED8FC8C2C7E2448001DAAE2 /* CLTextBlock.swift in Sources */,
