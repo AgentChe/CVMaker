@@ -90,20 +90,18 @@ class PDF14Generator {
             } else {
                 currentYOffset += 20
             }
- 
-             drawProfileDescriptionInCenterColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            drawAboutYourselfInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
-            
+            if let aboutYourself = generalInfo.aboutYourself {
+                drawProfileDescriptionInCenterColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                drawAboutYourselfInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            }
         }
         
         
         if let professionalSkills = profile.professionalSkills?.map({ $0.name }), !professionalSkills.isEmpty {
             
             drawSkiilsInRightColumn( xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-        }
-        
-        if let professionalSkills = profile.professionalSkills?.map({ $0.name }) {
+   
             drawSkiilsDescriptionInRightColumn(professionalSkills: professionalSkills, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
         }
         

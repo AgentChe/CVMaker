@@ -88,7 +88,6 @@ class PDF16Generator {
                 currentYCenterOffset = maxY
                 currentRightYOffset = maxY
                 
-                
                 separatorRectangle = CGRect(x: lm1, y: currentYCenterOffset, width: pageWidth - 2*lm1, height: 1)
                 
                 if let rects = pageAndRectsForSeparator[pageNumber] {
@@ -154,13 +153,15 @@ class PDF16Generator {
                 currentRightYOffset = maxY
                 
             }
+            
+             maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) // + 20
+            
+            currentLeftYOffset = maxY
+            currentYCenterOffset = maxY
+            currentRightYOffset = maxY
         }
      
-        var maxY : CGFloat =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) // + 20
-        
-        currentLeftYOffset = maxY
-        currentYCenterOffset = maxY
-        currentRightYOffset = maxY
+  
         
       
         if let educations = profile.educations, !educations.isEmpty {
@@ -175,7 +176,7 @@ class PDF16Generator {
                 pageAndRectsForSeparator[pageNumber] = [separatorRectangle]
             }
             
-            maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 40
+         var   maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 40
             
             currentLeftYOffset = maxY
             currentYCenterOffset = maxY
@@ -192,13 +193,14 @@ class PDF16Generator {
                 currentRightYOffset = maxY
                 
             }
+            maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+           
+           currentLeftYOffset = maxY
+           currentYCenterOffset = maxY
+           currentRightYOffset = maxY
         }
       
-         maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-        
-        currentLeftYOffset = maxY
-        currentYCenterOffset = maxY
-        currentRightYOffset = maxY
+      
 
 
         if let certificates = profile.certificates, !certificates.isEmpty {
@@ -213,7 +215,7 @@ class PDF16Generator {
                 pageAndRectsForSeparator[pageNumber] = [separatorRectangle]
             }
             
-            maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 40
+           var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 40
             
             currentLeftYOffset = maxY
             currentYCenterOffset = maxY
@@ -231,6 +233,7 @@ class PDF16Generator {
                 currentRightYOffset = maxY
             }
         }
+        
         if let professionalSkills = profile.professionalSkills?.map({ $0.name }), !professionalSkills.isEmpty {
             var  maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
             
@@ -259,13 +262,15 @@ class PDF16Generator {
             
             
             drawSkiilsDescriptionInRightColumn(professionalSkills: professionalSkills, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
+            maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+           
+           currentLeftYOffset = maxY
+           currentYCenterOffset = maxY
+           currentRightYOffset = maxY
         }
         
-        maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
        
-       currentLeftYOffset = maxY
-       currentYCenterOffset = maxY
-       currentRightYOffset = maxY
 
         
  
@@ -298,12 +303,15 @@ class PDF16Generator {
             drawLanguagesInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
             drawLanguagesDescriptionInRightColumn(languages: languages, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+           
+            
+           maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+           
+           currentLeftYOffset = maxY
+           currentYCenterOffset = maxY
+           currentRightYOffset = maxY
         }
-        maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-       
-       currentLeftYOffset = maxY
-       currentYCenterOffset = maxY
-       currentRightYOffset = maxY
+     
         
         if let interests = profile.interests?.map({ $0.name }), !interests.isEmpty {
            
@@ -333,69 +341,79 @@ class PDF16Generator {
             drawInterestsInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
             drawInterestsDescriptionInRightColumn(interests: interests, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
+            maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+           
+           currentLeftYOffset = maxY
+           currentYCenterOffset = maxY
+           currentRightYOffset = maxY
         }
 
-        maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-       
-       currentLeftYOffset = maxY
-       currentYCenterOffset = maxY
-       currentRightYOffset = maxY
+      
         
         
         
         if let socialMedia = profile.socialMedia {
+            let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
+            let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
+            let linkedIndExist = socialMedia.linkedIn != "" && socialMedia.linkedIn != nil
+            let twitterExist = socialMedia.twitter != "" && socialMedia.twitter != nil
             
-            separatorRectangle = CGRect(x: lm1, y: currentYCenterOffset, width: pageWidth - 2*lm1, height: 1)
-            
-            if let rects = pageAndRectsForSeparator[pageNumber] {
-                var rectsArray = pageAndRectsForSeparator[pageNumber]
-                rectsArray?.append(separatorRectangle)
-                pageAndRectsForSeparator[pageNumber] = rectsArray
-            } else {
-                pageAndRectsForSeparator[pageNumber] = [separatorRectangle]
+            if instagramExist || facebookExist || linkedIndExist || twitterExist {
+                
+                separatorRectangle = CGRect(x: lm1, y: currentYCenterOffset, width: pageWidth - 2*lm1, height: 1)
+                
+                if let rects = pageAndRectsForSeparator[pageNumber] {
+                    var rectsArray = pageAndRectsForSeparator[pageNumber]
+                    rectsArray?.append(separatorRectangle)
+                    pageAndRectsForSeparator[pageNumber] = rectsArray
+                } else {
+                    pageAndRectsForSeparator[pageNumber] = [separatorRectangle]
+                }
+                
+               var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 40
+                
+                currentLeftYOffset = maxY
+                currentYCenterOffset = maxY
+                currentRightYOffset = maxY
+                
+                
+                var sm_lm2: CGFloat = lm2
+                drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                var first: Bool = true
+                socialMediaPageNumber = pageNumber
+                
+                if socialMedia.instagram != "" && socialMedia.instagram != nil {
+                    let type: String = first ? "Instagram" : "  |  Instagram"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if socialMedia.facebook != "" && socialMedia.facebook != nil {
+                    let type: String = first ? "Facebook" : "  |  Facebook"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
+                    let type: String = first ? "LinkedIn" : "  |  LinkedIn"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if socialMedia.twitter != "" && socialMedia.twitter != nil {
+                    let type: String = first ? "Twitter" : "  |  Twitter"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                
+                maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+               
+               currentLeftYOffset = maxY
+               currentYCenterOffset = maxY
+               currentRightYOffset = maxY
             }
             
-            maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 40
-            
-            currentLeftYOffset = maxY
-            currentYCenterOffset = maxY
-            currentRightYOffset = maxY
-            
-            
-            var sm_lm2: CGFloat = lm2
-            drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            var first: Bool = true
-            socialMediaPageNumber = pageNumber
-            
-            if socialMedia.instagram != "" && socialMedia.instagram != nil {
-                let type: String = first ? "Instagram" : "  |  Instagram"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.facebook != "" && socialMedia.facebook != nil {
-                let type: String = first ? "Facebook" : "  |  Facebook"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
-                let type: String = first ? "LinkedIn" : "  |  LinkedIn"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.twitter != "" && socialMedia.twitter != nil {
-                let type: String = first ? "Twitter" : "  |  Twitter"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            
-         
         }
       
-        maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-       
-       currentLeftYOffset = maxY
-       currentYCenterOffset = maxY
-       currentRightYOffset = maxY
+      
 
         // Render pages
         for page in 0..<pages.count {

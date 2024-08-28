@@ -159,49 +159,53 @@ class PDF1Generator {
             
             drawInterestsDescriptionInRightColumn(interests: interests, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 0
-           
-           currentLeftYOffset = maxY
-           currentYCenterOffset = maxY
-           currentRightYOffset = maxY
-        }
-
-     
-        
-        
-         
-       
-        
-        if let socialMedia = profile.socialMedia {
-            var sm_lm2: CGFloat = lm2
-            drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            var first: Bool = true
-            socialMediaPageNumber = pageNumber
-            
-            if socialMedia.instagram != "" && socialMedia.instagram != nil {
-                let type: String = first ? "Instagram" : "  |  Instagram"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.facebook != "" && socialMedia.facebook != nil {
-                let type: String = first ? "Facebook" : "  |  Facebook"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
-                let type: String = first ? "LinkedIn" : "  |  LinkedIn"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.twitter != "" && socialMedia.twitter != nil {
-                let type: String = first ? "Twitter" : "  |  Twitter"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
             
             currentLeftYOffset = maxY
             currentYCenterOffset = maxY
             currentRightYOffset = maxY
+        }
+    
+        if let socialMedia = profile.socialMedia {
+            let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
+            let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
+            let linkedIndExist = socialMedia.linkedIn != "" && socialMedia.linkedIn != nil
+            let twitterExist = socialMedia.twitter != "" && socialMedia.twitter != nil
+            
+            if instagramExist || facebookExist || linkedIndExist || twitterExist {
+                
+                
+                var sm_lm2: CGFloat = lm2
+                
+                drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                var first: Bool = true
+                socialMediaPageNumber = pageNumber
+                
+                if instagramExist {
+                    let type: String = first ? "Instagram" : "  |  Instagram"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if facebookExist {
+                    let type: String = first ? "Facebook" : "  |  Facebook"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if linkedIndExist {
+                    let type: String = first ? "LinkedIn" : "  |  LinkedIn"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if twitterExist {
+                    let type: String = first ? "Twitter" : "  |  Twitter"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+                
+                currentLeftYOffset = maxY
+                currentYCenterOffset = maxY
+                currentRightYOffset = maxY
+            }
          
         }
       

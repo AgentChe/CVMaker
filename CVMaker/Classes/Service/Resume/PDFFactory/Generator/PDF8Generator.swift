@@ -49,6 +49,7 @@ class PDF8Generator {
         if let generalInfo = profile.generalInfo {
             drawGeneraInfoInRightColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
+            if currentYOffset < 120 { currentYOffset = 120 }
             centerMargin = currentYOffset
             currentYCenterOffset = centerMargin
             
@@ -58,10 +59,11 @@ class PDF8Generator {
                 
                 drawContactsDescriptionInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             }
-            drawProfileDescriptionInCenterColumn(xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            drawAboutYourselfInRightColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
-            
+            if let aboutYourself = generalInfo.aboutYourself {
+                drawProfileDescriptionInCenterColumn(xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                drawAboutYourselfInRightColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            }
         }
         
         
@@ -81,23 +83,29 @@ class PDF8Generator {
         }
         
         if let socialMedia = profile.socialMedia {
+            let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
+            let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
+            let linkedIndExist = socialMedia.linkedIn != "" && socialMedia.linkedIn != nil
+            let twitterExist = socialMedia.twitter != "" && socialMedia.twitter != nil
             
-            drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            
-            
-            if socialMedia.instagram != "" && socialMedia.instagram != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: "Instagram", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            if instagramExist || facebookExist || linkedIndExist || twitterExist {
+                drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                
+                
+                if socialMedia.instagram != "" && socialMedia.instagram != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: "Instagram", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                if socialMedia.facebook != "" && socialMedia.facebook != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: "Facebook", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: "LinkedIn", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                if socialMedia.twitter != "" && socialMedia.twitter != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: "Twitter", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                currentYOffset += 20
             }
-            if socialMedia.facebook != "" && socialMedia.facebook != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: "Facebook", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: "LinkedIn", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            if socialMedia.twitter != "" && socialMedia.twitter != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: "Twitter", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            currentYOffset += 20
             
         }
         
