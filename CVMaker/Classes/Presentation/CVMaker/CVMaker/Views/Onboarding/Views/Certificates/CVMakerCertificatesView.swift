@@ -56,7 +56,7 @@ private extension CVMakerCertificatesView {
         NSLayoutConstraint.activate([
             view.leadingAnchor.constraint(equalTo: leadingAnchor),
             view.trailingAnchor.constraint(equalTo: trailingAnchor),
-            view.topAnchor.constraint(equalTo: topAnchor),
+            view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             view.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         

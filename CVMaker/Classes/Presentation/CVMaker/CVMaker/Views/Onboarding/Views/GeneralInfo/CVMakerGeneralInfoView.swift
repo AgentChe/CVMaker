@@ -168,7 +168,7 @@ private extension CVMakerGeneralInfoView {
         NSLayoutConstraint.activate([
             progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
             progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
-            progressView.topAnchor.constraint(equalTo: topAnchor, constant: 32.scale)
+            progressView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 32.scale)
         ])
         
         NSLayoutConstraint.activate([

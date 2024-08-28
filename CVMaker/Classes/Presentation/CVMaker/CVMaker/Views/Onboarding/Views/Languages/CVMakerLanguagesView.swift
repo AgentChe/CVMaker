@@ -134,7 +134,7 @@ private extension CVMakerLanguagesView {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -2.scale)
         ])
         

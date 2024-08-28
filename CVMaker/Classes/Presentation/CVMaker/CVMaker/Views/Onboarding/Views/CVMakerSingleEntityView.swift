@@ -70,7 +70,7 @@ private extension CVMakerSingleEntityView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 32.scale)
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 32.scale)
         ])
         
         NSLayoutConstraint.activate([

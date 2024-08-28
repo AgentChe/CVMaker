@@ -195,6 +195,18 @@
 
 // MARK: Profile
 "Profile.Title" = "Your Account";
+"Profile.GeneralInfo" = "General information";
+"Profile.WorkExperience" = "Work experience";
+"Profile.Education" = "Education";
+"Profile.ProfessionalSkills" = "Professional skills";
+"Profile.Languages" = "Languages";
+"Profile.Interests" = "Interests";
+"Profile.Certificates" = "Certificates";
+"Profile.SocialMedia" = "Social media";
+"Profile.References" = "References";
+"Profile.ConfirmDelete.Title" = "Do you really want to delete all data?";
+"Profile.ConfirmDelete.SubTitle" = "All data will be deleted without the possibility of recovery";
+"Profile.ConfirmDelete.DeleteAction" = "Delete";
 
 // MARK: Settings
 "Settings.Title" = "Settings";

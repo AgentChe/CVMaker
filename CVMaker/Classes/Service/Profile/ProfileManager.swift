@@ -19,6 +19,7 @@ protocol ProfileManagerProtocol {
     func set(socialMedia: SocialMedia) -> Single<Void>
     func set(references: [Reference]) -> Single<Void>
     func delete(entity: ProfileManager.Entity) -> Single<Void>
+    func deleteProfile() -> Single<Void>
 }
 
 final class ProfileManager {
@@ -62,39 +63,57 @@ extension ProfileManager: ProfileManagerProtocol {
     }
     
     func set(generalInfo: GeneralInfo) -> Single<Void> {
-        store(object: generalInfo, entity: .generalInfo)
+        store(object: generalInfo, entity: .generalInfo) { generalInfo in
+            ProfileMediator.shared.change(generalInfo: generalInfo)
+        }
     }
     
     func set(workExperiences: [WorkExperience]) -> Single<Void> {
-        store(object: workExperiences, entity: .workExperiences)
+        store(object: workExperiences, entity: .workExperiences) { workExperiences in
+            ProfileMediator.shared.change(workExperiences: workExperiences)
+        }
     }
     
     func set(educations: [Education]) -> Single<Void> {
-        store(object: educations, entity: .educations)
+        store(object: educations, entity: .educations) { educations in
+            ProfileMediator.shared.change(educations: educations)
+        }
     }
     
     func set(professionalSkills: [ProfessionalSkill]) -> Single<Void> {
-        store(object: professionalSkills, entity: .professionalSkills)
+        store(object: professionalSkills, entity: .professionalSkills) { professionalSkills in
+            ProfileMediator.shared.change(professionalSkills: professionalSkills)
+        }
     }
     
     func set(languages: [Language]) -> Single<Void> {
-        store(object: languages, entity: .languages)
+        store(object: languages, entity: .languages) { languages in
+            ProfileMediator.shared.change(languages: languages)
+        }
     }
     
     func set(interests: [Interest]) -> Single<Void> {
-        store(object: interests, entity: .interests)
+        store(object: interests, entity: .interests) { interests in
+            ProfileMediator.shared.change(interests: interests)
+        }
     }
     
     func set(certificates: [Certificate]) -> Single<Void> {
-        store(object: certificates, entity: .certificates)
+        store(object: certificates, entity: .certificates) { certificates in
+            ProfileMediator.shared.change(certificates: certificates)
+        }
     }
     
     func set(socialMedia: SocialMedia) -> Single<Void> {
-        store(object: socialMedia, entity: .socialMedia)
+        store(object: socialMedia, entity: .socialMedia) { socialMedia in
+            ProfileMediator.shared.change(socialMedia: socialMedia)
+        }
     }
     
     func set(references: [Reference]) -> Single<Void> {
-        store(object: references, entity: .references)
+        store(object: references, entity: .references) { references in
+            ProfileMediator.shared.change(references: references)
+        }
     }
     
     func delete(entity: ProfileManager.Entity) -> Single<Void> {
@@ -103,6 +122,29 @@ extension ProfileManager: ProfileManagerProtocol {
             
             single(.success(Void()))
             
+            ProfileMediator.shared.delete(entity: entity)
+            
+            return Disposables.create()
+        }
+    }
+    
+    func deleteProfile() -> Single<Void> {
+        Single<Void>.create { single in
+            let userDefaults = UserDefaults.standard
+            userDefaults.removeObject(forKey: Entity.generalInfo.rawValue)
+            userDefaults.removeObject(forKey: Entity.workExperiences.rawValue)
+            userDefaults.removeObject(forKey: Entity.educations.rawValue)
+            userDefaults.removeObject(forKey: Entity.professionalSkills.rawValue)
+            userDefaults.removeObject(forKey: Entity.languages.rawValue)
+            userDefaults.removeObject(forKey: Entity.interests.rawValue)
+            userDefaults.removeObject(forKey: Entity.certificates.rawValue)
+            userDefaults.removeObject(forKey: Entity.socialMedia.rawValue)
+            userDefaults.removeObject(forKey: Entity.references.rawValue)
+            
+            single(.success(Void()))
+            
+            ProfileMediator.shared.deleteProfile()
+            
             return Disposables.create()
         }
     }
@@ -110,13 +152,15 @@ extension ProfileManager: ProfileManagerProtocol {
 
 // MARK: Private
 private extension ProfileManager {
-    func store<T: Codable>(object: T, entity: Entity) -> Single<Void> {
+    func store<T: Codable>(object: T, entity: Entity, notify: @escaping (T) -> Void) -> Single<Void> {
         Single<Void>.create { single in
             if let data = try? JSONEncoder().encode(object) {
                 UserDefaults.standard.set(data, forKey: entity.rawValue)
             }
             
             single(.success(Void()))
+            
+            notify(object)
             
             return Disposables.create()
         }
