@@ -105,9 +105,7 @@ class PDF13Generator {
         if let professionalSkills = profile.professionalSkills?.map({ $0.name }), !professionalSkills.isEmpty {
             
             drawSkiilsInRightColumn( xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-        }
-        
-        if let professionalSkills = profile.professionalSkills?.map({ $0.name }) {
+       
             drawSkiilsDescriptionInRightColumn(professionalSkills: professionalSkills, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
         }
         

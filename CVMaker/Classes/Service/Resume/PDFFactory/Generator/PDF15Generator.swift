@@ -516,69 +516,76 @@ class PDF15Generator {
     
         
         if let socialMedia = profile.socialMedia {
-            let fullNameFont = Fonts.Inter.bold(size: 10)
-            let textColor = UIColor.black
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineHeightMultiple = 0.6
-            paragraphStyle.alignment = .left
+            let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
+            let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
+            let linkedIndExist = socialMedia.linkedIn != "" && socialMedia.linkedIn != nil
+            let twitterExist = socialMedia.twitter != "" && socialMedia.twitter != nil
             
-            let fullNameAttributes: [NSAttributedString.Key: Any] = [
-                .font: fullNameFont,
-                .foregroundColor: textColor,
-                .paragraphStyle: paragraphStyle
-            ]
-            
-            var  textToDraw =  socialMedia.twitter != "" ? "          Twitter\n          –––––––" : ""
-            
-            if textToDraw == "" {
-                textToDraw =  socialMedia.linkedIn != "" ? "         LinkedIn\n        –––––––––" : ""
+            if instagramExist || facebookExist || linkedIndExist || twitterExist {
+                let fullNameFont = Fonts.Inter.bold(size: 10)
+                let textColor = UIColor.black
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineHeightMultiple = 0.6
+                paragraphStyle.alignment = .left
+                
+                let fullNameAttributes: [NSAttributedString.Key: Any] = [
+                    .font: fullNameFont,
+                    .foregroundColor: textColor,
+                    .paragraphStyle: paragraphStyle
+                ]
+                
+                var  textToDraw =  socialMedia.twitter != "" ? "          Twitter\n          –––––––" : ""
+                
+                if textToDraw == "" {
+                    textToDraw =  socialMedia.linkedIn != "" ? "         LinkedIn\n        –––––––––" : ""
+                }
+                if textToDraw == "" {
+                    textToDraw =  socialMedia.facebook != "" ? "       Facebook\n      ––––––––––" : ""
+                }
+                if textToDraw == "" {
+                    textToDraw =  socialMedia.instagram != "" ? "    Instagram\n    ––––––––––" : ""
+                }
+                
+                
+                
+                
+                let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth, attributes: fullNameAttributes)
+                var sm_lm2: CGFloat = pageWidth - lm1 - calculateTextWidth(text: textToDraw, height: textHeight, attributes: fullNameAttributes)
+                //    drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                var first: Bool = true
+                socialMediaPageNumber = pageNumber
+                if socialMedia.twitter != "" && socialMedia.twitter != nil {
+                    let type: String = first ? "          Twitter\n          –––––––" : "       Twitter\n       –––––––"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
+                    let type: String = first ? "LinkedIn\n–––––––––" : "         LinkedIn\n        –––––––––"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if socialMedia.facebook != "" && socialMedia.facebook != nil {
+                    let type: String = first ? "Facebook\n–––––––––" : "       Facebook\n      ––––––––––"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                if socialMedia.instagram != "" && socialMedia.instagram != nil {
+                    let type: String = first ? "Instagram\n––––––––––" : "    Instagram\n    ––––––––––"
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                    first = false
+                }
+                
+                
+                
+                
+                
+                
+                let maxY : CGFloat =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+                
+                currentLeftYOffset = maxY
+                currentYCenterOffset = maxY
+                currentRightYOffset = maxY
             }
-            if textToDraw == "" {
-                textToDraw =  socialMedia.facebook != "" ? "       Facebook\n      ––––––––––" : ""
-            }
-            if textToDraw == "" {
-                textToDraw =  socialMedia.instagram != "" ? "    Instagram\n    ––––––––––" : ""
-            }
-           
-           
-            
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth, attributes: fullNameAttributes)
-            var sm_lm2: CGFloat = pageWidth - lm1 - calculateTextWidth(text: textToDraw, height: textHeight, attributes: fullNameAttributes)
-        //    drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            var first: Bool = true
-            socialMediaPageNumber = pageNumber
-            if socialMedia.twitter != "" && socialMedia.twitter != nil {
-                let type: String = first ? "          Twitter\n          –––––––" : "       Twitter\n       –––––––"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
-                let type: String = first ? "LinkedIn\n–––––––––" : "         LinkedIn\n        –––––––––"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.facebook != "" && socialMedia.facebook != nil {
-                let type: String = first ? "Facebook\n–––––––––" : "       Facebook\n      ––––––––––"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-            if socialMedia.instagram != "" && socialMedia.instagram != nil {
-                let type: String = first ? "Instagram\n––––––––––" : "    Instagram\n    ––––––––––"
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: type, xOffset: &sm_lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                first = false
-            }
-          
-            
-          
-            
-           
-            
-            let maxY : CGFloat =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-            
-            currentLeftYOffset = maxY
-            currentYCenterOffset = maxY
-            currentRightYOffset = maxY
         }
       
       

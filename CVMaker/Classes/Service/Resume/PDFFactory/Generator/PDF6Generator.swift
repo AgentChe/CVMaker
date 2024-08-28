@@ -76,23 +76,29 @@ class PDF6Generator {
         }
         
         if let socialMedia = profile.socialMedia {
+            let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
+            let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
+            let linkedIndExist = socialMedia.linkedIn != "" && socialMedia.linkedIn != nil
+            let twitterExist = socialMedia.twitter != "" && socialMedia.twitter != nil
             
-            drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            
-            
-            if socialMedia.instagram != "" && socialMedia.instagram != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: "Instagram", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            if instagramExist || facebookExist || linkedIndExist || twitterExist {
+                drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                
+                
+                if socialMedia.instagram != "" && socialMedia.instagram != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.instagram!, type: "Instagram", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                if socialMedia.facebook != "" && socialMedia.facebook != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: "Facebook", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: "LinkedIn", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                if socialMedia.twitter != "" && socialMedia.twitter != nil {
+                    drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: "Twitter", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                }
+                currentYOffset += 20
             }
-            if socialMedia.facebook != "" && socialMedia.facebook != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.facebook!, type: "Facebook", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            if socialMedia.linkedIn != "" && socialMedia.linkedIn != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.linkedIn!, type: "LinkedIn", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            if socialMedia.twitter != "" && socialMedia.twitter != nil {
-                drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: "Twitter", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            currentYOffset += 20
             
         }
         
@@ -114,10 +120,9 @@ class PDF6Generator {
             for i in 0..<educations.count {
                 drawEducationeDescriptionInCenterColumn(education: educations[i], xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber, isLast: i == (educations.count - 1) ? true : false)
             }
-            
         }
+        
         if let workExperiences = profile.workExperiences, !workExperiences.isEmpty {
-            
             drawWorkExperienceInCenterColumn (xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
             for i in 0..<workExperiences.count  {
@@ -201,8 +206,8 @@ class PDF6Generator {
         var text = NSMutableAttributedString(string: fullName, attributes: fullNameAttributes)
 
         if !jobTitle.isEmpty {
-            let isAlphabetic = fullName.range(of: "^[a-zA-Z]+$", options: .regularExpression) != nil
-            let text_ = isAlphabetic ? ",\n\(jobTitle)" : "\(jobTitle)"
+            
+            let text_ = (jobTitle != "" && jobTitle != " ") ? "\n\(jobTitle)" : "\(jobTitle)"
             let jobTitleText = NSAttributedString(string: text_, attributes: jobTitleAttributes)
             text.append(jobTitleText)
         }
