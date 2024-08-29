@@ -7,8 +7,13 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 final class CVMakerViewController: UIViewController {
+    enum Mode {
+        case create, edit(CV)
+    }
+    
     enum StepAfterCancelFlow {
         case main
         case dismiss
@@ -20,9 +25,11 @@ final class CVMakerViewController: UIViewController {
     
     private lazy var disposeBag = DisposeBag()
     
+    private let mode: Mode
     private let stepAfterCancelFlow: StepAfterCancelFlow
     
-    private init(stepAfterCancelFlow: StepAfterCancelFlow) {
+    private init(mode: Mode, stepAfterCancelFlow: StepAfterCancelFlow) {
+        self.mode = mode
         self.stepAfterCancelFlow = stepAfterCancelFlow
         
         super.init(nibName: nil, bundle: nil)
@@ -46,6 +53,7 @@ final class CVMakerViewController: UIViewController {
             .disposed(by: disposeBag)
         
         let output = viewModel.configure(input: CVMakerViewModel.Input(
+            mode: mode,
             didSelectTemplate: mainView.didSelectTemplate,
             didSaveGeneralInfo: mainView.onboardingView.didCollectedGeneralInfo,
             didSaveWorkExperiences: mainView.onboardingView.didCollectedWorkExperience,
@@ -76,6 +84,12 @@ final class CVMakerViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        output.templatesElements
+            .drive(Binder(mainView.templateView) { base, elements in
+                base.setup(elements: elements)
+            })
+            .disposed(by: disposeBag)
+        
         output.route
             .drive(Binder(self) { base, route in
                 base.route(route)
@@ -93,8 +107,8 @@ final class CVMakerViewController: UIViewController {
 
 // MARK: Public
 extension CVMakerViewController {
-    static func make(stepAfterCancelFlow: StepAfterCancelFlow) -> CVMakerViewController {
-        let vc = CVMakerViewController(stepAfterCancelFlow: stepAfterCancelFlow)
+    static func make(mode: Mode, stepAfterCancelFlow: StepAfterCancelFlow) -> CVMakerViewController {
+        let vc = CVMakerViewController(mode: mode, stepAfterCancelFlow: stepAfterCancelFlow)
         vc.modalPresentationStyle = .fullScreen
         return vc
     }

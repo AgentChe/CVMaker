@@ -12,4 +12,5 @@ struct CV: Codable {
     let template: CVTemplate
     let profile: Profile
     let created: Date
+    let edited: Date?
 }

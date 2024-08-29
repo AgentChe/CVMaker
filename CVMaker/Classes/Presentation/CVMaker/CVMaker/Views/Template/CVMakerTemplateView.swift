@@ -12,10 +12,6 @@ final class CVMakerTemplateView: CVMakerFlowView {
     lazy var collectionView = makeCollectionView()
     lazy var continueButton = makeContinueButton()
     
-    private lazy var disposeBag = DisposeBag()
-    
-    private lazy var resumeManager = ResumeManager()
-    
     private let finished: (CVTemplate) -> Void
     
     init(finished: @escaping (CVTemplate) -> Void) {
@@ -32,25 +28,17 @@ final class CVMakerTemplateView: CVMakerFlowView {
     }
 }
 
+// MARK: Public
+extension CVMakerTemplateView {
+    func setup(elements: [CVMTemplatesCollectionElement]) {
+        collectionView.setup(elements: elements)
+    }
+}
+
 // MARK: Private
 private extension CVMakerTemplateView {
     func initialize() {
         backgroundColor = Appearance.main100
-        
-        resumeManager
-            .obtainCVTemplates()
-            .asDriver(onErrorJustReturn: [])
-            .drive(Binder(collectionView) { base, templates in
-                let elements: [CVMTemplatesCollectionElement] = [.header] + templates.enumerated().map { index, template -> CVMTemplatesCollectionElement in
-                    let element = CVMTemplatesCollectionTemplateElement(
-                        template: template,
-                        marked: index == 0
-                    )
-                    return .template(element)
-                }
-                base.setup(elements: elements)
-            })
-            .disposed(by: disposeBag)
     }
     
     @objc

@@ -16,6 +16,8 @@ final class ResumeMediator {
     private lazy var didChangedGroupsTrigger = PublishRelay<Void>()
     private lazy var didRemovedCVTrigger = PublishRelay<String>()
     private lazy var didRemovedCLTrigger = PublishRelay<String>()
+    private lazy var didEditedCVTrigger = PublishRelay<CV>()
+    private lazy var didEditedCLTrigger = PublishRelay<CL>()
     private lazy var didEditedGroupTrigger = PublishRelay<ResumeGroup>()
     
     private init() {}
@@ -43,6 +45,14 @@ extension ResumeMediator {
         didRemovedCLTrigger.accept(id)
     }
     
+    func edit(cv: CV) {
+        didEditedCVTrigger.accept(cv)
+    }
+    
+    func edit(cl: CL) {
+        didEditedCLTrigger.accept(cl)
+    }
+    
     func edited(group: ResumeGroup) {
         didEditedGroupTrigger.accept(group)
     }
@@ -65,6 +75,14 @@ extension ResumeMediator {
     
     var didRemovedCL: Signal<String> {
         didRemovedCLTrigger.asSignal()
+    }
+    
+    var didEditedCV: Signal<CV> {
+        didEditedCVTrigger.asSignal()
+    }
+    
+    var didEditedCL: Signal<CL> {
+        didEditedCLTrigger.asSignal()
     }
     
     var didEditedGroup: Signal<ResumeGroup> {

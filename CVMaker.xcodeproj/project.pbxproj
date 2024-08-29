@@ -12,6 +12,7 @@
 		DE31A98C2C7F68DC0089C7C9 /* MainCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A98B2C7F68DC0089C7C9 /* MainCollectionView.swift */; };
 		DE31A98E2C7F68E30089C7C9 /* MainCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A98D2C7F68E30089C7C9 /* MainCollectionCell.swift */; };
 		DE31A9902C7F68FC0089C7C9 /* ResumeMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A98F2C7F68FC0089C7C9 /* ResumeMediator.swift */; };
+		DE31A99A2C807AED0089C7C9 /* CVMakerProfileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE31A9992C807AED0089C7C9 /* CVMakerProfileGenerator.swift */; };
 		DE42B0962BFBB3CD00FF61B0 /* GeneralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */; };
 		DE42B0982BFBB58000FF61B0 /* ContactInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */; };
 		DE42B09A2BFBB6E400FF61B0 /* WorkExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */; };
@@ -331,6 +332,7 @@
 		DE31A98B2C7F68DC0089C7C9 /* MainCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionView.swift; sourceTree = "<group>"; };
 		DE31A98D2C7F68E30089C7C9 /* MainCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionCell.swift; sourceTree = "<group>"; };
 		DE31A98F2C7F68FC0089C7C9 /* ResumeMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeMediator.swift; sourceTree = "<group>"; };
+		DE31A9992C807AED0089C7C9 /* CVMakerProfileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVMakerProfileGenerator.swift; sourceTree = "<group>"; };
 		DE42B0952BFBB3CD00FF61B0 /* GeneralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfo.swift; sourceTree = "<group>"; };
 		DE42B0972BFBB58000FF61B0 /* ContactInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfo.swift; sourceTree = "<group>"; };
 		DE42B0992BFBB6E400FF61B0 /* WorkExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExperience.swift; sourceTree = "<group>"; };
@@ -690,6 +692,14 @@
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
+		DE31A9982C807AB90089C7C9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DE31A9992C807AED0089C7C9 /* CVMakerProfileGenerator.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		DE42B0922BFBB2E100FF61B0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -784,6 +794,7 @@
 		DE42B0D62BFCCDFF00FF61B0 /* CVMaker */ = {
 			isa = PBXGroup;
 			children = (
+				DE31A9982C807AB90089C7C9 /* Utils */,
 				DE42B0B72BFBCB8600FF61B0 /* Views */,
 				DE42B0B12BFBC73200FF61B0 /* CVMakerViewController.swift */,
 				DE42B0B32BFBC73800FF61B0 /* CVMakerViewModel.swift */,
@@ -2377,6 +2388,7 @@
 				DED8FB482C78C5E6001DAAE2 /* CVMakerLanguagesView.swift in Sources */,
 				DE42B0BC2BFBCBD800FF61B0 /* CVMakerChapterButton.swift in Sources */,
 				DE42B0C52BFC96FA00FF61B0 /* CVMakerGeneralInfoAboutYourselfView.swift in Sources */,
+				DE31A99A2C807AED0089C7C9 /* CVMakerProfileGenerator.swift in Sources */,
 				DED8FCA22C7E79CD001DAAE2 /* SettingsViewModel.swift in Sources */,
 				DEFA93CA2BE94AED00F892BC /* Collection+Extension.swift in Sources */,
 				DED8FCBC2C7F247B001DAAE2 /* CVMakerChapterViewModel.swift in Sources */,

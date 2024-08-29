@@ -18,6 +18,8 @@ protocol ResumeManagerProtocol {
     func removeCV(id: String) -> Single<Void>
     func removeCL(id: String) -> Single<Void>
     func removeGroup(id: String) -> Single<Void>
+    func edit(cv: CV) -> Single<CV>
+    func edit(cl: CL) -> Single<CL>
     func edit(resumeGroup: ResumeGroup) -> Single<ResumeGroup>
 }
 
@@ -111,7 +113,8 @@ extension ResumeManager: ResumeManagerProtocol {
                 id: UUID().uuidString,
                 template: template,
                 profile: profile,
-                created: Date()
+                created: Date(),
+                edited: nil
             )
             cvs.append(cv)
             
@@ -128,7 +131,7 @@ extension ResumeManager: ResumeManagerProtocol {
             let companyName = cv.profile.workExperiences?.last?.companyName ?? "ResumeGroup.DefaultName".localized
             
             if let index = groups.firstIndex(where: { $0.name == companyName }) {
-                var group = groups[index]
+                let group = groups[index]
                 
                 let newGroup = ResumeGroup(
                     id: group.id,
@@ -136,12 +139,12 @@ extension ResumeManager: ResumeManagerProtocol {
                     cvs: group.cvs + [cv],
                     cls: group.cls
                 )
-                groups.append(newGroup)
+                groups[index] = newGroup
             } else {
                 let newGroup = ResumeGroup(
                     id: UUID().uuidString,
                     name: companyName,
-                    cvs: cvs.filter { $0.profile.workExperiences?.last?.companyName == companyName },
+                    cvs: [cv],
                     cls: []
                 )
                 groups.append(newGroup)
@@ -189,7 +192,7 @@ extension ResumeManager: ResumeManagerProtocol {
             let companyName = cl.info.company?.name ?? "ResumeGroup.DefaultName".localized
             
             if let index = groups.firstIndex(where: { $0.name == companyName }) {
-                var group = groups[index]
+                let group = groups[index]
                 
                 let newGroup = ResumeGroup(
                     id: group.id,
@@ -197,13 +200,13 @@ extension ResumeManager: ResumeManagerProtocol {
                     cvs: group.cvs,
                     cls: group.cls + [cl]
                 )
-                groups.append(newGroup)
+                groups[index] = newGroup
             } else {
                 let newGroup = ResumeGroup(
                     id: UUID().uuidString,
                     name: companyName,
                     cvs: [],
-                    cls: cls.filter { $0.info.company?.name == companyName }
+                    cls: [cl]
                 )
                 groups.append(newGroup)
             }
@@ -235,20 +238,22 @@ extension ResumeManager: ResumeManagerProtocol {
                 UserDefaults.standard.setValue(data, forKey: Constants.cvKey)
             }
             
-            var groups: [ResumeGroup] = {
+            let groups: [ResumeGroup] = {
                 guard let data = UserDefaults.standard.data(forKey: Constants.groupKey) else { return [] }
                 let array = try? JSONDecoder().decode([ResumeGroup].self, from: data)
                 return array ?? []
             }()
             
-            let updatedGroups = groups.map { group -> ResumeGroup in
-                ResumeGroup(
-                    id: group.id,
-                    name: group.name,
-                    cvs: group.cvs.filter { $0.id != id },
-                    cls: group.cls
-                )
-            }
+            let updatedGroups = groups
+                .map { group -> ResumeGroup in
+                    ResumeGroup(
+                        id: group.id,
+                        name: group.name,
+                        cvs: group.cvs.filter { $0.id != id },
+                        cls: group.cls
+                    )
+                }
+                .filter { !($0.cvs.isEmpty && $0.cls.isEmpty) }
             
             if let data = try? JSONEncoder().encode(updatedGroups) {
                 UserDefaults.standard.set(data, forKey: Constants.groupKey)
@@ -277,20 +282,22 @@ extension ResumeManager: ResumeManagerProtocol {
                 UserDefaults.standard.setValue(data, forKey: Constants.clKey)
             }
             
-            var groups: [ResumeGroup] = {
+            let groups: [ResumeGroup] = {
                 guard let data = UserDefaults.standard.data(forKey: Constants.groupKey) else { return [] }
                 let array = try? JSONDecoder().decode([ResumeGroup].self, from: data)
                 return array ?? []
             }()
             
-            let updatedGroups = groups.map { group -> ResumeGroup in
-                ResumeGroup(
-                    id: group.id,
-                    name: group.name,
-                    cvs: group.cvs,
-                    cls: group.cls.filter { $0.id != id }
-                )
-            }
+            let updatedGroups = groups
+                .map { group -> ResumeGroup in
+                    ResumeGroup(
+                        id: group.id,
+                        name: group.name,
+                        cvs: group.cvs,
+                        cls: group.cls.filter { $0.id != id }
+                    )
+                }
+                .filter { !($0.cvs.isEmpty && $0.cls.isEmpty) }
             
             if let data = try? JSONEncoder().encode(updatedGroups) {
                 UserDefaults.standard.set(data, forKey: Constants.groupKey)
@@ -353,6 +360,104 @@ extension ResumeManager: ResumeManagerProtocol {
             
             single(.success(Void()))
             
+            ResumeMediator.shared.changedGroups()
+            
+            return Disposables.create()
+        }
+    }
+    
+    func edit(cv: CV) -> Single<CV> {
+        Single<CV>.create { single in
+            var cvs: [CV] = {
+                guard let data = UserDefaults.standard.data(forKey: Constants.cvKey) else { return [] }
+                let array = try? JSONDecoder().decode([CV].self, from: data)
+                return array ?? []
+            }()
+            
+            if let index = cvs.firstIndex(where: { $0.id == cv.id }) {
+                cvs[index] = cv
+            }
+            
+            if let data = try? JSONEncoder().encode(cvs) {
+                UserDefaults.standard.setValue(data, forKey: Constants.cvKey)
+            }
+            
+            let groups: [ResumeGroup] = {
+                guard let data = UserDefaults.standard.data(forKey: Constants.groupKey) else { return [] }
+                let array = try? JSONDecoder().decode([ResumeGroup].self, from: data)
+                return array ?? []
+            }()
+            
+            let updatedGroups = groups
+                .map { group -> ResumeGroup in
+                    let cvs = group.cvs.map { item -> CV in
+                        item.id == cv.id ? cv : item
+                    }
+                    return ResumeGroup(
+                        id: group.id,
+                        name: group.name,
+                        cvs: cvs,
+                        cls: group.cls
+                    )
+                }
+                .filter { !($0.cvs.isEmpty && $0.cls.isEmpty) }
+            
+            if let data = try? JSONEncoder().encode(updatedGroups) {
+                UserDefaults.standard.set(data, forKey: Constants.groupKey)
+            }
+            
+            single(.success(cv))
+            
+            ResumeMediator.shared.edit(cv: cv)
+            ResumeMediator.shared.changedGroups()
+            
+            return Disposables.create()
+        }
+    }
+    
+    func edit(cl: CL) -> Single<CL> {
+        Single<CL>.create { single in
+            var cls: [CL] = {
+                guard let data = UserDefaults.standard.data(forKey: Constants.clKey) else { return [] }
+                let array = try? JSONDecoder().decode([CL].self, from: data)
+                return array ?? []
+            }()
+            
+            if let index = cls.firstIndex(where: { $0.id == cl.id }) {
+                cls[index] = cl
+            }
+            
+            if let data = try? JSONEncoder().encode(cls) {
+                UserDefaults.standard.setValue(data, forKey: Constants.clKey)
+            }
+            
+            let groups: [ResumeGroup] = {
+                guard let data = UserDefaults.standard.data(forKey: Constants.groupKey) else { return [] }
+                let array = try? JSONDecoder().decode([ResumeGroup].self, from: data)
+                return array ?? []
+            }()
+            
+            let updatedGroups = groups
+                .map { group -> ResumeGroup in
+                    let cls = group.cls.map { item -> CL in
+                        item.id == cl.id ? cl : item
+                    }
+                    return ResumeGroup(
+                        id: group.id,
+                        name: group.name,
+                        cvs: group.cvs,
+                        cls: cls
+                    )
+                }
+                .filter { !($0.cvs.isEmpty && $0.cls.isEmpty) }
+            
+            if let data = try? JSONEncoder().encode(updatedGroups) {
+                UserDefaults.standard.set(data, forKey: Constants.groupKey)
+            }
+            
+            single(.success(cl))
+            
+            ResumeMediator.shared.edit(cl: cl)
             ResumeMediator.shared.changedGroups()
             
             return Disposables.create()
