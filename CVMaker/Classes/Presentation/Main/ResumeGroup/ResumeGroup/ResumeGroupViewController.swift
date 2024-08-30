@@ -97,11 +97,13 @@ private extension ResumeGroupViewController {
         case .share(let entity):
             switch entity {
             case .cv(let cv):
-                let pdf = PDFFactory.create(cv: cv)
+                let pdf = PDFFactory.createCV(cv: cv)
                 let vc = UIActivityViewController(activityItems: [pdf], applicationActivities: nil)
                 present(vc, animated: true)
             case .cl(let cl):
-                break // TODO
+                let pdf = PDFFactory.createCL(cl: cl)
+                let vc = UIActivityViewController(activityItems: [pdf], applicationActivities: nil)
+                present(vc, animated: true)
             }
         case .edit(let entity):
             switch entity {

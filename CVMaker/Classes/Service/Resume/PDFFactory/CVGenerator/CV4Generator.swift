@@ -1,7 +1,7 @@
 import UIKit
 import PDFKit
 
-class PDF2Generator {
+class CV4Generator {
     let profile: Profile
     
     init(profile: Profile) {
@@ -15,15 +15,15 @@ class PDF2Generator {
     
     let lm1: CGFloat = 43.0
     let lm2: CGFloat = 175.0
-    let lm3: CGFloat = 595 - 150 - 43
+    let lm3: CGFloat = 320
     
     let columnLeftWidth: CGFloat = 130
-    let columnCenterWidth: CGFloat = 330
-    let columnRightWidth: CGFloat = 150
+    let columnCenterWidth: CGFloat = 170
+    let columnRightWidth: CGFloat = 225
     
     
     
-    let textColor = UIColor.white
+    let textColor = UIColor.black
     
     var currentLeftYOffset: CGFloat =  40
     var currentYCenterOffset: CGFloat =  40
@@ -53,10 +53,10 @@ class PDF2Generator {
         if let generalInfo = profile.generalInfo {
             drawGeneraInfoInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             //   drawAboutYourselfInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            
+            if let generalInfo = profile.generalInfo {
                 drawContactInfoInCenterColumn(generalInfo: generalInfo, xOffset: lm3, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
                 
-            
+            }
             
             
             let maxY : CGFloat =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
@@ -66,20 +66,7 @@ class PDF2Generator {
             currentRightYOffset = maxY
             
         }
-        if let generalInfo = profile.generalInfo {
-            if let aboutYourself = generalInfo.aboutYourself {
-                
-                drawAboutYourselfRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-           
-                drawAboutYourselfDescInRightColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                
-                let maxY : CGFloat =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 25
-                
-                currentLeftYOffset = maxY
-                currentYCenterOffset = maxY
-                currentRightYOffset = maxY
-            }
-        }
+        
         if let workExperiences = profile.workExperiences, !workExperiences.isEmpty {
             var vertOffsetDesc = currentYCenterOffset
             var pgNumberDesc = pageNumber
@@ -127,7 +114,7 @@ class PDF2Generator {
             currentRightYOffset = maxY
         }
      
-   
+     
         
         if let educations = profile.educations, !educations.isEmpty {
             var vertOffsetDesc = currentYCenterOffset
@@ -139,7 +126,7 @@ class PDF2Generator {
             drawEducationInCenterColumn (xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             for i in 0..<educations.count {
                 drawEducationeDescriptionInCenterColumn(education: educations[i],vertOffset: &vertOffsetDesc, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pgNumberDesc)
-                drawEducationeDateInCenterColumn(education: educations[i],vertOffset: &vertOffsetDate ,xOffset: lm3, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pgNumberDate)
+              //  drawEducationeDateInCenterColumn(education: educations[i],vertOffset: &vertOffsetDate ,xOffset: lm3, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pgNumberDate)
                 
                 if pgNumberDesc > pgNumberDate {
                     currentLeftYOffset = vertOffsetDesc
@@ -167,13 +154,14 @@ class PDF2Generator {
                 pageNumber = max(pgNumberDesc,pgNumberDate)
                 
             }
-               var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-              
-              currentLeftYOffset = maxY
-              currentYCenterOffset = maxY
-              currentRightYOffset = maxY
+           var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+           
+           currentLeftYOffset = maxY
+           currentYCenterOffset = maxY
+           currentRightYOffset = maxY
         }
-   
+      
+      
 
         if let certificates = profile.certificates, !certificates.isEmpty {
             var vertOffsetDesc = currentYCenterOffset
@@ -219,7 +207,7 @@ class PDF2Generator {
            currentRightYOffset = maxY
         }
         
-       
+      
       
       
         if let professionalSkills = profile.professionalSkills?.map({ $0.name }), !professionalSkills.isEmpty {
@@ -228,31 +216,46 @@ class PDF2Generator {
             
             
             drawSkiilsDescriptionInRightColumn(professionalSkills: professionalSkills, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
            var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
            
            currentLeftYOffset = maxY
            currentYCenterOffset = maxY
            currentRightYOffset = maxY
-
         }
         
- 
-        
- 
-
         if let languages = profile.languages, !languages.isEmpty {
             
             drawLanguagesInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
             drawLanguagesDescriptionInRightColumn(languages: languages, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+        
+            var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+           
+           currentLeftYOffset = maxY
+           currentYCenterOffset = maxY
+           currentRightYOffset = maxY
+        }
+       
+        
+        if let interests = profile.interests?.map({ $0.name }), !interests.isEmpty {
+            
+            drawInterestsInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
+            drawInterestsDescriptionInRightColumn(interests: interests, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
            var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
            
            currentLeftYOffset = maxY
            currentYCenterOffset = maxY
            currentRightYOffset = maxY
-            
         }
-     
+
+       
+        
+        
+        socialMediaPageNumber = pageNumber
+       
+        
         if let socialMedia = profile.socialMedia {
             let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
             let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
@@ -261,7 +264,6 @@ class PDF2Generator {
             
             if instagramExist || facebookExist || linkedIndExist || twitterExist {
                 drawLinksMediaInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                
                 
                 
                 if socialMedia.instagram != "" && socialMedia.instagram != nil {
@@ -276,8 +278,7 @@ class PDF2Generator {
                 if socialMedia.twitter != "" && socialMedia.twitter != nil {
                     drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: "Twitter", xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
                 }
-           
-                var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
+               var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
                
                currentLeftYOffset = maxY
                currentYCenterOffset = maxY
@@ -285,33 +286,12 @@ class PDF2Generator {
             }
         }
       
-  
-
-        
-        
-        if let interests = profile.interests?.map({ $0.name }), !interests.isEmpty {
-            
-            drawInterestsInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            
-            drawInterestsDescriptionInRightColumn(interests: interests, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-           var maxY =  max(currentLeftYOffset, max(currentYCenterOffset, currentRightYOffset)) + 20
-           
-           currentLeftYOffset = maxY
-           currentYCenterOffset = maxY
-           currentRightYOffset = maxY
-        }
-
      
-        
-        
-        
-       
-        
-        
+
         // Render pages
         for page in 0..<pages.count {
             UIGraphicsBeginPDFPage()
-            if let backgroundImage = UIImage(named: "PDF1BackgroundImage") {
+            if let backgroundImage = UIImage(named: "PDF15BackgroundImage") {
                 let context = UIGraphicsGetCurrentContext()!
                 let pageRect = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
                 drawBackground(context: context, pageRect: pageRect, image: backgroundImage)
@@ -354,7 +334,7 @@ class PDF2Generator {
     func drawGeneraInfoInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.bold(size: 20)
         let jobTitleFont = Fonts.SpaceGrotesk.regular(size: 14)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         
         // Paragraph style for full name
         let fullNameParagraphStyle = NSMutableParagraphStyle()
@@ -397,6 +377,7 @@ class PDF2Generator {
         guard combinedText.string != "" else { return }
         var remainingText = combinedText
         
+        
         while remainingText.length > 0 {
             if pageRect.height  - currentLeftYOffset - bottomMargin < estimateHeight {
                 currentLeftYOffset = margin
@@ -404,6 +385,7 @@ class PDF2Generator {
             }
             let textRect = CGRect(x: xOffset, y: currentLeftYOffset, width: 300, height: pageRect.height - bottomMargin - currentLeftYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
+            
             
             let textHeight = calculateTextHeight(text: textToDraw, width: 300)
             
@@ -415,7 +397,7 @@ class PDF2Generator {
             }
             
             remainingText = remainder
-            
+           
             if remainingText.length > 0  {
                 currentLeftYOffset = margin
                 pageNumber += 1
@@ -428,9 +410,9 @@ class PDF2Generator {
     
     
     
-    func drawAboutYourselfRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.SpaceGrotesk.bold(size: 13)
-        let textColor = UIColor.white
+    func drawAboutYourselfInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
+        let fullNameFont = Fonts.SpaceGrotesk.bold(size: 12)
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
         paragraphStyle.alignment = .left
@@ -441,15 +423,13 @@ class PDF2Generator {
             .paragraphStyle: paragraphStyle
         ]
         
-        var text = "ABOUT ME".capitalized
+        var text = "\(generalInfo.aboutYourself ?? "")"
         var remainingText = text
         
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
             if pageRect.height  - currentLeftYOffset - bottomMargin < estimateHeight {
-                currentYCenterOffset = margin
-                currentRightYOffset = margin
                 currentLeftYOffset = margin
                 pageNumber += 1
             }
@@ -468,62 +448,11 @@ class PDF2Generator {
             
             remainingText = remainder
            
-            if !remainingText.isEmpty  {
-                currentYCenterOffset = margin
-                currentRightYOffset = margin
-                currentLeftYOffset = margin
-                pageNumber += 1
-            } else {
-                currentLeftYOffset += textHeight + 15
-            }
-            
-        }
-        
-        text = remainingText
-    }
-    func drawAboutYourselfDescInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.SpaceGrotesk.regular(size: 12)
-        let textColor = UIColor.white
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
-        paragraphStyle.alignment = .left
-        
-        let fullNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: fullNameFont,
-            .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        var text = "\(generalInfo.aboutYourself ?? "")"
-        var remainingText = text
-        
-        guard text != "" else { return }
-        let columnLeftWidth : CGFloat = 370
-        while !remainingText.isEmpty {
-            if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
-                currentLeftYOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnLeftWidth , height: pageRect.height - bottomMargin - currentYCenterOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
-            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
-            
-            let textHeight  = calculateTextHeight(text: textToDraw, width: columnLeftWidth, attributes: fullNameAttributes)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                attributedTextToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-           
             if !remainingText.isEmpty   {
-                currentYCenterOffset = margin
+                currentLeftYOffset = margin
                 pageNumber += 1
             } else {
-                currentYCenterOffset += textHeight //+ 45
+                currentLeftYOffset += textHeight + 45
             }
             
         }
@@ -533,7 +462,7 @@ class PDF2Generator {
     
     func drawSkiilsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.bold(size: 13)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
         paragraphStyle.alignment = .left
@@ -587,7 +516,7 @@ class PDF2Generator {
     
     func drawSkiilsDescriptionInRightColumn(professionalSkills: [String], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.regular(size: 10)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -647,7 +576,7 @@ class PDF2Generator {
     
     func drawLanguagesInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.bold(size: 13)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
         paragraphStyle.alignment = .left
@@ -703,7 +632,7 @@ class PDF2Generator {
     
     func drawLanguagesDescriptionInRightColumn(languages: [Language], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.regular(size: 10)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -767,7 +696,7 @@ class PDF2Generator {
     
     func drawLinksMediaInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.bold(size: 13)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
         paragraphStyle.alignment = .left
@@ -821,7 +750,7 @@ class PDF2Generator {
     
     func drawLinksDescriptionInRightColumn(socialMedia: String, type: String, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.regular(size: 10)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -840,7 +769,6 @@ class PDF2Generator {
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
-            print(pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight)
             if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
                 currentYCenterOffset = margin
                 currentRightYOffset = margin
@@ -855,7 +783,7 @@ class PDF2Generator {
             let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth, attributes: fullNameAttributes)
             
             rectAndLinkDict[socialMedia] = CGRect(x: textRect.minX, y: textRect.minY, width: textRect.width, height: fullNameFont.pointSize)
-          
+            
             if var linksArray = pageAndLinksDict[pageNumber] {
                 linksArray.append(socialMedia)
                 pageAndLinksDict[pageNumber] = linksArray
@@ -882,14 +810,14 @@ class PDF2Generator {
             }
             
         }
-
+        
         text = remainingText
     }
     
     
     func drawInterestsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.bold(size: 13)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.2
         paragraphStyle.alignment = .left
@@ -943,7 +871,7 @@ class PDF2Generator {
     
     func drawInterestsDescriptionInRightColumn(interests: [String], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.SpaceGrotesk.regular(size: 10)
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -1014,7 +942,7 @@ class PDF2Generator {
             contactParagraphStyle.lineHeightMultiple = 1.3
             
             
-            let textColor = UIColor.white
+            let textColor = UIColor.black
             let textAttributes: [NSAttributedString.Key: Any] = [
                 .font: contactFont,
                 .foregroundColor: textColor,
@@ -1087,7 +1015,7 @@ class PDF2Generator {
         
         
         
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: contactFont,
             .foregroundColor: textColor,
@@ -1150,7 +1078,7 @@ class PDF2Generator {
         if let companyName = workExperience.companyName, !companyName.isEmpty {
             let companyAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.bold(size: 10),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
             let attributedCompanyText = NSAttributedString(string: companyName, attributes: companyAttributes)
@@ -1161,28 +1089,37 @@ class PDF2Generator {
         if let jobTitle = workExperience.jobTitle, !jobTitle.isEmpty {
             let jobTitleAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.regular(size: 10),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
             let attributedJobTitleText = NSAttributedString(string: "\n\(jobTitle)", attributes: jobTitleAttributes)
             combinedAttributedString.append(attributedJobTitleText)
         }
+        let  dateParagraphStyle = NSMutableParagraphStyle()
+        dateParagraphStyle.alignment = .left
 
-        // Define a separate paragraph style for results if needed
-        let resultsParagraphStyle = NSMutableParagraphStyle()
-        resultsParagraphStyle.paragraphSpacing = 5.0
-        resultsParagraphStyle.lineSpacing = 5.0
+        if let startDate = workExperience.startDate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM yyyy"
+            let startDateString = dateFormatter.string(from: startDate)
 
-        // Results
-        if let results = workExperience.results, !results.isEmpty {
-            let resultsAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.SpaceGrotesk.regular(size: 10),
-                .foregroundColor: UIColor.white,
-                .paragraphStyle: resultsParagraphStyle // Different paragraph style can be used here
+            var dateText = startDateString
+            if let endDate = workExperience.endDate {
+                let endDateString = dateFormatter.string(from: endDate)
+                dateText += " - \(endDateString)"
+            } else {
+                dateText += " - PRESENT"
+            }
+
+            let dateAttributes: [NSAttributedString.Key: Any] = [
+                .font: Fonts.SpaceGrotesk.regular(size: 8),
+                .foregroundColor: UIColor.black,
+                .paragraphStyle: dateParagraphStyle
             ]
-            let attributedResultsText = NSAttributedString(string: "\n\(results)", attributes: resultsAttributes)
-            combinedAttributedString.append(attributedResultsText)
+            let attributedDateText = NSAttributedString(string: "\n\(dateText)", attributes: dateAttributes)
+            combinedAttributedString.append(attributedDateText)
         }
+      
 
         guard combinedAttributedString.length > 0 else { return }
         var remainingText = combinedAttributedString
@@ -1230,72 +1167,62 @@ class PDF2Generator {
         pageNumber: inout Int,
         checkTheNextText:NSMutableAttributedString? = nil,
         isLast: Bool = false) {
-        var combinedAttributedString = NSMutableAttributedString()
-    
-        let  dateParagraphStyle = NSMutableParagraphStyle()
-        dateParagraphStyle.alignment = .right
-
-        if let startDate = workExperience.startDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM yyyy"
-            let startDateString = dateFormatter.string(from: startDate)
-
-            var dateText = startDateString
-            if let endDate = workExperience.endDate {
-                let endDateString = dateFormatter.string(from: endDate)
-                dateText += " - \(endDateString)"
-            } else {
-                dateText += " - PRESENT"
+            var combinedAttributedString = NSMutableAttributedString()
+            
+            // Define a separate paragraph style for results if needed
+            let resultsParagraphStyle = NSMutableParagraphStyle()
+            resultsParagraphStyle.paragraphSpacing = 5.0
+            resultsParagraphStyle.lineSpacing = 5.0
+            
+            // Results
+            if let results = workExperience.results, !results.isEmpty {
+                let resultsAttributes: [NSAttributedString.Key: Any] = [
+                    .font: Fonts.SpaceGrotesk.regular(size: 10),
+                    .foregroundColor: UIColor.black,
+                    .paragraphStyle: resultsParagraphStyle // Different paragraph style can be used here
+                ]
+                let attributedResultsText = NSAttributedString(string: "\(results)", attributes: resultsAttributes)
+                combinedAttributedString.append(attributedResultsText)
             }
-
-            let dateAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.SpaceGrotesk.regular(size: 8),
-                .foregroundColor: UIColor.white,
-                .paragraphStyle: dateParagraphStyle
-            ]
-            let attributedDateText = NSAttributedString(string: "\(dateText)", attributes: dateAttributes)
-            combinedAttributedString.append(attributedDateText)
+            
+            guard combinedAttributedString.length > 0 else { return }
+            var remainingText = combinedAttributedString
+            
+            while remainingText.length > 0 {
+                if pageRect.height  - vertOffset - bottomMargin < estimateHeight {
+                    currentYCenterOffset = margin
+                    currentRightYOffset = margin
+                    currentLeftYOffset = margin
+                    vertOffset = margin
+                    pageNumber += 1
+                }
+                let textRect = CGRect(x: xOffset, y: vertOffset , width: columnRightWidth, height: pageRect.height - bottomMargin - vertOffset)
+                let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
+                
+                let textHeight = calculateTextHeight(text: textToDraw, width: columnRightWidth)
+                
+                if pages[pageNumber] == nil {
+                    pages[pageNumber] = []
+                }
+                pages[pageNumber]?.append {
+                    textToDraw.draw(in: textRect)
+                }
+                
+                remainingText = remainder
+                
+                
+                if remainingText.length > 0 {
+                    currentYCenterOffset = margin
+                    currentRightYOffset = margin
+                    currentLeftYOffset = margin
+                    vertOffset = margin
+                    pageNumber += 1
+                } else {
+                    vertOffset += textHeight + (isLast ? 30 : 15)
+                }
+                
+            }
         }
-        
-      
-        guard combinedAttributedString.length > 0 else { return }
-        var remainingText = combinedAttributedString
-        
-        while remainingText.length > 0 {
-            if pageRect.height  - vertOffset - bottomMargin < estimateHeight {
-                currentYCenterOffset = margin
-                currentRightYOffset = margin
-                currentLeftYOffset = margin
-                vertOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: vertOffset , width: columnRightWidth, height: pageRect.height - bottomMargin - vertOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnRightWidth)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                textToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-            
-            
-            if remainingText.length > 0 {
-                currentYCenterOffset = margin
-                currentRightYOffset = margin
-                currentLeftYOffset = margin
-                vertOffset = margin
-                pageNumber += 1
-            } else {
-                vertOffset += textHeight + (isLast ? 30 : 15)
-            }
-            
-        }
-    }
     
     func drawEducationInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int,checkTheNextText:NSMutableAttributedString? = nil) {
         
@@ -1309,7 +1236,7 @@ class PDF2Generator {
         contactParagraphStyle.paragraphSpacing = 3.0
         
         
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: contactFont,
             .foregroundColor: textColor,
@@ -1365,7 +1292,7 @@ class PDF2Generator {
         if let university = education.university, !university.isEmpty {
             let universityAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.bold(size: 12),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
             let attributedCompanyText = NSAttributedString(string: university, attributes: universityAttributes)
@@ -1375,7 +1302,7 @@ class PDF2Generator {
         if var fieldOfStudy = education.fieldOfStudy, !fieldOfStudy.isEmpty {
             let fieldOfStudyTitleAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.regular(size: 12),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
             if let degree = education.degree, !degree.isEmpty {
@@ -1384,7 +1311,31 @@ class PDF2Generator {
             let attributedJobTitleText = NSAttributedString(string: "\n\(fieldOfStudy)", attributes: fieldOfStudyTitleAttributes)
             combinedAttributedString.append(attributedJobTitleText)
         }
-    
+       
+        let  dateParagraphStyle = NSMutableParagraphStyle()
+        dateParagraphStyle.alignment = .left
+        dateParagraphStyle.paragraphSpacing = 3.0
+        if let startDate = education.startDate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM yyyy"
+            let startDateString = dateFormatter.string(from: startDate)
+            
+            var dateText = startDateString
+            if let endDate = education.endDate {
+                let endDateString = dateFormatter.string(from: endDate)
+                dateText += " - \(endDateString)"
+            } else {
+                dateText += " - PRESENT"
+            }
+            
+            let dateAttributes: [NSAttributedString.Key: Any] = [
+                .font: Fonts.SpaceGrotesk.regular(size: 8),
+                .foregroundColor: UIColor.black,
+                .paragraphStyle: dateParagraphStyle
+            ]
+            let attributedDateText = NSAttributedString(string: "\n\(dateText)", attributes: dateAttributes)
+            combinedAttributedString.append(attributedDateText)
+        }
         
         guard combinedAttributedString.length > 0 else { return }
         var remainingText = combinedAttributedString
@@ -1445,7 +1396,7 @@ class PDF2Generator {
             
             let dateAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.regular(size: 8),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: dateParagraphStyle
             ]
             let attributedDateText = NSAttributedString(string: "\(dateText)", attributes: dateAttributes)
@@ -1503,7 +1454,7 @@ class PDF2Generator {
         contactParagraphStyle.lineHeightMultiple = 1.3
         
         
-        let textColor = UIColor.white
+        let textColor = UIColor.black
         let textAttributes: [NSAttributedString.Key: Any] = [
             .font: contactFont,
             .foregroundColor: textColor,
@@ -1564,7 +1515,7 @@ class PDF2Generator {
         if let university = certificate.organizationName, !university.isEmpty {
             let universityAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.medium(size: 12),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
             let attributedCompanyText = NSAttributedString(string: university, attributes: universityAttributes)
@@ -1574,7 +1525,7 @@ class PDF2Generator {
         if var description = certificate.description, !description.isEmpty {
             let fieldOfStudyTitleAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.regular(size: 12),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
            
@@ -1645,7 +1596,7 @@ class PDF2Generator {
             
             let dateAttributes: [NSAttributedString.Key: Any] = [
                 .font: Fonts.SpaceGrotesk.regular(size: 8),
-                .foregroundColor: UIColor.white,
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: dateParagraphStyle
             ]
             let attributedDateText = NSAttributedString(string: "\(dateText)", attributes: dateAttributes)
@@ -1711,7 +1662,7 @@ class PDF2Generator {
 
 
 
-extension PDF2Generator {
+extension CV4Generator {
     
     func splitTextToFit(rect: CGRect, text: String, attributes: [NSAttributedString.Key: Any]) -> (String, String) {
         let attributedText = NSAttributedString(string: text, attributes: attributes)
@@ -1760,7 +1711,7 @@ extension PDF2Generator {
     func drawBackground(context: CGContext, pageRect: CGRect, image: UIImage) {
           context.saveGState()
           context.translateBy(x: 0, y: pageRect.size.height)
-         context.scaleBy(x: 1.0, y: -1.0)
+        context.scaleBy(x: 1.0, y: -1.0)
           context.draw(image.cgImage!, in: pageRect)
           context.restoreGState()
       }

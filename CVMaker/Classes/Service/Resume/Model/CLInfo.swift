@@ -6,6 +6,7 @@
 //
 
 struct CLInfo: Codable {
+    let personalInfo: CLPersonalInfo?
     let company: CLCompany?
     let hiringManager: CLHiringManager?
     let vacancy: CLVacancy?

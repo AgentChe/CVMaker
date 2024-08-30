@@ -173,6 +173,17 @@ struct Fonts {
         }
     }
     
+    // MARK: Outfit
+    struct Outfit {
+        static func semiBold(size: CGFloat) -> UIFont {
+            UIFont(name: "Outfit-SemiBold", size: size)!
+        }
+        
+        static func regular(size: CGFloat) -> UIFont {
+            UIFont(name: "Outfit-Regular", size: size)!
+        }
+    }
+    
     // MARK: SplineSans
     struct SplineSans {
         static func bold(size: CGFloat) -> UIFont {
@@ -185,6 +196,20 @@ struct Fonts {
         
         static func medium(size: CGFloat) -> UIFont {
             UIFont(name: "SplineSans-Medium", size: size)!
+        }
+    }
+    
+    // MARK: SpaceMono
+    struct SpaceMono {
+        static func regular(size: CGFloat) -> UIFont {
+            UIFont(name: "SpaceMono-Regular", size: size)!
+        }
+    }
+    
+    // MARK: Montserrat
+    struct Montserrat {
+        static func black(size: CGFloat) -> UIFont {
+            UIFont(name: "Montserrat-Black", size: size)!
         }
     }
     

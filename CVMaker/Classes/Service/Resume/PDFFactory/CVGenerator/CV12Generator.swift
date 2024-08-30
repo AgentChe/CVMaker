@@ -2,7 +2,7 @@ import UIKit
 import PDFKit
 
 
-class PDF12Generator {
+class CV12Generator {
     let profile: Profile
     
     init(profile: Profile) {
@@ -1606,7 +1606,7 @@ class PDF12Generator {
 
 
 
-extension PDF12Generator {
+extension CV12Generator {
     
     func splitTextToFit(rect: CGRect, text: String, attributes: [NSAttributedString.Key: Any]) -> (String, String) {
         let attributedText = NSAttributedString(string: text, attributes: attributes)

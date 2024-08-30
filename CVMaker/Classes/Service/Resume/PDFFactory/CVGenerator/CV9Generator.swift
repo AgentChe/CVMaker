@@ -1,11 +1,16 @@
 import UIKit
 import PDFKit
 
-class PDF5Generator {
+class CV9Generator {
     let profile: Profile
     
     init(profile: Profile) {
         self.profile = profile
+        if let generalInfo = profile.generalInfo {
+            if let profileImageName = generalInfo.photoFileName {
+                self.profileImageName = profileImageName
+            }
+        }
     }
     
     let pageWidth : CGFloat = 8.5 * 72.0
@@ -15,24 +20,30 @@ class PDF5Generator {
     var centerMargin: CGFloat = 40.0
     
     
-    let lm1: CGFloat = 43.0
-    let lm2: CGFloat = 270.0
-    let columnWidth: CGFloat = 200
-    let columnCenterWidth: CGFloat = 280
-    
+    let lm1: CGFloat = 420
+    let lm2: CGFloat = 43.0
+    let columnWidth: CGFloat = 210
+    let columnCenterWidth: CGFloat = 285
+    var aboutYourSelfHeight: CGFloat = 0
     let font = UIFont.systemFont(ofSize: 12)
     let textColor = UIColor.black
-    
     var currentYOffset: CGFloat =  40
     var currentYCenterOffset: CGFloat =  40
     
     let estimateHeight: CGFloat = 50.0
-    let bottomMargin: CGFloat = 25
+    let bottomMargin: CGFloat = 30
+    
+    var profileImageName: String? = ""
+    
+    
     
     var rectAndLinkDict: [String: CGRect] = [:]
     var pageAndLinksDict: [Int: [String]] = [:]
     
+    var rectAndContactTypeDict: [String: CGRect] = [:]
+    
     func createPDF() -> Data {
+        
         let pdfMetaData = [
             kCGPDFContextCreator: "PDF Creator",
             kCGPDFContextAuthor: "Your Name",
@@ -45,63 +56,180 @@ class PDF5Generator {
         
         var pages: [Int: [() -> Void]] = [:]
         var pageNumber = 0
+         
+        
         if let generalInfo = profile.generalInfo {
-            drawGeneraInfoInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            var text = "\(generalInfo.firstName ?? "") \(generalInfo.lastName ?? ""),\nJob Title"
+            drawGeneraInfoInRightColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
-            let fullNameFont = Fonts.Lora.bold(size: 24)
-            let textColor = UIColor(red: 0/255, green: 91/255, blue: 162/255, alpha: 1)
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .left
-            
-            let fullNameAttributes: [NSAttributedString.Key: Any] = [
-                .font: fullNameFont,
-                .foregroundColor: textColor,
-                .paragraphStyle: paragraphStyle
-            ]
-            let textHeight = calculateTextHeight(text: text, width: columnWidth, attributes: fullNameAttributes) + 25
-            
-            centerMargin += textHeight
-            currentYCenterOffset = centerMargin
+          
+          
             if let contactInfo = generalInfo.contactInfo {
+               
+                var fontSize : CGFloat = 10
+                let workWidth : CGFloat = pageWidth
+                var w1:CGFloat = 0
+                var w2:CGFloat = 0
+                var w3:CGFloat = 0
+                var border_offset:CGFloat = 50
+                let d1 : CGFloat = 50
+                var fullWidth : CGFloat = 0
                 
-                drawContactsInRightColumn( xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                let fullNameFont = Fonts.Roboto.regular(size: fontSize)
+                let textColor = UIColor(white: 1, alpha: 0.7)
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineHeightMultiple = 1.5
+                paragraphStyle.alignment = .center
+                let fullNameAttributes: [NSAttributedString.Key: Any] = [
+                    .font: fullNameFont,
+                    .foregroundColor: textColor,
+                    .paragraphStyle: paragraphStyle
+                ]
                 
-                drawContactsDescriptionInRightColumn(generalInfo: generalInfo, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-            }
-            
-            
-            
-        }
-        
-        
-        if let professionalSkills = profile.professionalSkills?.map({ $0.name }), !professionalSkills.isEmpty {
-            var nextTextForCheck = ""
-            for skill in professionalSkills {
-                if skill != "" {
-                    nextTextForCheck += "•  \(skill)\n"
+                if let address = contactInfo.homeAddress {
+                    if address != "" {
+                       
+                        w1 = calculateTextWidth(text: address, height: 20, attributes: fullNameAttributes)
+                    }
                 }
-            }
-            drawSkiilsInRightColumn( xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-        }
-        
-        if let professionalSkills = profile.professionalSkills?.map({ $0.name }) {
-            drawSkiilsDescriptionInRightColumn(professionalSkills: professionalSkills, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-        }
-        
-        if let languages = profile.languages, !languages.isEmpty {
-            var nextTextForCheck = ""
-            for language in languages {
-                if language.name != "" {
-                    nextTextForCheck += "\(language.name)  |  \(language.level)\n"
+                if let email = contactInfo.email {
+                    if email != "" {
+                        w2 = calculateTextWidth(text: email, height: 20, attributes: fullNameAttributes)
+                    }
                 }
+                if let phone = contactInfo.phone {
+                    if phone != "" {
+                        w3 = calculateTextWidth(text: phone, height: 20, attributes: fullNameAttributes)
+                    }
+                }
+                
+                fullWidth = border_offset + (w1 != 0 ? ((w2 != 0 || w3 != 0) ? w1 + d1 : w1 ) : 0) + (w2 != 0 ? (w3 != 0 ? w2 + d1 : w2) : 0) + (w3 != 0 ? w3 : 0) + border_offset
+                
+                
+                while fullWidth > workWidth {
+                    fontSize -= 0.1
+                    
+                    let fullNameFont = Fonts.Roboto.regular(size: fontSize)
+                    let textColor = UIColor(white: 1, alpha: 0.7)
+                    let paragraphStyle = NSMutableParagraphStyle()
+                    paragraphStyle.lineHeightMultiple = 1.5
+                    paragraphStyle.alignment = .center
+                    let fullNameAttributes: [NSAttributedString.Key: Any] = [
+                        .font: fullNameFont,
+                        .foregroundColor: textColor,
+                        .paragraphStyle: paragraphStyle
+                    ]
+                    
+                    if let address = contactInfo.homeAddress {
+                        if address != "" {
+                           
+                            w1 = calculateTextWidth(text: address, height: 50, attributes: fullNameAttributes)
+                        }
+                    }
+                    if let email = contactInfo.email {
+                        if email != "" {
+                            w2 = calculateTextWidth(text: email, height: 50, attributes: fullNameAttributes)
+                        }
+                    }
+                    if let phone = contactInfo.phone {
+                        if phone != "" {
+                            w3 = calculateTextWidth(text: phone, height: 50, attributes: fullNameAttributes)
+                        }
+                    }
+                    
+                    fullWidth = border_offset + (w1 != 0 ? ((w2 != 0 || w3 != 0) ? w1 + d1 : w1 ) : 0) + (w2 != 0 ? (w3 != 0 ? w2 + d1 : w2) : 0) + (w3 != 0 ? w3 : 0) + border_offset
+                                        
+                }
+                border_offset += (workWidth - fullWidth)/2
+                
+                
+                if let address = contactInfo.homeAddress {
+                    if address != "" {
+                        drawContactsDescriptionInRightColumn(text:address, 
+                                                             type:"address9",
+                                                             xOffset: border_offset,
+                                                             textWidth: w1,
+                                                             fontSize: fontSize,
+                                                             pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                             pages: &pages,
+                                                             pageNumber: &pageNumber)
+                    }
+                }
+                if let email = contactInfo.email {
+                    if email != "" {
+                        if w1 != 0 {
+                            drawContactsDescriptionInRightColumn(text:email,
+                                                                 type:"email9",
+                                                                 xOffset: border_offset + w1 + d1,
+                                                                 textWidth: w2,
+                                                                 fontSize: fontSize,
+                                                                 pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                                 pages: &pages,
+                                                                 pageNumber: &pageNumber)
+                        } else {
+                            drawContactsDescriptionInRightColumn(text:email,
+                                                                 type:"email9",
+                                                                 xOffset: border_offset,
+                                                                 textWidth: w2,
+                                                                 fontSize: fontSize,
+                                                                 pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                                 pages: &pages,
+                                                                 pageNumber: &pageNumber)
+                        }
+                    }
+                }
+                if let phone = contactInfo.phone {
+                    if phone != "" {
+                        if w1 != 0 && w2 != 0 {
+                            drawContactsDescriptionInRightColumn(text:phone,
+                                                                 type:"phone9",
+                                                                 xOffset: border_offset + w1 + d1 + w2 + d1,
+                                                                 textWidth: w3,
+                                                                 fontSize: fontSize,
+                                                                 pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                                 pages: &pages,
+                                                                 pageNumber: &pageNumber)
+                        }
+                        if w1 != 0 && w2 == 0 {
+                            drawContactsDescriptionInRightColumn(text:phone,
+                                                                 type:"phone9",
+                                                                 xOffset: border_offset + w1 + d1,
+                                                                 textWidth: w3,
+                                                                 fontSize: fontSize,
+                                                                 pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                                 pages: &pages,
+                                                                 pageNumber: &pageNumber)
+                        }
+                        if w1 == 0 && w2 != 0 {
+                            drawContactsDescriptionInRightColumn(text:phone,
+                                                                 type:"phone9",
+                                                                 xOffset: border_offset + w2 + d1,
+                                                                 textWidth: w3,
+                                                                 fontSize: fontSize,
+                                                                 pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                                 pages: &pages,
+                                                                 pageNumber: &pageNumber)
+                        }
+                        if w1 == 0 && w2 == 0 {
+                            drawContactsDescriptionInRightColumn(text:phone,
+                                                                 type:"phone9",
+                                                                 xOffset: border_offset,
+                                                                 textWidth: w3,
+                                                                 fontSize: fontSize,
+                                                                 pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight),
+                                                                 pages: &pages,
+                                                                 pageNumber: &pageNumber)
+                        }
+                    }
+                }
+                
+                currentYOffset = 193 + 50
             }
-            drawLanguagesInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+          
+            centerMargin = 193 + 50
+            currentYCenterOffset = centerMargin
             
-            drawLanguagesDescriptionInRightColumn(languages: languages, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
         }
-        
-        
+     
         if let socialMedia = profile.socialMedia {
             let instagramExist = socialMedia.instagram != "" && socialMedia.instagram != nil
             let facebookExist =  socialMedia.facebook != "" && socialMedia.facebook != nil
@@ -124,18 +252,33 @@ class PDF5Generator {
                 if socialMedia.twitter != "" && socialMedia.twitter != nil {
                     drawLinksDescriptionInRightColumn(socialMedia: socialMedia.twitter!, type: "Twitter", xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
                 }
-                currentYOffset += 10
+                
+                currentYOffset += 30
             }
+        }
+        
+        if let professionalSkills = profile.professionalSkills?.map({ $0.name }), !professionalSkills.isEmpty {
+            
+            drawSkiilsInRightColumn( xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+        
+            drawSkiilsDescriptionInRightColumn(professionalSkills: professionalSkills, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
+            currentYOffset += 12
+        }
+        
+        if let languages = profile.languages, !languages.isEmpty {
+            
+            drawLanguagesInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
+            drawLanguagesDescriptionInRightColumn(languages: languages, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+        
+            currentYOffset += 10
             
         }
         
+    
         if let interests = profile.interests?.map({ $0.name }), !interests.isEmpty {
-            var nextTextForCheck = ""
-            for interest in interests {
-                if interest != "" {
-                    nextTextForCheck += "•  \(interest)" + "\n"
-                }
-            }
+            
             drawInterestsInRightColumn(xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             
             drawInterestsDescriptionInRightColumn(interests: interests, xOffset: lm1, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
@@ -144,18 +287,9 @@ class PDF5Generator {
         // Draw second column text starting from the first page
         
         pageNumber = 0
-//        if let generalInfo = profile.generalInfo {
-//            drawContactInfoInCenterColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-//        }
-        if let generalInfo = profile.generalInfo {
-            if let aboutYourself = generalInfo.aboutYourself {
-                if aboutYourself != "" {
-                    drawAboutYourselfInCenterColumn (xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                
-                    drawAboutYourselfDescriptionInCenterColumn(aboutYourself: aboutYourself, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber, isLast:  true)
-                }
-            }
-        }
+        //        if let generalInfo = profile.generalInfo {
+        //            drawContactInfoInCenterColumn(generalInfo: generalInfo, xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+        //        }
         if let workExperiences = profile.workExperiences, !workExperiences.isEmpty {
             
             drawWorkExperienceInCenterColumn (xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
@@ -163,66 +297,172 @@ class PDF5Generator {
             for i in 0..<workExperiences.count  {
                 drawWorkExperienceDescriptionInCenterColumn(workExperience: workExperiences[i], xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber, isLast: i == workExperiences.count - 1 ? true : false)
             }
+            currentYCenterOffset += 20
         }
         if let educations = profile.educations, !educations.isEmpty {
-            if let educations = profile.educations {
-                drawEducationInCenterColumn(xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                for i in 0..<educations.count {
-                    drawEducationeDescriptionInCenterColumn(education: educations[i], xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                }
+            drawEducationInCenterColumn (xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            
+            for i in 0..<educations.count {
+                drawEducationeDescriptionInCenterColumn(education: educations[i], xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+                
             }
+            currentYCenterOffset += 20
         }
+     
+        
         if let certificates = profile.certificates, !certificates.isEmpty {
-            if let certificates = profile.certificates {
-                drawCertificatesInCenterColumn(xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                for i in 0..<certificates.count {
-                    drawCertificateDescriptionInCenterColumn(certificate: certificates[i], xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
-                }
+            drawCertificatesInCenterColumn(xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
+            for i in 0..<certificates.count {
+                drawCertificateDescriptionInCenterColumn(certificate: certificates[i], xOffset: lm2, pageRect: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight), pages: &pages, pageNumber: &pageNumber)
             }
         }
+        
         
         // Render pages
         for page in 0..<pages.count {
             UIGraphicsBeginPDFPage()
-           
+            if page == 0 {
+                let context = UIGraphicsGetCurrentContext()!
+            if let backgroundImage = UIImage(named: "PDF9BackgroundImage") {
+                
+                let pageRect = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
+                drawBackground(context: context, pageRect: pageRect, image: backgroundImage)
+                if let profileImageName, let image = DocumentsDirectory.loadImageFromDocumentsDirectory(fileName: profileImageName) {
+                    drawCircularImage(image: image, context: context, pageRect: pageRect, at: CGPoint(x: pageWidth/2 - 50/2, y: 30), size: CGSize(width: 56, height: 56))
+                }
+            }
+                for (type,rect) in rectAndContactTypeDict {
+                    if let image = UIImage(named: type) {
+                        drawImage(image: image, context: context, pageRect: rect, at: rect.origin, size: rect.size)
+                    }
+                }
+            } else {
+                if let backgroundImage = UIImage(named: "PDF9_1BackgroundImage") {
+                    let context = UIGraphicsGetCurrentContext()!
+                    let pageRect = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
+                    drawBackground(context: context, pageRect: pageRect, image: backgroundImage)
+                     }
+            }
             pages[page]?.forEach { $0() }
         }
         
         UIGraphicsEndPDFContext()
+        
         if let pdfDocument = PDFDocument(data: pdfData as Data) {
-            for page_ in 0..<pages.count {
-                
-                print("page_ \(page_)")
-                let topMarginForSM: CGFloat = currentYCenterOffset
-                
-                    if let page = pdfDocument.page(at: page_) {
-                        if let linksArray = pageAndLinksDict[page_] {
-                            for link in linksArray {
-                                // let imageRect = CGRect(x: 0, y: pageHeight - 40 - 56 , width: 56, height: 56)
-                                if let rect = rectAndLinkDict[link] {
-                                    var adaptedRect = CGRect(x: rect.minX,
-                                                             y: pageHeight -  rect.origin.y - 1.3*rect.height ,
-                                                             width: rect.width,
-                                                             height: rect.height)
-                                    let linkAnnotation = PDFAnnotation(bounds: adaptedRect, forType: .link, withProperties: nil)
-                                    linkAnnotation.url = URL(string: link)!
-                                    page.addAnnotation(linkAnnotation)
-                                }
+        for page_ in 0..<pages.count {
+            
+            print("page_ \(page_)")
+            let topMarginForSM: CGFloat = currentYCenterOffset
+            
+                if let page = pdfDocument.page(at: page_) {
+                    if let linksArray = pageAndLinksDict[page_] {
+                        for link in linksArray {
+                            // let imageRect = CGRect(x: 0, y: pageHeight - 40 - 56 , width: 56, height: 56)
+                            if let rect = rectAndLinkDict[link] {
+                                var adaptedRect = CGRect(x: rect.minX,
+                                                         y: pageHeight -  rect.origin.y - 1.8*rect.height ,
+                                                         width: rect.width,
+                                                         height: rect.height)
+                                let linkAnnotation = PDFAnnotation(bounds: adaptedRect, forType: .link, withProperties: nil)
+                                linkAnnotation.url = URL(string: link)!
+                                page.addAnnotation(linkAnnotation)
                             }
                         }
                     }
-                   
                 }
-                return pdfDocument.dataRepresentation() ?? Data()
+               
             }
+            return pdfDocument.dataRepresentation() ?? Data()
+        }
         
         return pdfData as Data
     }
     
-    func drawGeneraInfoInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Lora.bold(size: 24)
-        let textColor = UIColor(red: 0/255, green: 91/255, blue: 162/255, alpha: 1)
+    func drawGeneraInfoInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        var combinedAttributedString = NSMutableAttributedString()
+        let companyAndJobParagraphStyle = NSMutableParagraphStyle()
+        companyAndJobParagraphStyle.paragraphSpacing = 1.0
+        companyAndJobParagraphStyle.alignment = .center
+        if let firstName = generalInfo.firstName, !firstName.isEmpty {
+            var fullName:String = firstName
+            
+            if let lastName = generalInfo.lastName, !lastName.isEmpty {
+                fullName += " \(lastName)"
+            }
+            let fullManeTitleAttributes: [NSAttributedString.Key: Any] = [
+                .font: Fonts.Roboto.bold(size: 18),
+                .foregroundColor: UIColor(white: 1, alpha: 1),
+                .paragraphStyle: companyAndJobParagraphStyle
+            ]
+            let attributedJobTitleText = NSAttributedString(string: "\(fullName)\n", attributes: fullManeTitleAttributes)
+            
+            combinedAttributedString.append(attributedJobTitleText)
+        }
+        
+        var jobTitle = ""
+        if let reference = profile.workExperiences?.first {
+            if let jobTitle_ = reference.jobTitle {
+                if jobTitle_ != "" {
+                    jobTitle = jobTitle_
+                    let jobTitleAttributes: [NSAttributedString.Key: Any] = [
+                        .font: Fonts.Roboto.regular(size: 12),
+                        .foregroundColor: UIColor(white: 1, alpha: 0.7),
+                        .paragraphStyle: companyAndJobParagraphStyle
+                    ]
+                    let attributedjobTitileText = NSAttributedString(string: "\(jobTitle)", attributes: jobTitleAttributes)
+                    combinedAttributedString.append(attributedjobTitileText)
+                }
+            }
+        }
+        
+        var remainingText = combinedAttributedString
+        
+        
+        while remainingText.length > 0 {
+            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
+                currentYOffset = centerMargin - aboutYourSelfHeight
+                pageNumber += 1
+            }
+            var imageOffset: CGFloat = 0
+            if let backgroundImage = UIImage(named: profileImageName ?? "") {
+                imageOffset = 50 + 10
+            }
+            currentYOffset += 50 + 10
+            let textRect = CGRect(x: 0, y: currentYOffset , width: pageWidth, height: pageRect.height - bottomMargin   - currentYOffset)
+            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
+            
+            
+            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth)
+            
+            if pages[pageNumber] == nil {
+                pages[pageNumber] = []
+            }
+            pages[pageNumber]?.append {
+                textToDraw.draw(in: textRect)
+            }
+            
+            remainingText = remainder
+          
+            if remainingText.length > 0  {
+                currentYOffset = margin
+                pageNumber += 1
+            } else {
+                if let backgroundImage = UIImage(named: profileImageName ?? "") {
+                    currentYOffset += 56 + 15
+                } else {
+                    currentYOffset += textHeight + 10
+                }
+            }
+        }
+        
+    }
+    
+ 
+    func drawContactsDescriptionInRightColumn(text: String,type: String, xOffset: CGFloat,textWidth: CGFloat,fontSize: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Roboto.regular(size: fontSize)
+        let textColor = UIColor(white: 1, alpha: 0.7)
         let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
         
         let fullNameAttributes: [NSAttributedString.Key: Any] = [
@@ -231,22 +471,40 @@ class PDF5Generator {
             .paragraphStyle: paragraphStyle
         ]
         
-        let jobTitle = profile.workExperiences?.first?.jobTitle ?? ""
-        var text = "\(generalInfo.firstName ?? "") \(generalInfo.lastName ?? "")" + ((jobTitle != "") ? ",\n\(jobTitle)" : "")
-        guard text != "" else { return }
+        var text = text
+    
+        
         var remainingText = text
         
+        guard text != "" else { return }
         
         while !remainingText.isEmpty {
             if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth, height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset + 15, y: 151, width: textWidth , height: 50 )
+            
+            let coeddicient: CGFloat = 1
+            let topOffset: CGFloat = 7
+            var imageRect = CGRect()
+            if type == "email9" {
+                imageRect = CGRect(x: xOffset , y: textRect.minY + topOffset + 0.63, width: coeddicient * 10, height: coeddicient * 7.7)
+            }
+            if type == "phone9" {
+                imageRect = CGRect(x: xOffset , y: textRect.minY + topOffset  , width: coeddicient * 9, height: coeddicient * 9)
+            }
+            if type == "address9" {
+                imageRect = CGRect(x: xOffset , y: textRect.minY + topOffset - 0.3  , width: coeddicient * 8.5, height: coeddicient * 9)
+            }
+            rectAndContactTypeDict[type] = imageRect
+            
+            
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth, attributes: fullNameAttributes)
+            let textHeight = calculateTextHeight(text: textToDraw, width: textWidth, attributes: fullNameAttributes)
             
             if pages[pageNumber] == nil {
                 pages[pageNumber] = []
@@ -257,165 +515,43 @@ class PDF5Generator {
             
             remainingText = remainder
           
-            if !remainingText.isEmpty  {
+            if !remainingText.isEmpty   {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
-                currentYOffset += textHeight + 25
+            //    currentYOffset = 193 + 50
             }
+            
         }
+        
         text = remainingText
     }
     
-    
-    
-    func drawAboutYourselfInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.bold(size: 12)
+    func drawSkiilsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Inter.bold(size: 15)
         let textColor = UIColor.black
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
-        paragraphStyle.alignment = .left
-        
-        let fullNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: fullNameFont,
-            .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        var text = "\(generalInfo.aboutYourself ?? "")"
-        var remainingText = text
-        
-        guard text != "" else { return }
-        
-        while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
-            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth, attributes: fullNameAttributes)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                attributedTextToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-          
-            if !remainingText.isEmpty {
-                currentYOffset = margin
-                pageNumber += 1
-            } else {
-                currentYOffset += textHeight + 45
-            }
-            
-        }
-        
-        text = remainingText
-    }
-    func drawContactsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.bold(size: 13)
-        let textColor = UIColor.black
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
-        paragraphStyle.alignment = .left
-        
-        let fullNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: fullNameFont,
-            .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        var text = "Contact"
-        var remainingText = text
-        
-        guard text != "" else { return }
-        
-        while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
-            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth, attributes: fullNameAttributes)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                attributedTextToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-          
-            if !remainingText.isEmpty {
-                currentYOffset = margin
-                pageNumber += 1
-            } else {
-                currentYOffset += textHeight + 19.5
-            }
-            
-        }
-        
-        text = remainingText
-    }
-    
-    func drawContactsDescriptionInRightColumn(generalInfo: GeneralInfo, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.regular(size: 10)
-        let textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 0.5
         paragraphStyle.alignment = .left
-        guard let contactInfo = generalInfo.contactInfo else { return }
+        
         let fullNameAttributes: [NSAttributedString.Key: Any] = [
             .font: fullNameFont,
             .foregroundColor: textColor,
             .paragraphStyle: paragraphStyle
         ]
-     
-        let dwn_sl = "–"
-        var text = ""
-
-        if let website = contactInfo.website, !website.isEmpty {
-            text += website + "\n"
-            for _ in 0..<website.count {
-                text += dwn_sl
-            }
-            text += "\n\n\n"
-        }
-
-        if let email = contactInfo.email, !email.isEmpty {
-            text += email + "\n"
-            for _ in 0...email.count {
-                text += dwn_sl
-            }
-            text += "\n\n\n"
-        }
-
-        if let phone = contactInfo.phone, !phone.isEmpty {
-            text += phone + "\n"
-           
-            text += "\n\n"
-        }
         
+        var text = "Skills\n———–".uppercased()
         var remainingText = text
         
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
             if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin  - currentYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -434,7 +570,7 @@ class PDF5Generator {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
-                currentYOffset += textHeight + 25
+                currentYOffset += textHeight + 0
             }
             
         }
@@ -442,59 +578,9 @@ class PDF5Generator {
         text = remainingText
     }
     
-    func drawSkiilsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.bold(size: 13)
-        let textColor = UIColor.black
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
-        paragraphStyle.alignment = .left
-        
-        let fullNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: fullNameFont,
-            .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        var text = "Skills"
-        var remainingText = text
-        
-        guard text != "" else { return }
-        
-        while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
-            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth, attributes: fullNameAttributes)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                attributedTextToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-        
-            if !remainingText.isEmpty  {
-                currentYOffset = margin
-                pageNumber += 1
-            } else {
-                currentYOffset += textHeight + 15
-            }
-            
-        }
-        
-        text = remainingText
-    }
-    
-    func drawSkiilsDescriptionInRightColumn(professionalSkills: [String], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.regular(size: 10)
-        let textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
+    func drawSkiilsDescriptionInRightColumn(professionalSkills: [String], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Roboto.regular(size: 10)
+        let textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -516,62 +602,12 @@ class PDF5Generator {
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+            if pageRect.height - currentYOffset - bottomMargin < estimateHeight {
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
-            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth, attributes: fullNameAttributes)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                attributedTextToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-         
-            if !remainingText.isEmpty  {
-                currentYOffset = margin
-                pageNumber += 1
-            } else {
-                currentYOffset += textHeight + 25
-            }
-            
-        }
-        
-        text = remainingText
-    }
-    
-    
-    func drawLanguagesInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.bold(size: 13)
-        let textColor = UIColor.black
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
-        paragraphStyle.alignment = .left
-        
-        let fullNameAttributes: [NSAttributedString.Key: Any] = [
-            .font: fullNameFont,
-            .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
-        ]
-        
-        var text = "Languages"
-        var remainingText = text
-        
-        guard text != "" else { return }
-        
-        while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin  - currentYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -586,11 +622,11 @@ class PDF5Generator {
             
             remainingText = remainder
            
-            if !remainingText.isEmpty   {
+            if !remainingText.isEmpty  {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
-                currentYOffset += textHeight + 15
+                currentYOffset += textHeight + 25
             }
             
         }
@@ -599,9 +635,61 @@ class PDF5Generator {
     }
     
     
-    func drawLanguagesDescriptionInRightColumn(languages: [Language], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.regular(size: 10)
-        let textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
+    func drawLanguagesInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Inter.bold(size: 15)
+        let textColor = UIColor.black
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.5
+        paragraphStyle.alignment = .left
+        
+        let fullNameAttributes: [NSAttributedString.Key: Any] = [
+            .font: fullNameFont,
+            .foregroundColor: textColor,
+            .paragraphStyle: paragraphStyle
+        ]
+        
+        var text = "Languages\n–––––––––––—".uppercased()
+        var remainingText = text
+        
+        guard text != "" else { return }
+        
+        while !remainingText.isEmpty {
+            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
+                currentYOffset = centerMargin - aboutYourSelfHeight
+                pageNumber += 1
+            }
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin  - currentYOffset)
+            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
+            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
+            
+            let textHeight = calculateTextHeight(text: textToDraw, width: columnWidth, attributes: fullNameAttributes)
+            
+            if pages[pageNumber] == nil {
+                pages[pageNumber] = []
+            }
+            pages[pageNumber]?.append {
+                attributedTextToDraw.draw(in: textRect)
+            }
+            
+            remainingText = remainder
+          
+            if !remainingText.isEmpty {
+                currentYOffset = margin
+                pageNumber += 1
+            } else {
+                currentYOffset += textHeight + 0
+            }
+            
+        }
+        
+        text = remainingText
+    }
+    
+    
+    func drawLanguagesDescriptionInRightColumn(languages: [Language], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Roboto.regular(size: 10)
+        let textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -624,10 +712,11 @@ class PDF5Generator {
         
         while !remainingText.isEmpty {
             if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height  - bottomMargin - currentYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -641,8 +730,8 @@ class PDF5Generator {
             }
             
             remainingText = remainder
-          
-            if !remainingText.isEmpty {
+           
+            if !remainingText.isEmpty  {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
@@ -654,11 +743,11 @@ class PDF5Generator {
         text = remainingText
     }
     
-    func drawLinksMediaInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.bold(size: 13)
+    func drawLinksMediaInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Inter.bold(size: 15)
         let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
+        paragraphStyle.lineHeightMultiple = 0.5
         paragraphStyle.alignment = .left
         
         let fullNameAttributes: [NSAttributedString.Key: Any] = [
@@ -667,17 +756,22 @@ class PDF5Generator {
             .paragraphStyle: paragraphStyle
         ]
         
-        var text = "Links"
+        var text = "Links\n———".uppercased()
         var remainingText = text
         
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
+            
             if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+            
+            
+            var textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+        
+           
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -691,24 +785,23 @@ class PDF5Generator {
             }
             
             remainingText = remainder
-         
-            if !remainingText.isEmpty  {
+           
+            if !remainingText.isEmpty {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
-                currentYOffset += textHeight + 15
+                currentYOffset += textHeight + 0
             }
             
         }
         
         text = remainingText
     }
-    
     func drawLinksDescriptionInRightColumn(socialMedia: String, type: String, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         let fullNameFont = Fonts.Poppins.regular(size: 10)
         let textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.1
+        paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
         
         let fullNameAttributes: [NSAttributedString.Key: Any] = [
@@ -766,9 +859,9 @@ class PDF5Generator {
 
         text = remainingText
     }
-    func drawLinksDescriptionInRightColumn(socialMedia: SocialMedia, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.regular(size: 10)
-        let textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
+    func drawLinksDescriptionInRightColumn(socialMedia: SocialMedia, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Roboto.regular(size: 10)
+        let textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -798,11 +891,12 @@ class PDF5Generator {
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+            if pageRect.height - currentYOffset - bottomMargin < estimateHeight {
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin   - currentYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -816,8 +910,8 @@ class PDF5Generator {
             }
             
             remainingText = remainder
-            
-            if !remainingText.isEmpty   {
+          
+            if !remainingText.isEmpty {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
@@ -830,11 +924,11 @@ class PDF5Generator {
     }
     
     
-    func drawInterestsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.bold(size: 13)
+    func drawInterestsInRightColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Inter.bold(size: 15)
         let textColor = UIColor.black
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.2
+        paragraphStyle.lineHeightMultiple = 0.5
         paragraphStyle.alignment = .left
         
         let fullNameAttributes: [NSAttributedString.Key: Any] = [
@@ -843,17 +937,18 @@ class PDF5Generator {
             .paragraphStyle: paragraphStyle
         ]
         
-        var text = "Interests"
+        var text = "Interests\n–––––––––––".uppercased()
         var remainingText = text
         
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
             if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin  - currentYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -867,12 +962,12 @@ class PDF5Generator {
             }
             
             remainingText = remainder
-           
-            if !remainingText.isEmpty  {
+          
+            if !remainingText.isEmpty   {
                 currentYOffset = margin
                 pageNumber += 1
             } else {
-                currentYOffset += textHeight + 15
+                currentYOffset += textHeight + 0
             }
             
         }
@@ -880,9 +975,9 @@ class PDF5Generator {
         text = remainingText
     }
     
-    func drawInterestsDescriptionInRightColumn(interests: [String], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        let fullNameFont = Fonts.Inter.regular(size: 10)
-        let textColor = UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1)
+    func drawInterestsDescriptionInRightColumn(interests: [String], xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, checkTheNextText: String = "") {
+        let fullNameFont = Fonts.Roboto.regular(size: 10)
+        let textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.5
         paragraphStyle.alignment = .left
@@ -905,11 +1000,12 @@ class PDF5Generator {
         guard text != "" else { return }
         
         while !remainingText.isEmpty {
-            if pageRect.height  - currentYOffset - bottomMargin < estimateHeight {
-                currentYOffset = margin
+            if pageRect.height  - currentYOffset  - bottomMargin < estimateHeight {
+                currentYOffset = centerMargin - aboutYourSelfHeight
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin - currentYOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYOffset, width: columnWidth , height: pageRect.height - bottomMargin  - currentYOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: fullNameAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: fullNameAttributes)
             
@@ -923,7 +1019,7 @@ class PDF5Generator {
             }
             
             remainingText = remainder
-           
+             
             if !remainingText.isEmpty  {
                 currentYOffset = margin
                 pageNumber += 1
@@ -940,14 +1036,14 @@ class PDF5Generator {
     func drawContactInfoInCenterColumn(generalInfo: GeneralInfo , xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         if let contactInfo = generalInfo.contactInfo {
             
-            let contactFont = Fonts.Inter.medium(size: 10)
+            let contactFont = Fonts.Roboto.medium(size: 10)
             let vertOffset = 7
             let contactParagraphStyle = NSMutableParagraphStyle()
             contactParagraphStyle.alignment = .right
             contactParagraphStyle.lineHeightMultiple = 1.3
             
             
-            let textColor = UIColor(red: 0/255, green: 91/255, blue: 162/255, alpha: 1)
+            let textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
             let textAttributes: [NSAttributedString.Key: Any] = [
                 .font: font,
                 .foregroundColor: textColor,
@@ -970,49 +1066,48 @@ class PDF5Generator {
                 if phone != "" {
                     text += phone + "\n"
                 }
-                var remainingText = text
+            }
+            guard text != "" else { return }
+            var remainingText = text
+            
+            
+            while !remainingText.isEmpty {
                 
+                let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin  - currentYCenterOffset)
+                let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: textAttributes)
+                let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: textAttributes)
                 
-                while !remainingText.isEmpty {
-                    if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
-                        currentYCenterOffset = margin
-                        pageNumber += 1
-                    }
-                    let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
-                    let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: textAttributes)
-                    let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: textAttributes)
-                    
-                    let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth, attributes: textAttributes)
-                    
-                    if pages[pageNumber] == nil {
-                        pages[pageNumber] = []
-                    }
-                    pages[pageNumber]?.append {
-                        attributedTextToDraw.draw(in: textRect)
-                    }
-                    
-                    remainingText = remainder
-                    if !remainingText.isEmpty {
-                        currentYCenterOffset = margin
-                        pageNumber += 1
-                    } else {
-                        currentYCenterOffset += textHeight + 25
-                    }
+                let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth, attributes: textAttributes)
+                
+                if pages[pageNumber] == nil {
+                    pages[pageNumber] = []
+                }
+                pages[pageNumber]?.append {
+                    attributedTextToDraw.draw(in: textRect)
                 }
                 
-                text = remainingText
+                remainingText = remainder
+                if !remainingText.isEmpty {
+                    currentYCenterOffset = margin
+                    pageNumber += 1
+                } else {
+                    currentYCenterOffset += textHeight + 25
+                }
             }
+            
+            text = remainingText
         }
     }
-    func drawAboutYourselfInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
+    
+    func drawWorkExperienceInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int ) {
         
-        let contactFont = Fonts.Inter.bold(size: 12)
+        let contactFont = Fonts.Inter.bold(size: 15)
         
         
         let vertOffset = 7
         let contactParagraphStyle = NSMutableParagraphStyle()
         contactParagraphStyle.alignment = .left
-        contactParagraphStyle.lineHeightMultiple = 1.3
+        contactParagraphStyle.lineHeightMultiple = 0.5
         
         
         let textColor = UIColor.black
@@ -1023,17 +1118,18 @@ class PDF5Generator {
             
         ]
         
-        var text = "About me".capitalized
+        var text = "Experience\n––––––––––—–".uppercased()
         
         var remainingText = text
         
-        
+        guard text != "" else { return }
         while !remainingText.isEmpty {
             if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
                 currentYCenterOffset = margin
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
+
+            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin  - currentYCenterOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: textAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: textAttributes)
             
@@ -1047,148 +1143,45 @@ class PDF5Generator {
             }
             
             remainingText = remainder
-         
+          
                 if !remainingText.isEmpty {
                     currentYCenterOffset = margin
                     pageNumber += 1
                 } else {
-                    currentYCenterOffset += textHeight + 0
+                    currentYCenterOffset += textHeight + 12.5
                 }
-            
-        }
+            }
+        
         
         
         text = remainingText
     }
     
-    func drawAboutYourselfDescriptionInCenterColumn(aboutYourself: String, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, isLast: Bool = false) {
-        var combinedAttributedString = NSMutableAttributedString()
-        let companyAndJobParagraphStyle = NSMutableParagraphStyle()
-        companyAndJobParagraphStyle.paragraphSpacing = 1.0
-        
-            let resultsAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 10),
-                .foregroundColor: UIColor(red: 69/255, green: 69/255, blue: 69/255, alpha: 1.0)
-            ]
-            let attributedResultsText = NSAttributedString(string: "\n\(aboutYourself)", attributes: resultsAttributes)
-            combinedAttributedString.append(attributedResultsText)
-        
-        
-        var remainingText = combinedAttributedString
-        
-        while remainingText.length > 0 {
-            if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
-                currentYCenterOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                textToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-            
-         
-           
-                if remainingText.length > 0 {
-                    currentYCenterOffset = margin
-                    pageNumber += 1
-                } else {
-                    currentYCenterOffset += textHeight + (isLast ? 15 : 15)
-                }
-            
-        }
-    }
-    
-    
-    func drawWorkExperienceInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
-        
-        let contactFont = Fonts.Inter.bold(size: 12)
-        
-        
-        let vertOffset = 7
-        let contactParagraphStyle = NSMutableParagraphStyle()
-        contactParagraphStyle.alignment = .left
-        contactParagraphStyle.lineHeightMultiple = 1.3
-        
-        
-        let textColor = UIColor.black
-        let textAttributes: [NSAttributedString.Key: Any] = [
-            .font: contactFont,
-            .foregroundColor: textColor,
-            .paragraphStyle: contactParagraphStyle
-            
-        ]
-        
-        var text = "WORK EXPERIENCE".capitalized
-        
-        var remainingText = text
-        
-        
-        while !remainingText.isEmpty {
-            if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
-                currentYCenterOffset = margin
-                pageNumber += 1
-            }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
-            let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: textAttributes)
-            let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: textAttributes)
-            
-            let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth, attributes: textAttributes)
-            
-            if pages[pageNumber] == nil {
-                pages[pageNumber] = []
-            }
-            pages[pageNumber]?.append {
-                attributedTextToDraw.draw(in: textRect)
-            }
-            
-            remainingText = remainder
-         
-                if !remainingText.isEmpty {
-                    currentYCenterOffset = margin
-                    pageNumber += 1
-                } else {
-                    currentYCenterOffset += textHeight + 17
-                }
-            
-        }
-        
-        
-        text = remainingText
-    }
-    
-    func drawWorkExperienceDescriptionInCenterColumn(workExperience: WorkExperience, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int, isLast: Bool = false) {
+    func drawWorkExperienceDescriptionInCenterColumn(workExperience: WorkExperience, xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int ,isLast: Bool = false) {
         var combinedAttributedString = NSMutableAttributedString()
         let companyAndJobParagraphStyle = NSMutableParagraphStyle()
         companyAndJobParagraphStyle.paragraphSpacing = 3.0
-        
-        if let companyName = workExperience.companyName, !companyName.isEmpty {
-            let companyAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.semibold(size: 12),
-                .foregroundColor: UIColor(red: 0/255, green: 91/255, blue: 162/255, alpha: 1),
-                .paragraphStyle: companyAndJobParagraphStyle
-            ]
-            let attributedCompanyText = NSAttributedString(string: companyName, attributes: companyAttributes)
-            combinedAttributedString.append(attributedCompanyText)
-        }
-        
         if let jobTitle = workExperience.jobTitle, !jobTitle.isEmpty {
             let jobTitleAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 12),
+                .font: Fonts.Roboto.bold(size: 10),
                 .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
-            let attributedJobTitleText = NSAttributedString(string: "    \(jobTitle)", attributes: jobTitleAttributes)
+            let attributedJobTitleText = NSAttributedString(string:  jobTitle != "" ? "\(jobTitle)\n" : "", attributes: jobTitleAttributes)
             combinedAttributedString.append(attributedJobTitleText)
         }
+        
+        if let companyName = workExperience.companyName, !companyName.isEmpty {
+            let companyAttributes: [NSAttributedString.Key: Any] = [
+                .font: Fonts.Roboto.regular(size: 9),
+                .foregroundColor: UIColor.black,
+                .paragraphStyle: companyAndJobParagraphStyle
+            ]
+            let attributedCompanyText = NSAttributedString(string: "\(companyName)", attributes: companyAttributes)
+            combinedAttributedString.append(attributedCompanyText)
+        }
+        
+      
         let  dateParagraphStyle = NSMutableParagraphStyle()
         dateParagraphStyle.paragraphSpacing = 8.0
         
@@ -1206,8 +1199,8 @@ class PDF5Generator {
             }
             
             let dateAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 8),
-                .foregroundColor: UIColor.gray,
+                .font: Fonts.Roboto.regular(size: 8),
+                .foregroundColor: UIColor.black,
                 .paragraphStyle: dateParagraphStyle
             ]
             let attributedDateText = NSAttributedString(string: "\n\(dateText)", attributes: dateAttributes)
@@ -1216,13 +1209,13 @@ class PDF5Generator {
         
         if let results = workExperience.results, !results.isEmpty {
             let resultsAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 10),
-                .foregroundColor: UIColor.darkGray
+                .font: Fonts.Roboto.regular(size: 10),
+                .foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
             ]
             let attributedResultsText = NSAttributedString(string: "\n\(results)", attributes: resultsAttributes)
             combinedAttributedString.append(attributedResultsText)
         }
-        
+        guard combinedAttributedString.length > 0 else { return }
         var remainingText = combinedAttributedString
         
         while remainingText.length > 0 {
@@ -1230,7 +1223,8 @@ class PDF5Generator {
                 currentYCenterOffset = margin
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
+            
+            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height  - bottomMargin  - currentYCenterOffset )
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
             
             let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth)
@@ -1245,27 +1239,26 @@ class PDF5Generator {
             remainingText = remainder
             
          
-           
                 if remainingText.length > 0 {
                     currentYCenterOffset = margin
                     pageNumber += 1
                 } else {
                     currentYCenterOffset += textHeight + (isLast ? 30 : 15)
                 }
-            
-        }
+            }
+        
     }
     
-    func drawEducationInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int,checkTheNextText:NSMutableAttributedString? = nil) {
+    func drawEducationInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         
         
-        let contactFont = Fonts.Inter.bold(size: 12)
+        let contactFont = Fonts.Inter.bold(size: 15)
         
         
         let vertOffset = 7
         let contactParagraphStyle = NSMutableParagraphStyle()
         contactParagraphStyle.alignment = .left
-        contactParagraphStyle.lineHeightMultiple = 1.3
+        contactParagraphStyle.lineHeightMultiple = 0.5
         
         
         let textColor = UIColor.black
@@ -1276,8 +1269,8 @@ class PDF5Generator {
             
         ]
         
-        var text = "EDUCATION".capitalized
-        
+        var text = "Education\n—————––".uppercased()
+        guard text != "" else { return }
         var remainingText = text
         
         
@@ -1286,7 +1279,8 @@ class PDF5Generator {
                 currentYCenterOffset = margin
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
+            
+            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height  - bottomMargin  - currentYCenterOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: textAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: textAttributes)
             
@@ -1301,15 +1295,15 @@ class PDF5Generator {
             
             remainingText = remainder
             
-          
+        
                 if !remainingText.isEmpty {
                     currentYCenterOffset = margin
                     pageNumber += 1
                 } else {
-                    currentYCenterOffset += textHeight + 17
+                    currentYCenterOffset += textHeight + 15
                 }
-            }
-        
+            
+        }
         
         text = remainingText
     }
@@ -1318,29 +1312,30 @@ class PDF5Generator {
         var combinedAttributedString = NSMutableAttributedString()
         let companyAndJobParagraphStyle = NSMutableParagraphStyle()
         companyAndJobParagraphStyle.paragraphSpacing = 3.0
+        if var fieldOfStudy = education.fieldOfStudy, !fieldOfStudy.isEmpty {
+            let fieldOfStudyTitleAttributes: [NSAttributedString.Key: Any] = [
+                .font: Fonts.Roboto.bold(size: 9),
+                .foregroundColor: UIColor(white: 0, alpha: 0.7),
+                .paragraphStyle: companyAndJobParagraphStyle
+            ]
+//            if let degree = education.degree, !degree.isEmpty {
+//                fieldOfStudy += " (\(degree))"
+//            }
+            let attributedJobTitleText = NSAttributedString(string: "\(fieldOfStudy)\n", attributes: fieldOfStudyTitleAttributes)
+            combinedAttributedString.append(attributedJobTitleText)
+        }
         
         if let university = education.university, !university.isEmpty {
             let universityAttributes: [NSAttributedString.Key: Any] = [
-                .font:  Fonts.Inter.semibold(size: 12),
-                .foregroundColor: UIColor(red: 0/255, green: 91/255, blue: 162/255, alpha: 1),
-                .paragraphStyle: companyAndJobParagraphStyle
-            ]
-            let attributedCompanyText = NSAttributedString(string: university, attributes: universityAttributes)
-            combinedAttributedString.append(attributedCompanyText)
-        }
-        
-        if var fieldOfStudy = education.fieldOfStudy, !fieldOfStudy.isEmpty {
-            let fieldOfStudyTitleAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 12),
+                .font:  Fonts.Roboto.regular(size: 10),
                 .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
-            if let degree = education.degree, !degree.isEmpty {
-                fieldOfStudy += " (\(degree))"
-            }
-            let attributedJobTitleText = NSAttributedString(string: "    \(fieldOfStudy)", attributes: fieldOfStudyTitleAttributes)
-            combinedAttributedString.append(attributedJobTitleText)
+            let attributedCompanyText = NSAttributedString(string: "\(university)", attributes: universityAttributes)
+            combinedAttributedString.append(attributedCompanyText)
         }
+        
+    
         let  dateParagraphStyle = NSMutableParagraphStyle()
         dateParagraphStyle.paragraphSpacing = 8.0
         
@@ -1358,15 +1353,15 @@ class PDF5Generator {
             }
             
             let dateAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 8),
-                .foregroundColor: UIColor.gray,
+                .font: Fonts.Roboto.regular(size: 9),
+                .foregroundColor: UIColor(white: 0, alpha: 0.7),
                 .paragraphStyle: dateParagraphStyle
             ]
-            let attributedDateText = NSAttributedString(string: "\n\(dateText)", attributes: dateAttributes)
+            let attributedDateText = NSAttributedString(string: ", \(dateText)", attributes: dateAttributes)
             combinedAttributedString.append(attributedDateText)
         }
         
-        
+        guard combinedAttributedString.length > 0 else { return }
         var remainingText = combinedAttributedString
         
         while remainingText.length > 0 {
@@ -1374,7 +1369,7 @@ class PDF5Generator {
                 currentYCenterOffset = margin
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
+            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height  - bottomMargin  - currentYCenterOffset )
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
             
             let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth)
@@ -1388,7 +1383,7 @@ class PDF5Generator {
             
             remainingText = remainder
             
-           
+         
                 if remainingText.length > 0 {
                     currentYCenterOffset = margin
                     pageNumber += 1
@@ -1399,16 +1394,16 @@ class PDF5Generator {
         }
     }
     
-    func drawCertificatesInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int,checkTheNextText:NSMutableAttributedString? = nil) {
+    func drawCertificatesInCenterColumn(xOffset: CGFloat, pageRect: CGRect, pages: inout [Int: [() -> Void]], pageNumber: inout Int) {
         
         
-        let contactFont = Fonts.Inter.bold(size: 12)
+        let contactFont = Fonts.Inter.bold(size: 15)
         
         
         let vertOffset = 7
         let contactParagraphStyle = NSMutableParagraphStyle()
         contactParagraphStyle.alignment = .left
-        contactParagraphStyle.lineHeightMultiple = 1.3
+        contactParagraphStyle.lineHeightMultiple = 0.5
         
         
         let textColor = UIColor.black
@@ -1419,13 +1414,17 @@ class PDF5Generator {
             
         ]
         
-        var text = "CERTIFICATES".capitalized
-        
+        var text = "Certificates\n––––––––––––––".uppercased()
+   
+        guard text != "" else { return }
         var remainingText = text
         
-        
         while !remainingText.isEmpty {
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - centerMargin - currentYCenterOffset)
+            if pageRect.height  - currentYCenterOffset - bottomMargin < estimateHeight {
+                currentYCenterOffset = margin
+                pageNumber += 1
+            }
+            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin   - currentYCenterOffset)
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText, attributes: textAttributes)
             let attributedTextToDraw = NSAttributedString(string: textToDraw, attributes: textAttributes)
             
@@ -1440,12 +1439,12 @@ class PDF5Generator {
             
             remainingText = remainder
             
-        
+       
                 if !remainingText.isEmpty {
                     currentYCenterOffset = margin
                     pageNumber += 1
                 } else {
-                    currentYCenterOffset += textHeight + 17
+                    currentYCenterOffset += textHeight + 15
                 }
             
         }
@@ -1458,27 +1457,28 @@ class PDF5Generator {
         var combinedAttributedString = NSMutableAttributedString()
         let companyAndJobParagraphStyle = NSMutableParagraphStyle()
         companyAndJobParagraphStyle.paragraphSpacing = 3.0
-        
-        if let university = certificate.organizationName, !university.isEmpty {
-            let universityAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.semibold(size: 12),
-                .foregroundColor: UIColor(red: 0/255, green: 91/255, blue: 162/255, alpha: 1),
-                .paragraphStyle: companyAndJobParagraphStyle
-            ]
-            let attributedCompanyText = NSAttributedString(string: university, attributes: universityAttributes)
-            combinedAttributedString.append(attributedCompanyText)
-        }
-        
         if var description = certificate.description, !description.isEmpty {
             let fieldOfStudyTitleAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 12),
+                .font: Fonts.Roboto.bold(size: 10),
                 .foregroundColor: UIColor.black,
                 .paragraphStyle: companyAndJobParagraphStyle
             ]
-           
-            let attributedJobTitleText = NSAttributedString(string: "    \(description)", attributes: fieldOfStudyTitleAttributes)
+            
+            let attributedJobTitleText = NSAttributedString(string: "\(description)\n", attributes: fieldOfStudyTitleAttributes)
             combinedAttributedString.append(attributedJobTitleText)
         }
+        
+        if let university = certificate.organizationName, !university.isEmpty {
+            let universityAttributes: [NSAttributedString.Key: Any] = [
+                .font: Fonts.Roboto.regular(size: 9),
+                .foregroundColor: UIColor.black,
+                .paragraphStyle: companyAndJobParagraphStyle
+            ]
+            let attributedCompanyText = NSAttributedString(string: "\(university)", attributes: universityAttributes)
+            combinedAttributedString.append(attributedCompanyText)
+        }
+        
+        
         let  dateParagraphStyle = NSMutableParagraphStyle()
         dateParagraphStyle.paragraphSpacing = 8.0
         
@@ -1496,15 +1496,15 @@ class PDF5Generator {
             }
             
             let dateAttributes: [NSAttributedString.Key: Any] = [
-                .font: Fonts.Inter.regular(size: 8),
-                .foregroundColor: UIColor.gray,
+                .font: Fonts.Roboto.regular(size: 8),
+                .foregroundColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.7),
                 .paragraphStyle: dateParagraphStyle
             ]
             let attributedDateText = NSAttributedString(string: "\n\(dateText)", attributes: dateAttributes)
             combinedAttributedString.append(attributedDateText)
         }
         
-        
+        guard combinedAttributedString.length > 0 else { return }
         var remainingText = combinedAttributedString
         
         while remainingText.length > 0 {
@@ -1512,7 +1512,7 @@ class PDF5Generator {
                 currentYCenterOffset = margin
                 pageNumber += 1
             }
-            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin - currentYCenterOffset)
+            let textRect = CGRect(x: xOffset, y: currentYCenterOffset, width: columnCenterWidth, height: pageRect.height - bottomMargin   - currentYCenterOffset )
             let (textToDraw, remainder) = splitTextToFit(rect: textRect, text: remainingText)
             
             let textHeight = calculateTextHeight(text: textToDraw, width: columnCenterWidth)
@@ -1526,13 +1526,13 @@ class PDF5Generator {
             
             remainingText = remainder
             
-        
-                if remainingText.length > 0 {
-                    currentYCenterOffset = margin
-                    pageNumber += 1
-                } else {
-                    currentYCenterOffset += textHeight + (isLast ? 30 : 15)
-                }
+            
+            if remainingText.length > 0 {
+                currentYCenterOffset = margin
+                pageNumber += 1
+            } else {
+                currentYCenterOffset += textHeight + (isLast ? 30 : 15)
+            }
             
         }
     }
@@ -1549,14 +1549,7 @@ class PDF5Generator {
 
 
 
-
-
-
-
-
-
-
-extension PDF5Generator {
+extension CV9Generator {
     
     func splitTextToFit(rect: CGRect, text: String, attributes: [NSAttributedString.Key: Any]) -> (String, String) {
         let attributedText = NSAttributedString(string: text, attributes: attributes)
@@ -1585,6 +1578,13 @@ extension PDF5Generator {
         return (NSMutableAttributedString(attributedString: fitString), NSMutableAttributedString(attributedString: remainderString))
     }
     
+    func calculateTextWidth(text: String, height: CGFloat, attributes: [NSAttributedString.Key: Any]) -> CGFloat {
+        let attributedText = NSAttributedString(string: text, attributes: attributes)
+        let framesetter = CTFramesetterCreateWithAttributedString(attributedText)
+        let suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRange(location: 0, length: attributedText.length), nil, CGSize(width: CGFloat.greatestFiniteMagnitude, height: height), nil)
+        return suggestedSize.width
+    }
+    
     func calculateTextHeight(text: String, width: CGFloat, attributes: [NSAttributedString.Key: Any]) -> CGFloat {
         let attributedText = NSAttributedString(string: text, attributes: attributes)
         let framesetter = CTFramesetterCreateWithAttributedString(attributedText)
@@ -1609,5 +1609,43 @@ extension PDF5Generator {
           context.draw(image.cgImage!, in: pageRect)
           context.restoreGState()
       }
-    
+  
+    func drawCircularImage(image: UIImage, context: CGContext, pageRect: CGRect, at point: CGPoint, size: CGSize) {
+        context.saveGState()
+        
+        // Flip the coordinate system to PDF coordinate system (bottom-left is (0, 0))
+        context.translateBy(x: 0, y: pageRect.size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        
+        // Calculate the circular clipping path
+        let radius = min(size.width, size.height) / 2
+        let center = CGPoint(x: point.x + radius, y: pageRect.size.height - point.y - radius)
+        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
+        
+        context.addPath(circularPath.cgPath)
+        context.clip()
+        
+        // Draw the image within the circular path
+        let imageRect = CGRect(x: point.x, y: pageRect.size.height - point.y - size.height, width: size.width, height: size.height)
+        context.draw(image.cgImage!, in: imageRect)
+        
+        context.restoreGState()
+    }
+    func calculateTextWidth(text: String, font: UIFont) -> CGFloat {
+        let attributes = [NSAttributedString.Key.font: font]
+        let textSize = text.size(withAttributes: attributes)
+        return textSize.width
+    }
+    func drawImage(image: UIImage, context: CGContext, pageRect: CGRect, at point: CGPoint, size: CGSize) {
+        context.saveGState()
+        
+        context.translateBy(x: 0, y: pageRect.size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        
+        
+        let imageRect = CGRect(x: point.x, y: pageRect.size.height - point.y - size.height, width: size.width, height: size.height)
+        
+        context.draw(image.cgImage!, in: imageRect)
+        context.restoreGState()
+    }
 }

@@ -126,11 +126,11 @@ private extension CVMakerViewController {
                 UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make())
             }
         case .preview(let cv):
-            let pdf = PDFFactory.create(cv: cv)
+            let pdf = PDFFactory.createCV(cv: cv)
             let vc = PDFViewController(pdf: pdf)
             present(vc, animated: true)
         case .share(let cv):
-            let pdf = PDFFactory.create(cv: cv)
+            let pdf = PDFFactory.createCV(cv: cv)
             let vc = UIActivityViewController(activityItems: [pdf], applicationActivities: nil)
             present(vc, animated: true)
         }
