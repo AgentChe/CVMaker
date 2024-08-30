@@ -175,7 +175,8 @@ extension ResumeManager: ResumeManagerProtocol {
                 id: UUID().uuidString,
                 template: template,
                 info: info,
-                created: Date()
+                created: Date(),
+                edited: nil
             )
             cls.append(cl)
             

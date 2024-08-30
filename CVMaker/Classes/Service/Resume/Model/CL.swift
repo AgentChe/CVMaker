@@ -12,4 +12,5 @@ struct CL: Codable {
     let template: CLTemplate
     let info: CLInfo
     let created: Date
+    let edited: Date?
 }

@@ -83,7 +83,8 @@ private extension MainViewController {
             
             present(alert, animated: true)
         case .select(let group):
-            break // TODO
+            let vc = ResumeGroupViewController.make(group: group)
+            present(vc, animated: true)
         }
     }
     

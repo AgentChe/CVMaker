@@ -217,3 +217,11 @@
 
 // MARK: Resume Group
 "ResumeGroup.DefaultName" = "Company name";
+"ResumeGroup.CV.Title" = "CV Template %i";
+"ResumeGroup.CL.Title" = "CL Template $i";
+"ResumeGroup.Created" = "Created %@";
+"ResumeGroup.Edited" = "Last edited %@";
+"ResumeGroup.AddNew" = "Add new";
+"ResumeGroup.RWWC.Title" = "What do you want to\ncreate?";
+"ResumeGroup.RWWC.CV" = "New CV";
+"ResumeGroup.RWWC.CL" = "New cover letter";
