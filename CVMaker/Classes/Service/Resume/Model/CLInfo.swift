@@ -10,5 +10,6 @@ struct CLInfo: Codable {
     let company: CLCompany?
     let hiringManager: CLHiringManager?
     let vacancy: CLVacancy?
+    let toneOfVoice: CLToneOfVoice?
     let textBlocks: [CLTextBlock]?
 }

@@ -10,6 +10,7 @@ import RxCocoa
 
 protocol ResumeManagerProtocol {
     func obtainCVTemplates() -> Single<[CVTemplate]>
+    func obtainCLTemplates() -> Single<[CLTemplate]>
     func obtainCVs() -> Single<[CV]>
     func obtainCLs() -> Single<[CL]>
     func obtainGroups() -> Single<[ResumeGroup]>
@@ -21,6 +22,7 @@ protocol ResumeManagerProtocol {
     func edit(cv: CV) -> Single<CV>
     func edit(cl: CL) -> Single<CL>
     func edit(resumeGroup: ResumeGroup) -> Single<ResumeGroup>
+    func analyzeCL(qa: [[String: String]], resumeStyle: String?) -> Single<[CLTextBlock]>
 }
 
 final class ResumeManager {
@@ -29,6 +31,8 @@ final class ResumeManager {
         static let clKey = "resume_manager_cl_key"
         static let groupKey = "resume_manager_group_key"
     }
+    
+    private lazy var restApiTransport = RestAPITransport()
 }
 
 // MARK: ResumeManagerProtocol
@@ -52,6 +56,23 @@ extension ResumeManager: ResumeManagerProtocol {
                 CVTemplate(identifier: .template14),
                 CVTemplate(identifier: .template15),
                 CVTemplate(identifier: .template16)
+            ]
+            single(.success(templates))
+            
+            return Disposables.create()
+        }
+    }
+    
+    func obtainCLTemplates() -> Single<[CLTemplate]> {
+        Single<[CLTemplate]>.create { single in
+            let templates: [CLTemplate] = [
+                CLTemplate(identifier: .template1),
+                CLTemplate(identifier: .template2),
+                CLTemplate(identifier: .template3),
+                CLTemplate(identifier: .template4),
+                CLTemplate(identifier: .template5),
+                CLTemplate(identifier: .template6),
+                CLTemplate(identifier: .template7)
             ]
             single(.success(templates))
             
@@ -487,5 +508,13 @@ extension ResumeManager: ResumeManagerProtocol {
             
             return Disposables.create()
         }
+    }
+    
+    func analyzeCL(qa: [[String: String]], resumeStyle: String?) -> Single<[CLTextBlock]> {
+        let request = CLAssistantAnalyzeRequest(qa: qa, resumeStyle: resumeStyle)
+        
+        return restApiTransport
+            .callServerApi(requestBody: request)
+            .map { CLTextBlock.map(response: $0) }
     }
 }

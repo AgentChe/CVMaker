@@ -7,7 +7,11 @@
 
 import Foundation
 
+// TODO
 final class GlobalDefinitions {
+    static let domain = "https://cvmaker.camplain-apps.com"
+    static let apiKey = "Xn4QEjsgh4zE4kMZyA"
+    
     static let otterScaleHost = "https://api.korrekted.com"
     static let otterScaleApiKey = "i9upCYSnV2mW4aM3"
     
@@ -26,6 +30,7 @@ final class GlobalDefinitions {
         static let redirectUri = "https://cmmaker.callback"
     }
     
+    // TODO
     enum Paygate {
         static let defaultLifetime = "train.somatic.endless"
         static let defaultMonthly = "train.somatic.monthly"

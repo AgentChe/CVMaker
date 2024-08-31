@@ -111,7 +111,8 @@ private extension ResumeGroupViewController {
                 let vc = CVMakerViewController.make(mode: .edit(cv), stepAfterCancelFlow: .dismiss)
                 present(vc, animated: true)
             case .cl(let cl):
-                break // TODO
+                let vc = CLMakerViewController.make(mode: .edit(cl))
+                present(vc, animated: true)
             }
         case .requestWhatWantCreate:
             let vc = RWWCViewController.make { [weak self] entity in
@@ -120,7 +121,8 @@ private extension ResumeGroupViewController {
                     let vc = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .dismiss)
                     self?.present(vc, animated: true)
                 case .cl:
-                    break // TODO
+                    let vc = CLMakerViewController.make(mode: .create)
+                    self?.present(vc, animated: true)
                 }
             }
             present(vc, animated: false)

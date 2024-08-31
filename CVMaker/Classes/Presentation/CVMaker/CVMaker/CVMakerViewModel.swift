@@ -305,7 +305,7 @@ private extension CVMakerViewModel {
                 references,
                 createCV.drive()
             ])
-        case .edit(let cv):
+        case .edit:
             return Disposables.create([createCV.drive()])
         }
     }
