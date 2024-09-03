@@ -10,7 +10,7 @@ import RxCocoa
 
 final class CVMakerViewModel {
     enum Route {
-        case cancelFlow, preview(CV), share(CV)
+        case cancelFlow, preview(CV), share(CV), paygate
     }
     
     private lazy var profileManager = ProfileManager()
@@ -179,13 +179,15 @@ private extension CVMakerViewModel {
             .asDriver(onErrorDriveWith: .never())
             .map { Route.preview($0) }
         
-        let share = didShareCV
+        let shareOrPaygate = didShareCV
             .withLatestFrom(cv)
             .asDriver(onErrorDriveWith: .never())
-            .map { Route.share($0) }
+            .map { cv -> Route in
+                SessionManager().hasActiveSubscriptions() ? Route.share(cv) : Route.paygate
+            }
         
         return Driver
-            .merge(cancelFlow, preview, share)
+            .merge(cancelFlow, preview, shareOrPaygate)
     }
     
     func makeDisposable(

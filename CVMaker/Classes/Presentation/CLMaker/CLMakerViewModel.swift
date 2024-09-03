@@ -10,7 +10,7 @@ import RxCocoa
 
 final class CLMakerViewModel {
     enum Route {
-        case cancelFlow, preview(CL), share(CL)
+        case cancelFlow, preview(CL), share(CL), paygate
     }
     
     enum Action {
@@ -198,13 +198,15 @@ private extension CLMakerViewModel {
             .asDriver(onErrorDriveWith: .never())
             .map { Route.preview($0) }
         
-        let share = didShareCL
+        let shareOrPaygate = didShareCL
             .withLatestFrom(cl)
             .asDriver(onErrorDriveWith: .never())
-            .map { Route.share($0) }
+            .map { cl -> Route in
+                SessionManager().hasActiveSubscriptions() ? Route.share(cl) : Route.paygate
+            }
         
         return Driver
-            .merge(cancelFlow, preview, share)
+            .merge(cancelFlow, preview, shareOrPaygate)
     }
     
     func makeActions(didCompleteOnboarding: Signal<Void>) -> Driver<Action> {

@@ -13,6 +13,7 @@ final class ResumeGroupViewModel {
         case share(RSCollectionElement.Entity)
         case edit(RSCollectionElement.Entity)
         case requestWhatWantCreate
+        case paygate
     }
     
     private lazy var resumeManager = ResumeManager()
@@ -87,15 +88,19 @@ private extension ResumeGroupViewModel {
         didTapShare: Signal<Void>,
         didTapEdit: Signal<Void>
     ) -> Driver<Route> {
-        let share = didTapShare
+        let shareOrPaygate = didTapShare
             .asDriver(onErrorDriveWith: .never())
             .withLatestFrom(currentElement)
-            .map { Route.share($0.entity) }
+            .map { element -> Route in
+                SessionManager().hasActiveSubscriptions() ? Route.share(element.entity) : Route.paygate
+            }
         
-        let edit = didTapEdit
+        let editOrPaygate = didTapEdit
             .asDriver(onErrorDriveWith: .never())
             .withLatestFrom(currentElement)
-            .map { Route.edit($0.entity) }
+            .map { element -> Route in
+                SessionManager().hasActiveSubscriptions() ? Route.edit(element.entity) : Route.paygate
+            }
         
         let requestWhatWantCreate = didTapAddNew
             .map { Route.requestWhatWantCreate }
@@ -103,7 +108,7 @@ private extension ResumeGroupViewModel {
         
         return Driver
             .merge(
-                share, edit, requestWhatWantCreate
+                shareOrPaygate, editOrPaygate, requestWhatWantCreate
             )
     }
     

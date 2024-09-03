@@ -120,6 +120,9 @@ private extension CLMakerViewController {
             let pdf = PDFFactory.createCL(cl: cl)
             let vc = UIActivityViewController(activityItems: [pdf], applicationActivities: nil)
             present(vc, animated: true)
+        case .paygate:
+            let vc = PaygateViewController.make()
+            present(vc, animated: true)
         }
     }
     

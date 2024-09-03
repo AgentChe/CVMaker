@@ -133,6 +133,9 @@ private extension CVMakerViewController {
             let pdf = PDFFactory.createCV(cv: cv)
             let vc = UIActivityViewController(activityItems: [pdf], applicationActivities: nil)
             present(vc, animated: true)
+        case .paygate:
+            let vc = PaygateViewController.make()
+            present(vc, animated: true)
         }
     }
 }

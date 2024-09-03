@@ -126,6 +126,9 @@ private extension ResumeGroupViewController {
                 }
             }
             present(vc, animated: false)
+        case .paygate:
+            let vc = PaygateViewController.make()
+            present(vc, animated: true)
         }
     }
 }
