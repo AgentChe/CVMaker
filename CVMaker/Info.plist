@@ -8,15 +8,25 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>fb483805924629531</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>cvmaker</string>
+			</array>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string></string>
+	<string>483805924629531</string>
 	<key>FacebookClientToken</key>
-	<string></string>
+	<string>b7856a7424906bd2cd013437fff1bd12</string>
 	<key>FacebookDisplayName</key>
-	<string></string>
+	<string>CV Maker</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -113,6 +123,6 @@
 		</dict>
 	</dict>
 	<key>branch_key</key>
-	<string></string>
+	<string>key_live_kxfI6ORZPZt7p1SoWgp5HdhhythQAWFe</string>
 </dict>
 </plist>
