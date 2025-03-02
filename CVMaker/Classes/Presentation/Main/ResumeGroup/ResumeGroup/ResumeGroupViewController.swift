@@ -108,7 +108,7 @@ private extension ResumeGroupViewController {
         case .edit(let entity):
             switch entity {
             case .cv(let cv):
-                let vc = CVMakerViewController.make(mode: .edit(cv), stepAfterCancelFlow: .dismiss)
+                let vc = CVMakerViewController.make(mode: .edit(cv), stepAfterCancelFlow: .dismiss, requestReview: false)
                 present(vc, animated: true)
             case .cl(let cl):
                 let vc = CLMakerViewController.make(mode: .edit(cl))
@@ -118,7 +118,7 @@ private extension ResumeGroupViewController {
             let vc = RWWCViewController.make { [weak self] entity in
                 switch entity {
                 case .cv:
-                    let vc = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .dismiss)
+                    let vc = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .dismiss, requestReview: false)
                     self?.present(vc, animated: true)
                 case .cl:
                     let vc = CLMakerViewController.make(mode: .create)

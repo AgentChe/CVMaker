@@ -27,10 +27,12 @@ final class CVMakerViewController: UIViewController {
     
     private let mode: Mode
     private let stepAfterCancelFlow: StepAfterCancelFlow
+    private let requestReview: Bool
     
-    private init(mode: Mode, stepAfterCancelFlow: StepAfterCancelFlow) {
+    private init(mode: Mode, stepAfterCancelFlow: StepAfterCancelFlow, requestReview: Bool) {
         self.mode = mode
         self.stepAfterCancelFlow = stepAfterCancelFlow
+        self.requestReview = requestReview
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,6 +100,10 @@ final class CVMakerViewController: UIViewController {
         
         output.disposable
             .disposed(by: disposeBag)
+        
+        if requestReview {
+            RequestReview.request()
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -107,8 +113,8 @@ final class CVMakerViewController: UIViewController {
 
 // MARK: Public
 extension CVMakerViewController {
-    static func make(mode: Mode, stepAfterCancelFlow: StepAfterCancelFlow) -> CVMakerViewController {
-        let vc = CVMakerViewController(mode: mode, stepAfterCancelFlow: stepAfterCancelFlow)
+    static func make(mode: Mode, stepAfterCancelFlow: StepAfterCancelFlow, requestReview: Bool) -> CVMakerViewController {
+        let vc = CVMakerViewController(mode: mode, stepAfterCancelFlow: stepAfterCancelFlow, requestReview: requestReview)
         vc.modalPresentationStyle = .fullScreen
         return vc
     }
@@ -123,7 +129,7 @@ private extension CVMakerViewController {
             case .dismiss:
                 dismiss(animated: true)
             case .main:
-                UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make())
+                UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make(requestReview: false))
             }
         case .preview(let cv):
             let pdf = PDFFactory.createCV(cv: cv)

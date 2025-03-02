@@ -20,6 +20,18 @@ final class MainViewController: UIViewController {
     
     private lazy var didDeleteGroupTrigger = PublishRelay<ResumeGroup>()
     
+    private let requestReview: Bool
+    
+    private init(requestReview: Bool) {
+        self.requestReview = requestReview
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = mainView
     }
@@ -50,13 +62,17 @@ final class MainViewController: UIViewController {
         
         output.disposable
             .disposed(by: disposeBag)
+        
+        if requestReview {
+            RequestReview.request()
+        }
     }
 }
 
 // MARK: Public
 extension MainViewController {
-    static func make() -> MainViewController {
-        let vc = MainViewController()
+    static func make(requestReview: Bool) -> MainViewController {
+        let vc = MainViewController(requestReview: requestReview)
         vc.navigationItem.title = "Main.Title".localized
         vc.navigationItem.backButtonTitle = " "
         return vc

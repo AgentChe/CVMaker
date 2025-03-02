@@ -76,9 +76,9 @@ private extension OnboardingViewController {
             }
             present(vc, animated: true)
         case .main:
-            UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make())
+            UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make(requestReview: true))
         case .cvMaker:
-            UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .main)
+            UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .main, requestReview: true)
         }
     }
 }

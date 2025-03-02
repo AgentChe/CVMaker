@@ -73,9 +73,9 @@ private extension SplashViewController {
             }
             present(vc, animated: true)
         case .main:
-            UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make())
+            UIApplication.shared.keyWindow?.rootViewController = NavigationController(rootViewController: MainViewController.make(requestReview: false))
         case .cvMaker:
-            UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .main)
+            UIApplication.shared.keyWindow?.rootViewController = CVMakerViewController.make(mode: .create, stepAfterCancelFlow: .main, requestReview: false)
         }
     }
 }
