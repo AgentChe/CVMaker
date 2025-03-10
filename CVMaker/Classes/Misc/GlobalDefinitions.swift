@@ -17,7 +17,7 @@ final class GlobalDefinitions {
     static let countriesCitiesAPIKey = "eHlzeXRJVWViT3o1Rm9hM2V1UG1iS1ZKN00yQWtHWkFpaUhYcHhPSg=="
     
     static let applicationTag = "CV_MAKER"
-    static let amplitudeApiKey = "d433d2c66723aeefd10c5b65f91c1fa3"
+    static let amplitudeApiKey = "e2f97fdca00fd18f23fee9ae1520225b"
     
     static let termsOfUseUrl = URL(string: "https://toiboto.com/terms")!
     static let privacyPolicyUrl = URL(string: "https://toiboto.com/policy")!

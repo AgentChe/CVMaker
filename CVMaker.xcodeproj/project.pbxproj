@@ -320,7 +320,6 @@
 		DEFA93322BE949FB00F892BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93312BE949FB00F892BC /* Assets.xcassets */; };
 		DEFA93352BE949FB00F892BC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEFA93342BE949FB00F892BC /* Base */; };
 		DEFA93BA2BE94AED00F892BC /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */; };
-		DEFA93BB2BE94AED00F892BC /* BranchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933E2BE94AED00F892BC /* BranchManager.swift */; };
 		DEFA93BC2BE94AED00F892BC /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA933F2BE94AED00F892BC /* FacebookManager.swift */; };
 		DEFA93BD2BE94AED00F892BC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA93402BE94AED00F892BC /* FirebaseManager.swift */; };
 		DEFA93BE2BE94AED00F892BC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFA93422BE94AED00F892BC /* ImagePicker.swift */; };
@@ -700,7 +699,6 @@
 		DEFA93342BE949FB00F892BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEFA93362BE949FB00F892BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
-		DEFA933E2BE94AED00F892BC /* BranchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchManager.swift; sourceTree = "<group>"; };
 		DEFA933F2BE94AED00F892BC /* FacebookManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		DEFA93402BE94AED00F892BC /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		DEFA93422BE94AED00F892BC /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -2192,7 +2190,6 @@
 			isa = PBXGroup;
 			children = (
 				DEFA933D2BE94AED00F892BC /* AmplitudeManager.swift */,
-				DEFA933E2BE94AED00F892BC /* BranchManager.swift */,
 				DEFA933F2BE94AED00F892BC /* FacebookManager.swift */,
 				DEFA93402BE94AED00F892BC /* FirebaseManager.swift */,
 			);
@@ -2925,7 +2922,6 @@
 				DEFA93CD2BE94AED00F892BC /* UIApplication+Extension.swift in Sources */,
 				DE31AAE82C82F57D0089C7C9 /* CLMakerHiringManagerCollector.swift in Sources */,
 				DE42B0D52BFCBC4300FF61B0 /* CVMGIAboutYourselfTipsView.swift in Sources */,
-				DEFA93BB2BE94AED00F892BC /* BranchManager.swift in Sources */,
 				DED8FB2E2C788634001DAAE2 /* CVMPSCollectionSkillCell.swift in Sources */,
 				DED8FC762C7DF2D8001DAAE2 /* CV10Generator.swift in Sources */,
 				DED8FC842C7E22F7001DAAE2 /* CLHiringManager.swift in Sources */,
@@ -3089,7 +3085,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2MYAP2M337;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -3106,7 +3102,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = iphone.cvmaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3129,7 +3125,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2MYAP2M337;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -3146,7 +3142,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = iphone.cvmaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
