@@ -8,7 +8,7 @@
 import Foundation
 
 final class GlobalDefinitions {
-    static let domain = "https://cvmaker.camplain-apps.com"
+    static let domain = "https://cvmaker.thinkaboutapps.com"
     static let apiKey = "Xn4QEjsgh4zE4kMZyA"
     
     static let otterScaleHost = "https://api.korrekted.com"
@@ -16,12 +16,9 @@ final class GlobalDefinitions {
     
     static let countriesCitiesAPIKey = "eHlzeXRJVWViT3o1Rm9hM2V1UG1iS1ZKN00yQWtHWkFpaUhYcHhPSg=="
     
-    static let applicationTag = "CV_MAKER"
-    static let amplitudeApiKey = "e2f97fdca00fd18f23fee9ae1520225b"
-    
-    static let termsOfUseUrl = URL(string: "https://toiboto.com/terms")!
-    static let privacyPolicyUrl = URL(string: "https://toiboto.com/policy")!
-    static let contactUsUrl = URL(string: "https://toiboto.com/#contact_us")!
+    static let termsOfServiceUrl = URL(string: "https://thinkaboutapps.com/terms")!
+    static let privacyPolicyUrl = URL(string: "https://thinkaboutapps.com/policy")!
+    static let contactUsUrl = URL(string: "https://thinkaboutapps.com/contact")!
     
     enum LinkedIn {
         static let clientId = "7792qc3r585vh5"
